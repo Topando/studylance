@@ -1,0 +1,16 @@
+{% extends "app/base.html" %}
+
+
+{% block title %}
+    Редактирование задания
+{% endblock %}
+
+{% block body %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="Submit" name="submit" value="Submit"/>
+        <a href="{{ task.get_absolute_url }}">Отменить</a></div>
+
+    </form>
+{% endblock %}

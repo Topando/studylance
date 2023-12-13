@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from .models import *
+from django.forms.widgets import HiddenInput
 
 
 class RegisterUserForm(UserCreationForm):
@@ -15,7 +16,7 @@ class RegisterUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', "email", "password1", "password2")
+        fields = ("first_name", "last_name", 'username', "email", "password1", "password2")
 
 
 class LoginUserForm(AuthenticationForm):
@@ -32,4 +33,11 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('age',)
+        fields = ('photo', 'age',)
+
+
+class TaskUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ('title', 'description', 'price', 'photo', 'customer_id', 'university', 'direction', 'course')
+        widgets = {'customer_id': HiddenInput()}

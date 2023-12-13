@@ -1,0 +1,18 @@
+{% extends "app/base.html" %}
+{% block title %}
+    Удаление задания
+{% endblock %}
+
+
+{% block body %}
+    <form method="post">
+        {% csrf_token %}
+        <h2>Удаление проекта</h2>
+        <p>Вы уверены?</p>
+        <p class="form-buttons">
+        <div>
+            <input type="submit" value="Удалить">
+            <a href="{{ task.get_absolute_url }}">Отменить</a></div>
+        </p>
+    </form>
+{% endblock %}

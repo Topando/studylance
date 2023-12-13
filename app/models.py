@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 
 
 class Profile(models.Model):
@@ -49,16 +50,51 @@ class Resume(models.Model):
 class University(models.Model):
     university = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.university
+
 
 class Course(models.Model):
     course = models.CharField(max_length=2)
 
+    def __str__(self):
+        return self.course
+
 
 class Direction(models.Model):
     direction = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.direction
 
 
 class Comments(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     author_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments_author')
     comment = models.TextField()
+
+
+class Task(models.Model):
+    customer_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='task_customer', null=True, blank=True)
+    executor_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    is_done = models.BooleanField(default=False)
+    is_working = models.BooleanField(default=False)
+    title = models.TextField()
+    description = models.TextField()
+    photo = models.ImageField(upload_to='tasks/', null=True, blank=True)
+    university = models.ForeignKey('University', on_delete=models.CASCADE)
+    direction = models.ForeignKey('Direction', on_delete=models.CASCADE)
+    course = models.ForeignKey('Course', on_delete=models.CASCADE)
+    price = models.IntegerField(null=True, blank=True)
+    deadline = models.DateField(null=True, blank=True)
+    time_created = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse("task", kwargs={"task_id": self.pk})
+
+
+class TaskAnswer(models.Model):
+    task_id = models.ForeignKey(Task, on_delete=models.CASCADE)
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    description = models.TextField()
+    price = models.IntegerField()
