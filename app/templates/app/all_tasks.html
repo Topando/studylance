@@ -1,0 +1,13 @@
+{% extends "app/base.html" %}
+
+{% block title %}
+    Задания
+{% endblock %}
+
+
+{% block body %}
+    {% for task in tasks %}
+        <p>{{ task.title }}</p>
+        <a href="{{ task.get_absolute_url }}">Посмотреть</a>
+    {% endfor %}
+{% endblock %}

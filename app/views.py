@@ -2,7 +2,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 
 from app.forms import *
 
@@ -57,3 +57,9 @@ def profile_update(request):
             'user_form': user_form,
             'profile_form': profile_form
         })
+
+
+class AllTasks(ListView):
+    model = Task
+    template_name = "app/all_tasks.html"
+    context_object_name = "tasks"
