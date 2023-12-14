@@ -6,8 +6,9 @@
 
 
 {% block body %}
+    <a href="/app/tasks/create/">Создать задание</a>
     {% for task in tasks %}
         <p>{{ task.title }}</p>
-        <a href="{{ task.get_absolute_url }}">Посмотреть</a>
+        <a href="{{ task.get_absolute_url }}">{{ task.get_absolute_url }}</a>
     {% endfor %}
 {% endblock %}

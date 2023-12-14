@@ -50,13 +50,22 @@ class Resume(models.Model):
 class University(models.Model):
     university = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.university
+
 
 class Course(models.Model):
     course = models.CharField(max_length=2)
 
+    def __str__(self):
+        return self.course
+
 
 class Direction(models.Model):
     direction = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.direction
 
 
 class Comments(models.Model):
@@ -66,7 +75,7 @@ class Comments(models.Model):
 
 
 class Task(models.Model):
-    customer_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='task_customer')
+    customer_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='task_customer', null=True, blank=True)
     executor_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     is_done = models.BooleanField(default=False)
     is_working = models.BooleanField(default=False)
