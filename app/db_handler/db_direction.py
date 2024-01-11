@@ -12,10 +12,12 @@ def direction_update():
         td = tags.findAll('td')
         if len(td) == 1:
             continue
-        elif td[2].text.strip() == "":
+        elif td[2].text.strip() != "Бакалавр":
+            continue
+        elif td[1].text.strip() == "":
             continue
         else:
-            direction = Direction(direction=td[1].text.strip())
+            direction = Direction(direction=td[1].text.strip(), code=td[0].text.strip())
             try:
                 direction.save()
             except Exception:

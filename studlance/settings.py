@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
 ]
+SITE_ID = 3
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,3 +135,10 @@ MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = []
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "erdekov.sasha@gmail.com"
+EMAIL_HOST_PASSWORD = "ikvrubakhraopikl"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False

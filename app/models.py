@@ -7,6 +7,7 @@ from django.urls import reverse
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email_verify = models.BooleanField(default=False)
     is_executor = models.BooleanField(default=0)
     is_customer = models.BooleanField(default=0)
     photo = models.ImageField(upload_to="profile/", blank=True)
@@ -62,6 +63,7 @@ class Course(models.Model):
 
 
 class Direction(models.Model):
+    code = models.CharField(max_length=10)
     direction = models.CharField(max_length=100)
 
     def __str__(self):
@@ -89,12 +91,16 @@ class Task(models.Model):
     deadline = models.DateField(null=True, blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.title
+
     def get_absolute_url(self):
         return reverse("task", kwargs={"task_id": self.pk})
 
 
 class TaskAnswer(models.Model):
-    task_id = models.ForeignKey(Task, on_delete=models.CASCADE)
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    task_id = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True)
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField()
-    price = models.IntegerField()
+    price = models.IntegerField(null=True, blank=True)
+

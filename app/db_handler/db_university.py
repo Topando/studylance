@@ -14,7 +14,10 @@ def university_update():
             if col[i].value is None:
                 break
             try:
-                university = University(university=col[i].value)
+                print(col[i].value)
+                name = col[i].value
+                name = name.split(" «")[1][:-1]
+                university = University(university=name)
                 university.save()
             except Exception:
                 print("ЛОХ")

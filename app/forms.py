@@ -41,3 +41,9 @@ class TaskUpdateForm(forms.ModelForm):
         model = Task
         fields = ('title', 'description', 'price', 'photo', 'customer_id', 'university', 'direction', 'course')
         widgets = {'customer_id': HiddenInput()}
+
+
+class TaskAnswerForm(forms.ModelForm):
+    class Meta:
+        model = TaskAnswer
+        fields = ('description', 'price')

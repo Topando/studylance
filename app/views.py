@@ -1,31 +1,85 @@
-from django.contrib.auth import login, logout
+from django.conf import settings
+from django.contrib.auth import login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView
+from django.contrib.sites.models import Site
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.views import View
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView, TemplateView
 
+from app.db_handler.db_direction import direction_update
+from app.db_handler.db_university import university_update
 from app.forms import *
 
 from app.db_handler.db_update import database_filling
+from app.mixins import *
 from app.utils import *
+
+User = get_user_model()
+
+
+class UserConfirmEmailView(View):
+    def get(self, request, uidb64, token):
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode('utf-8')
+            print(uid)
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+        if user is not None and default_token_generator.check_token(user, token):
+            user.is_active = True
+            user.save()
+            login(request, user)
+            return redirect('email_confirmed')
+        else:
+            return redirect('email_confirmation_failed')
+
+
+class EmailConfirmationSentView(TemplateView):
+    template_name = 'app/registration/email_confirmation_sent.html'
+
+
+class EmailConfirmedView(TemplateView):
+    template_name = 'app/registration/email_confirmed.html'
+
+
+class EmailConfirmationFailedView(TemplateView):
+    template_name = 'app/registration/email_confirmation_failed.html'
 
 
 def index(request):
     return render(request, 'app/index.html')
 
 
-class RegisterUser(CreateView):
+class RegisterUser(UserIsNotAuthenticated, CreateView):
     form_class = RegisterUserForm
-    template_name = "app/register.html"
+    template_name = "app/registration/register.html"
 
     def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect("home")
+        user = form.save(commit=False)
+        user.is_active = False
+        user.save()
+
+        token = default_token_generator.make_token(user)
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        activation_url = reverse_lazy('confirm_email', kwargs={'uidb64': uid, 'token': token})
+        current_site = Site.objects.get_current().domain
+        send_mail(
+            'Подтвердите свой электронный адрес',
+            f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: http://{current_site}{activation_url}',
+            settings.EMAIL_HOST_USER,
+            [user.email],
+            fail_silently=False,
+        )
+        return redirect('email_confirmation_sent')
 
 
-class LoginUser(LoginView):
+class LoginUser(UserIsNotAuthenticated, LoginView):
     form_class = LoginUserForm
     template_name = "app/login.html"
 
@@ -84,8 +138,10 @@ class TaskUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return redirect("task", self.kwargs["task_id"])
 
     def test_func(self):
-        customer_id = Task.objects.get(pk=self.kwargs["task_id"]).customer_id.id
-        return check_author_task(self.request.user, customer_id)
+        task = Task.objects.get(pk=self.kwargs["task_id"])
+        customer_id = task.customer_id.id
+        executor_id = task.executor_id
+        return check_task_delete(self.request.user, customer_id, executor_id)
 
 
 class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -112,4 +168,19 @@ class TaskCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return redirect("tasks")
 
     def test_func(self):
-        return True
+        return check_create_task(self.request.user, Task)
+
+
+class ResponseTask(ResponseMixin, LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = TaskAnswer
+    form_class = TaskAnswerForm
+    template_name = "app/response_task.html"
+    success_url = reverse_lazy("tasks")
+
+    def form_valid(self, form):
+        form.instance.author_id = self.request.user
+        task = Task.objects.filter(id=self.kwargs["task_id"]).first()
+        form.instance.task_id = task
+        form.save()
+        return redirect("task", self.kwargs["task_id"])
+
