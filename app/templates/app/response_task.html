@@ -1,0 +1,15 @@
+{% extends "app/base.html" %}
+
+
+{% block title %}
+    Отклин на задание
+{% endblock %}
+
+{% block body %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="Submit" name="submit" value="Submit"/>
+    </form>
+
+{% endblock %}
