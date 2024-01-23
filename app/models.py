@@ -99,6 +99,7 @@ class Task(models.Model):
 
 
 class ImagesTask(models.Model):
+    task_id = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='images_task')
     image = models.FileField(upload_to='tasks/', null=True, blank=True)
 
 class TaskAnswer(models.Model):

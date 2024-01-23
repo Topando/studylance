@@ -89,7 +89,7 @@ def user_login(request, username, password):
     return False
 
 
-def register_user(form, ):
+def register_user(form):
     user = form.save(commit=False)
     user.is_active = False
     user.save()
@@ -102,3 +102,5 @@ def register_user(form, ):
     message = f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: http://{current_site}{activation_url}'
     email = user.email
     send_message(email, subject, message)
+
+

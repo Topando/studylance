@@ -43,3 +43,10 @@ def check_user_email_mixin(uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         return True
     return False
+
+
+def task_create_mixin(request):
+    user = User.objects.filter(pk=request.user.id).first()
+    if user is not None and user.profile.is_customer:
+        return True
+    return False

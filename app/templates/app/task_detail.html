@@ -7,11 +7,13 @@
 
 {% block body %}
     {{ task.title }}
-
+    {% for image in images %}
+        <img style="display:block;width: 100px; height: 100px" src="{{ image.image.url }}">
+    {% endfor %}
     {% if task.customer_id.id == request.user.id %}
         <a href="{{ task.get_absolute_url }}update/">Редактировать задание</a>
         <p><a href="{{ task.get_absolute_url }}delete/">Удалить задание</a></p>
     {% endif %}
-     <p><a href="{{ task.get_absolute_url }}response/">Оставить отклик</a></p>
+    <p><a href="{{ task.get_absolute_url }}response/">Оставить отклик</a></p>
 
 {% endblock %}

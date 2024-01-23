@@ -40,7 +40,7 @@ class ProfileForm(forms.ModelForm):
 class TaskUpdateForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ('title', 'description', 'price', 'customer_id', 'university', 'direction', 'course')
+        fields = ('title', 'description', 'price', 'university', 'direction', 'course')
         widgets = {'customer_id': HiddenInput()}
 
 
@@ -57,3 +57,9 @@ class PasswordChangeForm(forms.Form):
 class PasswordChangeDoneForm(forms.Form):
     first_password = forms.CharField(label='Пароль', widget=forms.PasswordInput(), validators=[validate_password])
     second_password = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput())
+
+
+class TaskCreateForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ('title', 'description', 'price', 'university', 'direction', 'course')

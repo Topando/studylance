@@ -56,7 +56,6 @@ def password_change_view(request, uidb64, token):
                 first_password = form.cleaned_data.get('first_password')
                 second_password = form.cleaned_data.get('second_password')
                 if first_password == second_password:
-                    print(123123)
                     user_password_change(uidb64, first_password)
                     return redirect('login')
             return render(request, 'app/password_change/password_change_done.html', {'form': form})
@@ -164,6 +163,11 @@ class TaskDetail(DetailView):
     template_name = "app/task_detail.html"
     pk_url_kwarg = "task_id"
 
+    def get_context_data(self, **kwargs):
+        task = Task.objects.get(pk=self.kwargs['task_id'])
+        images = ImagesTask.objects.filter(task_id=self.kwargs["task_id"]).all()
+        context = {"task": task, "images": images}
+        return context
 
 class TaskUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Task
@@ -209,19 +213,31 @@ class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 #         return check_create_task(self.request.user, Task)
 
 
-def upload_and_display_files(request):
-    files = ImagesTask.objects.all()
-
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            for uploaded_file in request.FILES.getlist('files'):
-                ImagesTask.objects.create(image=uploaded_file)
-            return redirect('task_create')
+def task_create_view(request):
+    if task_create_mixin(request):
+        if request.method == "POST":
+            form = TaskCreateForm(request.POST)
+            images = request.FILES.getlist("images")
+            if form.is_valid() and len(images) <= 5:
+                title = form.cleaned_data.get("title")
+                description = form.cleaned_data.get("description")
+                price = form.cleaned_data.get("price")
+                university = form.cleaned_data.get("university")
+                direction = form.cleaned_data.get("direction")
+                course = form.cleaned_data.get("course")
+                customer_id = request.user.id
+                user = User.objects.get(pk=customer_id)
+                task = Task.objects.create(customer_id=user, title=title, description=description, price=price,
+                                           university=university, direction=direction, course=course)
+                for image in images:
+                    ImagesTask.objects.create(task_id=task, image=image)
+                return redirect('tasks')
+            return render(request, 'app/task_create.html', {'form': form})
+        else:
+            form = TaskCreateForm()
+            return render(request, 'app/task_create.html', {'form': form})
     else:
-        form = UploadFileForm()
-
-    return render(request, 'app/upload_and_display.html', {'form': form, 'files': files})
+        return redirect('home')
 
 
 class ResponseTask(ResponseMixin, LoginRequiredMixin, UserPassesTestMixin, CreateView):
