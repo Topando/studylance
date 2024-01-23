@@ -1,7 +1,7 @@
 import os
 
 import openpyxl
-from app.models import University
+from ..models import University
 
 pre = os.path.dirname(os.path.realpath(__file__))
 

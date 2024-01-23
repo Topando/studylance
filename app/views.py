@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import login, logout, get_user_model
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView
@@ -23,11 +24,53 @@ from app.utils import *
 User = get_user_model()
 
 
+# class UserPasswordChange(View):
+#     def get(self, request, uidb64, token):
+#         uid = urlsafe_base64_decode(uidb64).decode('utf-8')
+#         user = GetUser.get_user_pk(uid)
+#         if user is not None and default_token_generator.check_token(user, token):
+#             pass
+
+def user_password_change_email_view(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            password_change(email)
+        return redirect('password_change_sent')
+    else:
+        form = PasswordChangeForm()
+        return render(request, 'app/password_change/get_email.html', {'form': form})
+
+
+class PasswordChangeSentView(TemplateView):
+    template_name = 'app/password_change/password_change_sent.html'
+
+
+def password_change_view(request, uidb64, token):
+    if check_user_email_mixin(uidb64, token):
+        if request.POST:
+
+            form = PasswordChangeDoneForm(request.POST)
+            if form.is_valid():
+                first_password = form.cleaned_data.get('first_password')
+                second_password = form.cleaned_data.get('second_password')
+                if first_password == second_password:
+                    print(123123)
+                    user_password_change(uidb64, first_password)
+                    return redirect('login')
+            return render(request, 'app/password_change/password_change_done.html', {'form': form})
+        else:
+            form = PasswordChangeDoneForm()
+            return render(request, 'app/password_change/password_change_done.html', {'form': form})
+    else:
+        return redirect('home')
+
+
 class UserConfirmEmailView(View):
     def get(self, request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64).decode('utf-8')
-            print(uid)
             user = User.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
@@ -61,30 +104,25 @@ class RegisterUser(UserIsNotAuthenticated, CreateView):
     template_name = "app/registration/register.html"
 
     def form_valid(self, form):
-        user = form.save(commit=False)
-        user.is_active = False
-        user.save()
-
-        token = default_token_generator.make_token(user)
-        uid = urlsafe_base64_encode(force_bytes(user.pk))
-        activation_url = reverse_lazy('confirm_email', kwargs={'uidb64': uid, 'token': token})
-        current_site = Site.objects.get_current().domain
-        send_mail(
-            'Подтвердите свой электронный адрес',
-            f'Пожалуйста, перейдите по следующей ссылке, чтобы подтвердить свой адрес электронной почты: http://{current_site}{activation_url}',
-            settings.EMAIL_HOST_USER,
-            [user.email],
-            fail_silently=False,
-        )
+        register_user(form)
         return redirect('email_confirmation_sent')
 
 
-class LoginUser(UserIsNotAuthenticated, LoginView):
-    form_class = LoginUserForm
-    template_name = "app/login.html"
-
-    def get_success_url(self):
-        return reverse_lazy("home")
+def login_view(request):
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            form = LoginUserForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password')
+                if user_login(request, username, password):
+                    return redirect('home')
+            return render(request, 'app/login.html', {'form': form})
+        else:
+            form = LoginUserForm()
+            return render(request, 'app/login.html', {'form': form})
+    else:
+        return redirect('home')
 
 
 def logout_user(request):
@@ -157,18 +195,33 @@ class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return check_task_delete(self.request.user, customer_id, executor_id)
 
 
-class TaskCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-    model = Task
-    form_class = TaskUpdateForm
-    template_name = "app/task_update.html"
+# class TaskCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+#     model = Task
+#     form_class = TaskUpdateForm
+#     template_name = "app/task_update.html"
+#
+#     def form_valid(self, form):
+#         form.instance.customer_id = self.request.user
+#         form.save()
+#         return redirect("tasks")
+#
+#     def test_func(self):
+#         return check_create_task(self.request.user, Task)
 
-    def form_valid(self, form):
-        form.instance.customer_id = self.request.user
-        form.save()
-        return redirect("tasks")
 
-    def test_func(self):
-        return check_create_task(self.request.user, Task)
+def upload_and_display_files(request):
+    files = ImagesTask.objects.all()
+
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            for uploaded_file in request.FILES.getlist('files'):
+                ImagesTask.objects.create(image=uploaded_file)
+            return redirect('task_create')
+    else:
+        form = UploadFileForm()
+
+    return render(request, 'app/upload_and_display.html', {'form': form, 'files': files})
 
 
 class ResponseTask(ResponseMixin, LoginRequiredMixin, UserPassesTestMixin, CreateView):
@@ -183,4 +236,3 @@ class ResponseTask(ResponseMixin, LoginRequiredMixin, UserPassesTestMixin, Creat
         form.instance.task_id = task
         form.save()
         return redirect("task", self.kwargs["task_id"])
-

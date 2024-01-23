@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django import forms
 
 
 class Profile(models.Model):
@@ -83,7 +84,6 @@ class Task(models.Model):
     is_working = models.BooleanField(default=False)
     title = models.TextField()
     description = models.TextField()
-    photo = models.ImageField(upload_to='tasks/', null=True, blank=True)
     university = models.ForeignKey('University', on_delete=models.CASCADE)
     direction = models.ForeignKey('Direction', on_delete=models.CASCADE)
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
@@ -98,9 +98,33 @@ class Task(models.Model):
         return reverse("task", kwargs={"task_id": self.pk})
 
 
+class ImagesTask(models.Model):
+    image = models.FileField(upload_to='tasks/', null=True, blank=True)
+
 class TaskAnswer(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True)
     author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField()
     price = models.IntegerField(null=True, blank=True)
 
+
+class MultipleFileInput(forms.ClearableFileInput):
+    allow_multiple_selected = True
+
+
+class MultipleFileField(forms.FileField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("widget", MultipleFileInput())
+        super().__init__(*args, **kwargs)
+
+    def clean(self, data, initial=None):
+        single_file_clean = super().clean
+        if isinstance(data, (list, tuple)):
+            result = [single_file_clean(d, initial) for d in data]
+        else:
+            result = single_file_clean(data, initial)
+        return result
+
+
+class UploadFileForm(forms.Form):
+    files = MultipleFileField()

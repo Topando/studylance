@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from .models import *
 from django.forms.widgets import HiddenInput
@@ -19,7 +20,7 @@ class RegisterUserForm(UserCreationForm):
         fields = ("first_name", "last_name", 'username', "email", "password1", "password2")
 
 
-class LoginUserForm(AuthenticationForm):
+class LoginUserForm(forms.Form):
     username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={"class": "form-input"}))
     password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}))
 
@@ -39,7 +40,7 @@ class ProfileForm(forms.ModelForm):
 class TaskUpdateForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ('title', 'description', 'price', 'photo', 'customer_id', 'university', 'direction', 'course')
+        fields = ('title', 'description', 'price', 'customer_id', 'university', 'direction', 'course')
         widgets = {'customer_id': HiddenInput()}
 
 
@@ -47,3 +48,12 @@ class TaskAnswerForm(forms.ModelForm):
     class Meta:
         model = TaskAnswer
         fields = ('description', 'price')
+
+
+class PasswordChangeForm(forms.Form):
+    email = forms.EmailField(label='Email', required=True)
+
+
+class PasswordChangeDoneForm(forms.Form):
+    first_password = forms.CharField(label='Пароль', widget=forms.PasswordInput(), validators=[validate_password])
+    second_password = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput())
