@@ -1,5 +1,5 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,34 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-{% block body %}
-{% endblock %}
+    {% block header%}
+        <header class = 'header'>
+            <div class = 'header-logo'>
+                <a href = '{{ home }}'>STUDYLANCE</a>
+            </div>
+            <div class = 'header-nav'>
+                <a href = '{{ tasks }}'>Задания</a>
+                <a href = '#'>Исполнитель</a>
+                {% if request.user.is_authenticated %}
+                    <a href = '{{ profile }}'>Профиль</a>
+                    <a href = '{{ logout }}'>Выйти</a>
+                {% else %}
+                    <a href = '{{ login }}'>Вход</a>
+                    <a href = '{{ register }}'>Регистрация</a>
+                {% endif %}
+            </div>
+        </header>
+    {% endblock header%}
+
+    {% block body %}
+    {% endblock %}
+
+    {% block footer %}
+        <footer class = 'footer'>
+            <a href = '{{ home }}'>STUDYLANCE</a>
+            <p>|</p>
+            <a href = '#'>предложения</a>
+        </footer>
+    {% endblock footer %}
 </body>
 </html>
