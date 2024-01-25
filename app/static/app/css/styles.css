@@ -1,7 +1,47 @@
-  body{
-	background: white;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+a {
+    text-decoration: none;
+    color: var(--color-orange);
+}
+:root {
+    --color-main-text: #FFF;
+    --color-secondary-text: #878383;
+    --color-orange: #FF4D00;
+    --color-background: #121212;
+    --color-orange-button: #B53C06;
+}
+@font-face {
+    font-family: helvetica-bold-s;
+    src: url("C:\Users\feorg\Downloads\Helvetica-Bold.ttf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
 
-.s{
-    color: red;
+}
+@font-face {
+    font-family: helvetica-light-s;
+    src: url(../font/Helvetica-Light.woff2);
+    font-weight: 300;
+}
+@font-face {
+    font-family: helvetica-regular-s;
+    src: url(../font/Helvetica-Regular.woff2);
+    font-weight: 400;
+}
+body {
+    background-color: var(--color-background);
+    color: var(--color-main-text);
+}
+.header {
+    display: flex;
+    padding: 1% 8.33% 0 8.33%;
+    align-content: center;
+    justify-content: space-between;
+}
+.header .header-logo {
+    font: 30px "helvetica-bold-s";
+    color: var(--color-orange);
 }
