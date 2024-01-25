@@ -75,7 +75,7 @@ body {
 }
 .index-what-is-it p{
     width: 47vw;
-    max-width: 667px;
+    max-width: 650px;
     font: 26px "helvetica-light-s", normal;
     margin: calc(var(--index)*45) 0 0 calc(var(--index)*20);
 }
