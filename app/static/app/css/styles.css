@@ -3,11 +3,11 @@
     padding: 0;
     box-sizing: border-box;
 }
-a {
+body a {
     text-decoration: none;
-    color: var(--color-orange);
 }
 :root {
+    --index: calc(1/1440*100vw);
     --color-main-text: #FFF;
     --color-secondary-text: #878383;
     --color-orange: #FF4D00;
@@ -16,32 +16,69 @@ a {
 }
 @font-face {
     font-family: helvetica-bold-s;
-    src: url("C:\Users\feorg\Downloads\Helvetica-Bold.ttf") format("opentype");
-    font-weight: 700;
-    font-style: normal;
-
+    src: url('../fonts/Helvetica-Bold.woff2');
+    font-weight: bold;
 }
 @font-face {
     font-family: helvetica-light-s;
-    src: url(../font/Helvetica-Light.woff2);
+    src: url('../fonts/Helvetica-Light.otf');
     font-weight: 300;
 }
 @font-face {
     font-family: helvetica-regular-s;
-    src: url(../font/Helvetica-Regular.woff2);
-    font-weight: 400;
+    src: url('../fonts/Helvetica-Regular.woff2');
+    font-weight: normal;
 }
 body {
+    font: 22px "helvetica-regular-s", normal;
+    min-height: 100vh;
     background-color: var(--color-background);
     color: var(--color-main-text);
+    position:relative;
 }
 .header {
     display: flex;
     padding: 1% 8.33% 0 8.33%;
-    align-content: center;
     justify-content: space-between;
 }
-.header .header-logo {
-    font: 30px "helvetica-bold-s";
+.header .header-logo a{
+    font: 30px "helvetica-bold-s", normal;
     color: var(--color-orange);
+}
+.header .header-nav {
+    display: flex;
+
+}
+.header .header-nav a{
+    font: 22px "helvetica-bold-s", normal;
+    color: var(--color-secondary-text);
+    margin-left: calc(var(--index)*50);
+}
+.container-footer {
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+    padding-bottom: calc(var(--index)*16);
+}
+.footer {
+    display: flex;
+    justify-content: center;
+}
+.footer * {
+    padding-right: 5px;
+    color: var(--color-secondary-text);
+    font-size: 16px;
+}
+
+.index-what-is-it {
+    margin: calc(var(--index)*100) 0 0 calc(var(--index)*244);
+}
+.index-what-is-it p{
+    width: 47vw;
+    max-width: 667px;
+    font: 26px "helvetica-light-s", normal;
+    margin: calc(var(--index)*45) 0 0 calc(var(--index)*20);
+}
+h2 {
+    font: 48px "helvetica-regular-s", normal;
 }
