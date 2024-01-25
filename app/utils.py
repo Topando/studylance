@@ -11,7 +11,7 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
-from .models import User
+from .models import User, Task, ImagesTask, FilesTask
 
 
 def check_author_task(user, pk):
@@ -82,6 +82,7 @@ def user_login(request, username, password):
     user = User.objects.filter(email=username).first()
     if user is None:
         user = User.objects.filter(username=username).first()
+    print(password)
     if user is not None and check_password(password, user.password):
         login(request, user)
         print("Пользователь авторизован")
@@ -104,3 +105,13 @@ def register_user(form):
     send_message(email, subject, message)
 
 
+def task_create(task_info, images, files):
+    task = Task.objects.create(customer_id=task_info['user'], title=task_info['title'],
+                               description=task_info['description'], price=task_info['price'],
+                               university=task_info['university'], direction=task_info['direction'],
+                               course=task_info['course'])
+    for image in images:
+        ImagesTask.objects.create(task_id=task, image=image)
+
+    for file in files:
+        FilesTask.objects.create(task_id=task, file=file)

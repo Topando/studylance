@@ -56,6 +56,7 @@ def password_change_view(request, uidb64, token):
                 first_password = form.cleaned_data.get('first_password')
                 second_password = form.cleaned_data.get('second_password')
                 if first_password == second_password:
+                    print(first_password)
                     user_password_change(uidb64, first_password)
                     return redirect('login')
             return render(request, 'app/password_change/password_change_done.html', {'form': form})
@@ -166,8 +167,10 @@ class TaskDetail(DetailView):
     def get_context_data(self, **kwargs):
         task = Task.objects.get(pk=self.kwargs['task_id'])
         images = ImagesTask.objects.filter(task_id=self.kwargs["task_id"]).all()
-        context = {"task": task, "images": images}
+        files = FilesTask.objects.filter(task_id=self.kwargs["task_id"]).all()
+        context = {"task": task, "images": images, "files": files}
         return context
+
 
 class TaskUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Task
@@ -218,19 +221,18 @@ def task_create_view(request):
         if request.method == "POST":
             form = TaskCreateForm(request.POST)
             images = request.FILES.getlist("images")
-            if form.is_valid() and len(images) <= 5:
-                title = form.cleaned_data.get("title")
-                description = form.cleaned_data.get("description")
-                price = form.cleaned_data.get("price")
-                university = form.cleaned_data.get("university")
-                direction = form.cleaned_data.get("direction")
-                course = form.cleaned_data.get("course")
+            files = request.FILES.getlist("files")
+            if form.is_valid() and len(images) <= 5 and len(files) <= 5:
+                task_info = {}
+                task_info['title'] = form.cleaned_data.get("title")
+                task_info['description'] = form.cleaned_data.get("description")
+                task_info['price'] = form.cleaned_data.get("price")
+                task_info['university'] = form.cleaned_data.get("university")
+                task_info['direction'] = form.cleaned_data.get("direction")
+                task_info['course'] = form.cleaned_data.get("course")
                 customer_id = request.user.id
-                user = User.objects.get(pk=customer_id)
-                task = Task.objects.create(customer_id=user, title=title, description=description, price=price,
-                                           university=university, direction=direction, course=course)
-                for image in images:
-                    ImagesTask.objects.create(task_id=task, image=image)
+                task_info['user'] = User.objects.get(pk=customer_id)
+                task_create(task_info, images, files)
                 return redirect('tasks')
             return render(request, 'app/task_create.html', {'form': form})
         else:

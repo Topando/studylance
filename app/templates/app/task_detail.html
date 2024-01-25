@@ -1,6 +1,5 @@
 {% extends "app/base.html" %}
 
-
 {% block title %}
     Задание
 {% endblock %}
@@ -9,6 +8,10 @@
     {{ task.title }}
     {% for image in images %}
         <img style="display:block;width: 100px; height: 100px" src="{{ image.image.url }}">
+    {% endfor %}
+    {% for file in files %}
+        <p><a  href="{{ file.file.url }}" download> {{ file.file|filename  }} </a></p>
+
     {% endfor %}
     {% if task.customer_id.id == request.user.id %}
         <a href="{{ task.get_absolute_url }}update/">Редактировать задание</a>

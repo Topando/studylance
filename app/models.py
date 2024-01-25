@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.http import FileResponse
 from django.urls import reverse
 from django import forms
 
@@ -101,6 +102,15 @@ class Task(models.Model):
 class ImagesTask(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='images_task')
     image = models.FileField(upload_to='tasks/', null=True, blank=True)
+
+
+class FilesTask(models.Model):
+    task_id = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='files_task')
+    file = models.FileField(upload_to='tasks/', null=True, blank=True)
+
+    def file_download(self):
+        return FileResponse(self.file, as_attachment=True)
+
 
 class TaskAnswer(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True)
