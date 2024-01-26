@@ -11,7 +11,6 @@
     {% endfor %}
     {% for file in files %}
         <p><a  href="{{ file.file.url }}" download> {{ file.file|filename  }} </a></p>
-
     {% endfor %}
     {% if task.customer_id.id == request.user.id %}
         <a href="{{ task.get_absolute_url }}update/">Редактировать задание</a>

@@ -115,3 +115,23 @@ def task_create(task_info, images, files):
 
     for file in files:
         FilesTask.objects.create(task_id=task, file=file)
+
+
+def get_user_by_image_id(image_id):
+    user_id = ImagesTask.objects.filter(pk=image_id).first().task_id.customer_id.id
+    return user_id
+
+
+def get_image_by_image_id(image_id):
+    return ImagesTask.objects.filter(pk=image_id).first()
+
+
+def delete_image(image):
+    try:
+        image.delete()
+    except Exception:
+        print("Ошибка удаления фотографии")
+
+
+def get_task_by_task_id(task_id):
+    return Task.objects.get(pk=task_id)

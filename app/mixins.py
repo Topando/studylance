@@ -6,6 +6,7 @@ from django.core.exceptions import PermissionDenied
 from django.utils.http import urlsafe_base64_decode
 
 from .models import Task
+from .utils import check_task_delete
 from .views import User
 
 
@@ -50,3 +51,11 @@ def task_create_mixin(request):
     if user is not None and user.profile.is_customer:
         return True
     return False
+
+
+class TaskUpdateMixin(UserPassesTestMixin):
+    def test_func(self):
+        task = Task.objects.get(pk=self.kwargs["task_id"])
+        customer_id = task.customer_id.id
+        executor_id = task.executor_id
+        return check_task_delete(self.request.user, customer_id, executor_id)

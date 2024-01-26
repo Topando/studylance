@@ -1,35 +1,14 @@
-from django.conf import settings
 from django.contrib.auth import login, logout, get_user_model
-from django.contrib.auth.hashers import check_password
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.views import LoginView
-from django.contrib.sites.models import Site
-from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView, TemplateView
-
-from app.db_handler.db_direction import direction_update
-from app.db_handler.db_university import university_update
 from app.forms import *
-
-from app.db_handler.db_update import database_filling
 from app.mixins import *
 from app.utils import *
 
 User = get_user_model()
 
-
-# class UserPasswordChange(View):
-#     def get(self, request, uidb64, token):
-#         uid = urlsafe_base64_decode(uidb64).decode('utf-8')
-#         user = GetUser.get_user_pk(uid)
-#         if user is not None and default_token_generator.check_token(user, token):
-#             pass
 
 def user_password_change_email_view(request):
     if request.method == 'POST':
@@ -165,14 +144,15 @@ class TaskDetail(DetailView):
     pk_url_kwarg = "task_id"
 
     def get_context_data(self, **kwargs):
-        task = Task.objects.get(pk=self.kwargs['task_id'])
+        context = super().get_context_data(**kwargs)
         images = ImagesTask.objects.filter(task_id=self.kwargs["task_id"]).all()
         files = FilesTask.objects.filter(task_id=self.kwargs["task_id"]).all()
-        context = {"task": task, "images": images, "files": files}
+        context["images"] = images
+        context["files"] = files
         return context
 
 
-class TaskUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class TaskUpdate(TaskUpdateMixin, LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Task
     pk_url_kwarg = "task_id"
     template_name = "app/task_update.html"
@@ -182,11 +162,10 @@ class TaskUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         form.save()
         return redirect("task", self.kwargs["task_id"])
 
-    def test_func(self):
-        task = Task.objects.get(pk=self.kwargs["task_id"])
-        customer_id = task.customer_id.id
-        executor_id = task.executor_id
-        return check_task_delete(self.request.user, customer_id, executor_id)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['images'] = ImagesTask.objects.filter(task_id=self.kwargs["task_id"])
+        return context
 
 
 class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -196,7 +175,7 @@ class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy("tasks")
 
     def test_func(self):
-        task = Task.objects.get(pk=self.kwargs["task_id"])
+        task = get_task_by_task_id(self.kwargs["task_id"])
         customer_id = task.customer_id.id
         executor_id = task.executor_id
         return check_task_delete(self.request.user, customer_id, executor_id)
@@ -254,3 +233,13 @@ class ResponseTask(ResponseMixin, LoginRequiredMixin, UserPassesTestMixin, Creat
         form.instance.task_id = task
         form.save()
         return redirect("task", self.kwargs["task_id"])
+
+
+def delete_img_task_view(request, image_id):
+    user_id = get_user_by_image_id(image_id)
+    if check_author_task(request.user, user_id):
+        image = get_image_by_image_id(image_id)
+        task_id = image.task_id.id
+        delete_image(image)
+        return redirect("task_update", task_id)
+    return redirect('home')

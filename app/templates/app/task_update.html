@@ -11,6 +11,11 @@
         {{ form.as_p }}
         <input type="Submit" name="submit" value="Submit"/>
         <a href="{{ task.get_absolute_url }}">Отменить</a></div>
-
+        {% for image in images %}
+            <form method="POST">
+                <img style="display:block;width: 100px; height: 100px" src="{{ image.image.url }}">
+                <a href="{% url 'delete_img_task' image_id=image.id %}">{{ image.id }}</a>
+            </form>
+        {% endfor %}
     </form>
 {% endblock %}
