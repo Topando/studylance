@@ -1,16 +1,8 @@
-{% extends "app/base.html" %}
+{% extends "app/base-for-login-reg.html" %}
 
 {% block title %}
     Вход
 {% endblock title %}
-
-{% block header %}
-    <header class = 'header-login-reg'>
-        <div class = 'header-logo'>
-            <a href = '{% url "home" %}'>STUDYLANCE</a>
-        </div>
-    </header>
-{% endblock header %}
 
 {% block body %}
     <div class = 'container-out-log-reg'>

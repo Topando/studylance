@@ -1,19 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>BFVS}</title>
-</head>
-<body>
-<form action="" method="POST">
-    {% csrf_token %}
-    {% for f in form %}
-    <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>
-    <div class="form-error">
-        {{ f.errors }}
-    </div>
-    {% endfor %}
-    <input type="Submit" name="submit" value="Submit"/>
-</form>
-</body>
-</html>
+{% extends "app/base.html" %}
+
+{% block title %}
+    Вход
+{% endblock title %}
+
+{% block header %}
+    <header class = 'header-login-reg'>
+        <div class = 'header-logo'>
+            <a href = '{% url "home" %}'>STUDYLANCE</a>
+        </div>
+    </header>
+{% endblock header %}
+
+{% block body %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% for f in form %}
+        <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>
+        <div class="form-error">
+            {{ f.errors }}
+        </div>
+        {% endfor %}
+        <input type="Submit" name="submit" value="Submit"/>
+    </form>
+
+{% endblock body %}

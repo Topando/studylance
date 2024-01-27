@@ -91,7 +91,9 @@ h2 {
     padding-top: calc(var(--index)*20);
 }
 
-.form-input {
+.form-input,
+#id_first_name,
+#id_last_name{
     width: 230px;
     height: 30px;
     background: var(--color-background);
@@ -109,7 +111,8 @@ h2 {
     font: 14px "helvetica-regular-s", normal;
 }
 .form-login label,
-.bottom-info-reg{
+.bottom-info-reg,
+.form-label{
     color: var(--color-main-text);
     font: 16px "helvetica-light-s", normal;
 }
@@ -135,7 +138,7 @@ h2 {
     justify-content: center;
 }
 .container-log-reg .bottom-info-reg * {
-    margin: 30px 0 10px 0;
+    margin: 30px 0 10px 5px;
 }
 .form-login p{
     display: flex;
