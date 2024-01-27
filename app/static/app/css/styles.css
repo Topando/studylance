@@ -41,7 +41,7 @@ body {
     padding: 1% 8.33% 0 8.33%;
     justify-content: space-between;
 }
-.header .header-logo a{
+.header-logo a{
     font: 30px "helvetica-bold-s", normal;
     color: var(--color-orange);
 }
@@ -81,4 +81,9 @@ body {
 }
 h2 {
     font: 48px "helvetica-regular-s", normal;
+}
+
+.test {
+    color: #FF4D00;
+    font-size: 50px;
 }
