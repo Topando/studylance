@@ -12,7 +12,10 @@ body a {
     --color-secondary-text: #878383;
     --color-orange: #FF4D00;
     --color-background: #121212;
+    --color-background-light: #141516;
     --color-orange-button: #B53C06;
+    --color-border-orange-button: #B23903;
+    --color-border: #1E1F21;
 }
 @font-face {
     font-family: helvetica-bold-s;
@@ -38,7 +41,7 @@ body {
 }
 .header {
     display: flex;
-    padding: 1% 8.33% 0 8.33%;
+    padding: calc(var(--index)*20) 8.33% 0 8.33%;
     justify-content: space-between;
 }
 .header-logo a{
@@ -60,7 +63,8 @@ body {
     bottom: 0;
     padding-bottom: calc(var(--index)*16);
 }
-.footer {
+.footer,
+.header-login-reg {
     display: flex;
     justify-content: center;
 }
@@ -83,7 +87,52 @@ h2 {
     font: 48px "helvetica-regular-s", normal;
 }
 
-.test {
-    color: #FF4D00;
-    font-size: 50px;
+.header-login-reg {
+    padding-top: calc(var(--index)*20);
+}
+
+.form-input {
+    width: 230px;
+    height: 30px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    color: var(--color-main-text);
+}
+.orange-button {
+    width: 230px;
+    height: 30px;
+    background: var(--color-orange-button);
+    color: var(--color-main-text);
+    border: 1px solid var(--color-border-orange-button);
+    border-radius: 5px;
+}
+.form-login label,
+.bottom-info-reg{
+    color: var(--color-main-text);
+    font: 16px "helvetica-light-s", normal;
+}
+.bottom-info-reg a{
+    color: var(--color-orange);
+}
+.container-out-log-reg {
+    display: flex;
+    justify-content: center;
+}
+.container-log-reg {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 110px;
+    padding: 30px 35px 20px 35px;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+}
+.container-log-reg .bottom-info-reg {
+    display: inline-flex;
+    justify-content: center;
+}
+.container-log-reg .bottom-info-reg * {
+    margin-right: 10px;
 }
