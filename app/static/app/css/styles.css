@@ -75,17 +75,20 @@ body {
     font-size: 16px;
 }
 
-.index-what-is-it {
+.index-what-is-it,
+.alert-info{
     margin: calc(var(--index)*100) 0 0 calc(var(--index)*244);
 }
-.index-what-is-it p{
+.index-what-is-it p,
+.alert-info p{
     width: 47vw;
     max-width: 650px;
     font: 26px "helvetica-light-s", normal;
-    margin: calc(var(--index)*45) 0 0 calc(var(--index)*20);
+    margin: 0 0 calc(var(--index)*20) calc(var(--index)*20);
 }
 h2 {
     font: 48px "helvetica-regular-s", normal;
+    margin-bottom: calc(var(--index)*45);
 }
 
 .header-login-reg {
