@@ -103,6 +103,9 @@ class ImagesTask(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='images_task')
     image = models.FileField(upload_to='tasks/', null=True, blank=True)
 
+    def deleter(self):
+        print(123)
+        return "123"
 
 class FilesTask(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='files_task')

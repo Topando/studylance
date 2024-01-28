@@ -2,7 +2,7 @@ from django.contrib.auth import login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView, TemplateView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView, TemplateView, FormView
 from app.forms import *
 from app.mixins import *
 from app.utils import *
@@ -168,6 +168,40 @@ class TaskUpdate(TaskUpdateMixin, LoginRequiredMixin, UserPassesTestMixin, Updat
         return context
 
 
+def task_update_view(request, task_id):  # <5фото
+    if task_create_mixin(request):
+        if request.method == "POST":
+            task = get_task_by_task_id(task_id)
+            form = TaskUpdateForm(request.POST)
+            images = request.FILES.getlist("images")
+            files = request.FILES.getlist("files")
+            count_images = len(images) + get_count_files_in_task(task_id, ImagesTask)
+            count_files = len(files) + get_count_files_in_task(task_id, FilesTask)
+            print(count_images)
+            if form.is_valid() and count_images <= 5 and count_files <= 5:
+                task_info = get_form_task_info(form)
+                customer_id = request.user.id
+                task_info['user'] = User.objects.get(pk=customer_id)
+                update_task(task_id, task_info)
+                images_in_db(images, task)
+                files_in_db(files, task)
+                return redirect("task", task_id)
+            return redirect("task_update", task_id)
+        else:
+            task = Task.objects.get(pk=task_id)
+            form = TaskUpdateForm(instance=task)
+            images = ImagesTask.objects.filter(task_id=task_id)
+            files = FilesTask.objects.filter(task_id=task_id)
+            context = {}
+            context['form'] = form
+            context['images'] = images
+            context['files'] = files
+
+            return render(request, "app/task_update.html", context=context)
+    else:
+        return redirect("home")
+
+
 class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Task
     pk_url_kwarg = "task_id"
@@ -243,3 +277,21 @@ def delete_img_task_view(request, image_id):
         delete_image(image)
         return redirect("task_update", task_id)
     return redirect('home')
+
+
+class FileFieldFormView(FormView):
+    form_class = FileFieldForm
+    template_name = "test.html"  # Replace with your template.
+    success_url = reverse_lazy("test")
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        files = form.cleaned_data["file_field"]
+        return redirect(self.success_url)

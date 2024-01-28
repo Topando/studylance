@@ -6,16 +6,30 @@
 {% endblock %}
 
 {% block body %}
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+        <div>
+            <label>Upload image</label>
+            <input name="images" type="file" multiple accept="image/png, image/jpeg, image/jpg">
+        </div>
+        <div>
+            <label>Upload files</label>
+            <input name="files" type="file" multiple accept=".doc,.docx">
+        </div>
         <input type="Submit" name="submit" value="Submit"/>
-        <a href="{{ task.get_absolute_url }}">Отменить</a></div>
+        <a href="{{ task.get_absolute_url }}">Отменить</a>
         {% for image in images %}
             <form method="POST">
                 <img style="display:block;width: 100px; height: 100px" src="{{ image.image.url }}">
                 <a href="{% url 'delete_img_task' image_id=image.id %}">{{ image.id }}</a>
             </form>
+
         {% endfor %}
+        {% for file in files %}
+            <p><a href="{{ file.file.url }}" download> {{ file.file|filename }} </a></p>
+        {% endfor %}
+
+
     </form>
 {% endblock %}
