@@ -9,10 +9,24 @@
         <div class = 'container-log-reg'>
             <form action="" method="POST" class = 'form-login'>
                 {% csrf_token %}
-                {{ form.as_p }}
+
+                {% for f in form %}
+                    <div>
+                        {% if f.label == 'Пароль' %}
+                            <div class = 'title-password-forgot'>
+                                <label for="{{ f.id_for_label }}">{{ f.label }}</label>
+                                <a href="{% url 'password_change' %}">Забыли пароль¿</a>
+                            </div>
+                            {{ f }}
+                        {% else %}
+                                <label for="{{ f.id_for_label }}">{{ f.label }}</label>
+                                {{ f }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
                 <input class = "orange-button" type="Submit" name="submit" value="Войти"/>
             </form>
-            <a href="{% url 'password_change' %}">Изменить пароль</a>
 
             <div class = 'bottom-info-reg'>
                 <p>Еще нет аккаунта¿</p>
