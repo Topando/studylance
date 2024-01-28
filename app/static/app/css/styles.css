@@ -138,9 +138,10 @@ h2 {
 .container-log-reg .bottom-info-reg {
     display: inline-flex;
     justify-content: center;
+    margin: 30px 0 10px 0;
 }
-.container-log-reg .bottom-info-reg * {
-    margin: 30px 0 10px 5px;
+.container-log-reg .bottom-info-reg a {
+    margin-left: 8px;
 }
 .form-login p,
 .form-register p,
@@ -152,7 +153,8 @@ h2 {
     margin-bottom: 20px;
 }
 .form-login p input,
- .form-login div input{
+ .form-login div input,
+ .form-register div input{
     padding: 2px 15px 2px 15px;
     margin-top: 5px;
     font: 14px "helvetica-regular-s", normal;
@@ -165,4 +167,15 @@ h2 {
 }
 .form-login > div .title-password-forgot a {
     color: var(--color-orange);
+}
+.container-reg-field > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6px;
+}
+.form-register > .container-reg-field{
+    margin-bottom: 20px;
+}
+.container-reg-field .form-error {
+    margin-bottom: 0;
 }
