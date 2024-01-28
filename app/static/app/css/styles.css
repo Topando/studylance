@@ -94,7 +94,8 @@ h2 {
 
 .form-input,
 #id_first_name,
-#id_last_name{
+#id_last_name,
+.form-change-pass > div > input{
     width: 230px;
     height: 30px;
     background: var(--color-background);
@@ -114,18 +115,21 @@ h2 {
 .form-login label,
 .bottom-info-reg,
 .form-label,
-.form-login > div .title-password-forgot a {
+.form-login > div .title-password-forgot a,
+.form-change-pass{
     color: var(--color-main-text);
     font: 16px "helvetica-light-s", normal;
 }
 .bottom-info-reg a{
     color: var(--color-orange);
 }
-.container-out-log-reg {
+.container-out-log-reg,
+ .container-input-data-out{
     display: flex;
     justify-content: center;
 }
-.container-log-reg {
+.container-log-reg,
+ .container-input-data{
     display: flex;
     text-align: center;
     flex-direction: column;
@@ -145,7 +149,8 @@ h2 {
 }
 .form-login p,
 .form-register p,
-.form-login > div{
+.form-login > div,
+.form-change-pass div{
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -154,7 +159,8 @@ h2 {
 }
 .form-login p input,
  .form-login div input,
- .form-register div input{
+ .form-register div input,
+ .form-change-pass input{
     padding: 2px 15px 2px 15px;
     margin-top: 5px;
     font: 14px "helvetica-regular-s", normal;

@@ -51,12 +51,12 @@ class TaskAnswerForm(forms.ModelForm):
 
 
 class PasswordChangeForm(forms.Form):
-    email = forms.EmailField(label='Email', required=True)
+    email = forms.EmailField(label='Почта', required=True)
 
 
 class PasswordChangeDoneForm(forms.Form):
-    first_password = forms.CharField(label='Пароль', widget=forms.PasswordInput(), validators=[validate_password])
-    second_password = forms.CharField(label='Подтверждение пароля', widget=forms.PasswordInput())
+    first_password = forms.CharField(label='Новый пароль', widget=forms.PasswordInput(), validators=[validate_password])
+    second_password = forms.CharField(label='Повторите пароль', widget=forms.PasswordInput())
 
 
 class TaskCreateForm(forms.ModelForm):
