@@ -38,6 +38,8 @@ body {
     background-color: var(--color-background);
     color: var(--color-main-text);
     position:relative;
+    padding-bottom: 100px;
+
 }
 .header {
     display: flex;
@@ -136,7 +138,7 @@ h2 {
     display: flex;
     text-align: center;
     flex-direction: column;
-    margin: 110px 0 100px 0;
+    margin: 110px 0 0 0;
     padding: 30px 35px 8px 35px;
     background: var(--color-background-light);
     border: 1px solid var(--color-border);
@@ -187,4 +189,49 @@ h2 {
 }
 .container-reg-field .form-error {
     margin-bottom: 0;
+}
+
+.card-task-secondary-info {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-secondary-text);
+    font: 14px "helvetica-regular-s", normal;
+}
+.card-task-secondary-info > div {
+    display: flex;
+}
+.card-task-secondary-info > div {
+    display: flex;
+}
+.card-task-secondary-info > div > *{
+    margin-right: 20px;
+}
+.card-task {
+    min-width: 800px;
+    margin: 0 calc(var(--index)*244) 25px calc(var(--index)*244);
+    padding: 16px 16px 14px 16px;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+}
+.container-task {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+}
+.task-title-desс > h3 {
+    font: 20px "helvetica-bold-s", normal;
+    color: var(--color-main-text);
+}
+.task-title-desс > p {
+    font: 14px "helvetica-light-s", normal;
+    color: var(--color-main-text);
+    margin: 10px 0 15px 15px;
+}
+.card-task-price p{
+    font: 24px "helvetica-bold-s", normal;
+    color: var(--color-orange);
+}
+.container-show-more {
+    text-align: center;
 }

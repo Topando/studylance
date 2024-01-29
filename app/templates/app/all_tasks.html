@@ -1,14 +1,39 @@
 {% extends "app/base.html" %}
 
 {% block title %}
-    Задания
+    STUDYLANCE - Задания
 {% endblock %}
-
 
 {% block body %}
     <a href="{% url 'task_create' %}">Создать задание</a>
     {% for task in tasks %}
-        <p>{{ task.title }}</p>
-        <a href="{{ task.get_absolute_url }}">{{ task.get_absolute_url }}</a>
+        <div class = "card-task">
+            <a href = "{{ task.get_absolute_url }}" class = "link-task">
+                <div class = "container-task">
+                    <div class = "task-title-desс">
+                        <h3>{{ task.title }}</h3>
+                        <p>{{ task.description }}</p>
+                    </div>
+                    <div class = "card-task-price">
+                        <p>{{task.price}} ₽</p>
+                    </div>
+                </div>
+
+                <div class = "card-task-secondary-info">
+                    <div>
+                        <p>До {{ task.deadline }}</p>
+                        <p>Курс {{ task.course }}</p>
+                        <p>{{ task.direction }}</p>
+                        <p>{{ task.university }}</p>
+                    </div>
+                    <p class = "card-task-time-created">{{ task.time_created }}</p>
+                </div>
+            </a>
+
+        </div>
     {% endfor %}
+
+    <div class = "container-show-more">
+        <input class = "orange-button" id = "show-more" type="Submit" name="submit" value="Показать еще"/>
+    </div>
 {% endblock %}
