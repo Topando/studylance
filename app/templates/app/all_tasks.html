@@ -1,4 +1,5 @@
 {% extends "app/base.html" %}
+{% load static %}
 
 {% block title %}
     STUDYLANCE - Задания
@@ -15,7 +16,7 @@
                 <div class="hystmodal__wrap">
                     <div class="hystmodal__window" role="dialog" aria-modal="true" >
                         <input type="text" name="filter-date-from" required="" id="filter-date-from">
-                        <img src="img/connection.svg" />
+                        <img src="{% static 'app/img/connection.svg'%}" />
                         <input type="text" name="filter-date-before" required="" id="filter-date-before">
 
                         <button data-hystclose class="hystmodal__close">Применить</button>
@@ -100,7 +101,7 @@
                     <div>
                         <p>До {{ task.deadline }}</p>
                         <p>Курс {{ task.course }}</p>
-                        <p>{{ task.direction }}</p>
+                        <p>{{ task.direction.code }}</p>
                         <p>{{ task.university }}</p>
                     </div>
                     <p class = "card-task-time-created">{{ task.time_created }}</p>
@@ -113,7 +114,6 @@
     <div class = "container-show-more">
         <input class = "orange-button" id = "show-more" type="Submit" name="submit" value="Показать еще"/>
     </div>
-
 
     <script type="text/javascript" src="../../static/app/scripts/script-modal-window.js"></script>
 {% endblock %}

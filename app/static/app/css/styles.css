@@ -8,7 +8,7 @@ body a {
 }
 :root {
     --index: calc(1/1440*100vw);
-    --color-main-text: #FFF;
+    --color-main-text: #FFFAF0;
     --color-secondary-text: #878383;
     --color-orange: #FF4D00;
     --color-background: #121212;
