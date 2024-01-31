@@ -15,7 +15,6 @@ class HystModal{
         this._modalBlock = false; //ссылка на открытый .hystmodal__window
         //не нужно
         this.starter = false, //ссылка на элемент "открыватель" текущего окна
-        // (он нужен для возвращения фокуса на него)
         this._nextWindows = false; //ссылка на .hystmodal который нужно открыть
         this._scrollPosition = 0; //текущая прокрутка (см. выше)
 
