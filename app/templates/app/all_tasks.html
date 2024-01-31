@@ -5,7 +5,81 @@
 {% endblock %}
 
 {% block body %}
-    <a href="{% url 'task_create' %}">Создать задание</a>
+    <div class = "task-filter">
+        <a class = "button-create-task" href="{% url 'task_create' %}">Создать задание</a>
+
+        <div class = "container-button-filter">
+            <a class = "button-filter" href="#" data-hystmodal="#filter-date">Дата</a>
+
+            <div class="hystmodal" id="filter-date" aria-hidden="true">
+                <div class="hystmodal__wrap">
+                    <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <button data-hystclose class="hystmodal__close">Применить</button>
+                        <p>Дата</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class = "container-button-filter">
+            <a class = "button-filter" href="#" data-hystmodal="#filter-deadline">Дедлайн</a>
+
+            <div class="hystmodal" id="filter-deadline" aria-hidden="true">
+                <div class="hystmodal__wrap">
+                    <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <button data-hystclose class="hystmodal__close">Применить</button>
+                        <p>Дедлайн</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class = "container-button-filter">
+            <a class = "button-filter" href="#" data-hystmodal="#filter-course">Курс</a>
+
+            <div class="hystmodal" id="filter-course" aria-hidden="true">
+                <div class="hystmodal__wrap">
+                    <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <button data-hystclose class="hystmodal__close">Применить</button>
+                        <p>Course</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class = "container-button-filter">
+            <a class = "button-filter" href="#" data-hystmodal="#filter-university">ВУЗ</a>
+
+            <div class="hystmodal" id="filter-university" aria-hidden="true">
+                <div class="hystmodal__wrap">
+                    <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <button data-hystclose class="hystmodal__close">Применить</button>
+                        <p>Текст модального окна ...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class = "container-button-filter">
+            <a class = "button-filter" href="#" data-hystmodal="#filter-direction">Направление</a>
+
+            <div class="hystmodal" id="filter-direction" aria-hidden="true">
+                <div class="hystmodal__wrap">
+                    <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <button data-hystclose class="hystmodal__close">Применить</button>
+                        <p>direction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a class = "button-reset-filter" href="#">Сбросить</a>
+    </div>
+
     {% for task in tasks %}
         <div class = "card-task">
             <a href = "{{ task.get_absolute_url }}" class = "link-task">
@@ -36,4 +110,8 @@
     <div class = "container-show-more">
         <input class = "orange-button" id = "show-more" type="Submit" name="submit" value="Показать еще"/>
     </div>
+
+
+
+    <script type="text/javascript" src="../../static/app/scripts/script-modal-window.js"></script>
 {% endblock %}

@@ -235,3 +235,43 @@ h2 {
 .container-show-more {
     text-align: center;
 }
+
+/*модальные окна  НИЧЕГО НЕ ТРОГАТЬ!!*/
+.hystmodal__wrap {
+    position: absolute;
+    display: none;
+    top: 10px;
+}
+.hystmodal {
+    position: relative;
+}
+.hystmodal--active .hystmodal__wrap {
+    display: block;
+}
+.hystmodal__window {
+    border: 1px solid black;
+}
+/**/
+
+.task-filter {
+    display: flex;
+    align-items: baseline;
+    margin: 90px calc(var(--index)*244) 45px calc(var(--index)*244);
+}
+.task-filter > *{
+    margin-right: 12px;
+}
+.button-filter,
+.button-create-task,
+.button-reset-filter{
+    padding: 6px 15px 6px 15px;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-secondary-text);
+    font: 18px "helvetica-regular-s", normal;
+}
+.button-create-task,
+.button-reset-filter{
+    color: var(--color-orange);
+}
