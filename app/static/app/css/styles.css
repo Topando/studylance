@@ -236,11 +236,11 @@ h2 {
     text-align: center;
 }
 
-/*модальные окна  НИЧЕГО НЕ ТРОГАТЬ!!*/
+/*функциональные стили модальных окон  НИЧЕГО НЕ ТРОГАТЬ!!*/
 .hystmodal__wrap {
     position: absolute;
     display: none;
-    top: 10px;
+    top: 25px;
 }
 .hystmodal {
     position: relative;
@@ -275,3 +275,5 @@ h2 {
 .button-reset-filter{
     color: var(--color-orange);
 }
+
+/*стили самих модальных окон*/
