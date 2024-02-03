@@ -74,6 +74,10 @@ class HystModal{
         this.openedWindow.setAttribute('aria-hidden', 'false');
 
         this.isOpened = true;
+
+        //для центровки модального окна относительно кнопки
+        var elem = document.getElementById(this.openedWindow.id);
+        elem.style.left = elem.offsetWidth/2 - elem.firstElementChild.offsetWidth/2 + 'px';
     }
 
     close(){

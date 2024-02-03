@@ -18,9 +18,14 @@
             <div class="hystmodal" id="filter-date" aria-hidden="true">
                 <div class="hystmodal__wrap">
                     <div class="hystmodal__window" role="dialog" aria-modal="true" >
-                        <input type="date" name="filter-date-from" required="" id="filter-date-from" min="2000-01-01">
-                        <img src="{% static 'app/img/connection.svg'%}" />
-                        <input type="date" name="filter-date-before" required="" id="filter-date-before" min="2000-01-01">
+                        <div>
+                            <label>От</label>
+                            <input type="date" name="filter-date-from" required="" id="filter-date-from" min="2000-01-01">
+                        </div>
+                        <div>
+                            <label>До</label>
+                            <input type="date" name="filter-date-before" required="" id="filter-date-before" min="2000-01-01">
+                        </div>
 
                         <button data-hystclose class="hystmodal__close orange-button">Применить</button>
                     </div>
@@ -35,8 +40,31 @@
             <div class="hystmodal" id="filter-deadline" aria-hidden="true">
                 <div class="hystmodal__wrap">
                     <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <div>
+                            <label>От</label>
+                            <input type="date" name="filter-date-from" required="" id="filter-deadline-from" min="2000-01-01">
+                        </div>
+                        <div>
+                            <label>До</label>
+                            <input type="date" name="filter-date-before" required="" id="filter-deadline-before" min="2000-01-01">
+                        </div>
+
+                        <button data-hystclose class="hystmodal__close orange-button">Применить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class = "container-button-filter">
+            <a class = "button-filter" href="#" data-hystmodal="#filter-subject">Предмет</a>
+
+            <div class="hystmodal" id="filter-subject" aria-hidden="true">
+                <div class="hystmodal__wrap">
+                    <div class="hystmodal__window" role="dialog" aria-modal="true" >
                         <button data-hystclose class="hystmodal__close">Применить</button>
-                        <p>Дедлайн</p>
+                        <p>subject</p>
+                        <button data-hystclose class="hystmodal__close orange-button">Применить</button>
                     </div>
                 </div>
             </div>
