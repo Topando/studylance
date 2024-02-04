@@ -325,13 +325,13 @@ h2 {
 }
 
 /*стили для task_detail*/
-.task-container {
+.task-container,
+.container-profile{
     margin: 80px calc(var(--index)*244) 0px calc(var(--index)*244);
     padding: 30px 50px 20px 50px;
     background: var(--color-background-light);
     border: 1px solid var(--color-border);
     border-radius: 10px;
-    min-height: 100%;
 }
 .task-header .task-secondary-info {
     display: flex;

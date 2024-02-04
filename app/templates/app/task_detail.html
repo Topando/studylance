@@ -9,7 +9,7 @@
     <div class = "task-container">
         <div class = "task-header">
             <div class = "task-secondary-info">
-                <p>Задание от {{ request.user }}</p>
+                <p>Задание от {{ task.customer_id }}</p>
                 <p>До {{ task.deadline }}</p>
                 <p>{{ task.direction.code }}</p>
                 <p>Курс {{ task.course }}</p>

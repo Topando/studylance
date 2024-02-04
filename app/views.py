@@ -129,10 +129,20 @@ def logout_user(request):
     return redirect("home")
 
 
-class Profile(DetailView):
+class Profile(UpdateView):
     model = User
+    form_class = UserForm
     template_name = "app/profile.html"
     pk_url_kwarg = "profile_id"
+
+    def get_success_url(self):
+        return reverse_lazy('profile', args=[self.kwargs['profile_id']])
+
+    def get_context_data(self, **kwargs):
+        comments = Comments.objects.filter(user_id=self.kwargs['profile_id'])
+        context = super().get_context_data(**kwargs)
+        context["comments"] = comments
+        return context
 
 
 def profile_update(request):
