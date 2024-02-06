@@ -62,12 +62,12 @@
 
                 <div class = "container-profile-comments">
                     <h3>Комментарии</h3>
-                    <!-- тут for какой-нибудь ебнуть -->
                         <div class = "profile-comments">
                             {% for comment in comments %}
                                 <div class = "profile-comment">
                                     <div class = "header-profile-comment">
-
+                                        <p>{{comment.author_id}}</p>
+                                        <p class = "profile-comment-score">Оценка: </p>
                                     </div>
                                     <p>
                                         {{ comment.comment }}
