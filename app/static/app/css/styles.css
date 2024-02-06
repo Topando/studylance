@@ -405,7 +405,7 @@ h2 {
 }
 .header-profile > p {
     color: var(--color-secondary-text);
-    font: 16px "helvetica-light-s", normal;
+    font: 18px "helvetica-light-s", normal;
 }
 .header-profile > .profile-rating {
     color: var(--color-orange);
@@ -434,4 +434,25 @@ h2 {
 .container-profile-desc-comments {
     margin-top: 80px;
     margin-left: 40px;
+}
+.container-profile-desc-comments {
+    width: 100%;
+}
+.header-profile-description {
+    color: var(--color-secondary-text);
+    font: 20px "helvetica-light-s", normal;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+.header-profile-description a {
+    color: var(--color-secondary-text);
+    text-decoration: underline;
+    font-size: 18px;
+}
+.profile-description {
+    color: var(--color-main-text);
+    font: 18px "helvetica-light-s", normal;
+    margin-bottom: 50px;
 }
