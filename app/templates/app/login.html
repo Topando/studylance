@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="Submit" name="submit" value="Submit"/>
-</form>
-<a href="{% url 'password_change' %}">Изменить пароль</a>
-</body>
-</html>
+{% extends "app/base-for-login-reg.html" %}
+
+{% block title %}
+    Вход
+{% endblock title %}
+
+{% block body %}
+    <div class = 'container-out-log-reg'>
+        <div class = 'container-log-reg'>
+            <form action="" method="POST" class = 'form-login'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class = "orange-button" type="Submit" name="submit" value="Войти"/>
+            </form>
+            <a href="{% url 'password_change' %}">Изменить пароль</a>
+
+            <div class = 'bottom-info-reg'>
+                <p>Еще нет аккаунта¿</p>
+                <a href = '{% url "register" %}'>Регистрация</a>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

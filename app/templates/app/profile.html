@@ -1,12 +1,17 @@
 {% extends "app/base.html" %}
 
 {% block title %}
-sdfasd
+    sdfasd
 {% endblock %}
 
 
 
 
 {% block body %}
-<h1 class="s">{{ user.resume.id }}</h1>
+    <h1 class="s">{{ user }}</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="Submit" name="submit" value="Submit"/>
+    </form>
 {% endblock %}

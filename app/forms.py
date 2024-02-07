@@ -83,10 +83,6 @@ class MultipleFileField(forms.FileField):
         return result
 
 
-def val(value):
-    print(value)
-
-
 class FileFieldForm(forms.Form):
-    file_field = MultipleFileField(label="Фото", validators=[val])
+    file_field = MultipleFileField(label="Фото")
     file_field.widget.attrs.update({'accept': 'image/png, image/jpeg, image/jpg'})

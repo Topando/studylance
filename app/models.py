@@ -6,6 +6,8 @@ from django.http import FileResponse
 from django.urls import reverse
 from django import forms
 
+from studlance import settings
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -90,7 +92,7 @@ class Task(models.Model):
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
     price = models.IntegerField(null=True, blank=True)
     deadline = models.DateField(null=True, blank=True)
-    time_created = models.DateTimeField(auto_now_add=True)
+    time_created = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.title

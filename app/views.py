@@ -109,15 +109,25 @@ def logout_user(request):
     return redirect("home")
 
 
-class Profile(DetailView):
+class Profile(UpdateView):
     model = User
+    form_class = UserForm
     template_name = "app/profile.html"
     pk_url_kwarg = "profile_id"
+
+    def get_success_url(self):
+        return reverse_lazy('profile', args=[self.kwargs['profile_id']])
+
+    def get_context_data(self, **kwargs):
+        comments = Comments.objects.filter(user_id=self.kwargs['profile_id'])
+        context = super().get_context_data(**kwargs)
+        context["comments"] = comments
+        return context
 
 
 def profile_update(request):
     if request.method == "POST":
-        user_form = UserForm(request.POST, instance=request.user)
+        user_form = UserForm(request.POST, request.FILES, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -168,7 +178,7 @@ class TaskUpdate(TaskUpdateMixin, LoginRequiredMixin, UserPassesTestMixin, Updat
         return context
 
 
-def task_update_view(request, task_id):  # <5фото
+def task_update_view(request, task_id):
     if task_create_mixin(request):
         if request.method == "POST":
             task = get_task_by_task_id(task_id)
@@ -287,6 +297,9 @@ class FileFieldFormView(FormView):
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
+        print(form_class.cleaned_data['file_field'])
+        if len(form_class.instance.file_field) > 5:
+            raise ValidationError("Vyfsds")
         if form.is_valid():
             return self.form_valid(form)
         else:
