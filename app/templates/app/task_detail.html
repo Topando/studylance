@@ -1,4 +1,5 @@
 {% extends "app/base.html" %}
+{% load static %}
 
 
 {% block title %}
@@ -39,7 +40,12 @@
             <div class="task-files">
                 <h3>Файлы</h3>
                 {% for file in files %}
-                    <p><a href="{{ file.file.url }}" download> {{ file.file|filename }} </a></p>
+                    <div class = "container-task-file">
+                        <a href="{{ file.file.url }}" download>
+                            <p>{{ file.file|filename }}</p>
+                            <img src = "{% static 'app/img/download-icon.svg' %}">
+                        </a>
+                    </div>
                 {% endfor %}
             </div>
         </div>
