@@ -10,7 +10,7 @@
         <div class="task-header">
             <div class="task-secondary-info">
                 <p>Задание от {{ task.customer_id }}</p>
-                <p>До {{ task.deadline }}</p>
+                <p>До {{ task.deadline|date:"d-m-Y" }}</p>
                 <p>{{ task.direction.code }}</p>
                 <p>Курс {{ task.course }}</p>
                 {% if task.customer_id.id == request.user.id %}

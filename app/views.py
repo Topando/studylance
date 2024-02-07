@@ -147,7 +147,11 @@ class AllTasks(ListView):
     template_name = "app/all_tasks.html"
     context_object_name = "tasks"
 
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for task in Task.objects.all():
+            print(task.time_created)
+        return context
 class TaskDetail(DetailView):
     model = Task
     template_name = "app/task_detail.html"

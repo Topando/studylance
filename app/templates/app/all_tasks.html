@@ -130,12 +130,12 @@
 
                 <div class = "card-task-secondary-info">
                     <div>
-                        <p>До {{ task.deadline }}</p>
+                        <p>До {{ task.deadline|date:"d-m-Y" }}</p>
                         <p>Курс {{ task.course }}</p>
                         <p>{{ task.direction.code }}</p>
                         <p>{{ task.university }}</p>
                     </div>
-                    <p class = "card-task-time-created">{{ task.time_created }}</p>
+                    <p class = "card-task-time-created">{{ task.time_created|date:"d-m-Y" }}</p>
                 </div>
             </a>
 
