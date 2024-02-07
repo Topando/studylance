@@ -182,17 +182,13 @@ def task_update_view(request, task_id):
     if task_create_mixin(request):
         if request.method == "POST":
             task = get_task_by_task_id(task_id)
-            form = TaskUpdateForm(request.POST)
+            form = TaskUpdateForm(request.POST, instance=task)
             images = request.FILES.getlist("images")
             files = request.FILES.getlist("files")
             count_images = len(images) + get_count_files_in_task(task_id, ImagesTask)
             count_files = len(files) + get_count_files_in_task(task_id, FilesTask)
-            print(count_images)
             if form.is_valid() and count_images <= 5 and count_files <= 5:
-                task_info = get_form_task_info(form)
-                customer_id = request.user.id
-                task_info['user'] = User.objects.get(pk=customer_id)
-                update_task(task_id, task_info)
+                form.save()
                 images_in_db(images, task)
                 files_in_db(files, task)
                 return redirect("task", task_id)
@@ -246,16 +242,12 @@ def task_create_view(request):
             images = request.FILES.getlist("images")
             files = request.FILES.getlist("files")
             if form.is_valid() and len(images) <= 5 and len(files) <= 5:
-                task_info = {}
-                task_info['title'] = form.cleaned_data.get("title")
-                task_info['description'] = form.cleaned_data.get("description")
-                task_info['price'] = form.cleaned_data.get("price")
-                task_info['university'] = form.cleaned_data.get("university")
-                task_info['direction'] = form.cleaned_data.get("direction")
-                task_info['course'] = form.cleaned_data.get("course")
                 customer_id = request.user.id
-                task_info['user'] = User.objects.get(pk=customer_id)
-                task_create(task_info, images, files)
+                customer = User.objects.get(pk=customer_id)
+                form.instance.customer_id = customer
+                task = form.save()
+                images_in_db(images, task)
+                files_in_db(files, task)
                 return redirect('tasks')
             return render(request, 'app/task_create.html', {'form': form})
         else:

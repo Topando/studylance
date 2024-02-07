@@ -137,6 +137,5 @@ EMAIL_HOST_PASSWORD = "ikvrubakhraopikl"
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-DATE_INPUT_FORMATS = ('%d-%m-%Y')
-USE_I18N = True
+
 USE_L10N = False  # Here

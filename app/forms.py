@@ -21,8 +21,10 @@ class RegisterUserForm(UserCreationForm):
 
 
 class LoginUserForm(forms.Form):
-    username = forms.CharField(label="Логин или почта", widget=forms.TextInput(attrs={"class": "form-input"}), label_suffix = "")
-    password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}), label_suffix = "")
+    username = forms.CharField(label="Логин или почта", widget=forms.TextInput(attrs={"class": "form-input"}),
+                               label_suffix="")
+    password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}),
+                               label_suffix="")
 
 
 class UserForm(forms.ModelForm):
@@ -37,12 +39,16 @@ class ProfileForm(forms.ModelForm):
         fields = ('photo', 'age',)
 
 
+class MyDateInput(forms.DateInput):
+    input_type = 'date'
+    format = '%Y-%m-%d'
+
+
 class TaskUpdateForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ('title', 'description', 'price', 'university', 'direction', 'course')
-        widgets = {'customer_id': HiddenInput()}
-
+        fields = ('title', 'description', 'price', 'university', 'direction', 'course', "deadline")
+        widgets = {'customer_id': HiddenInput(), "deadline": MyDateInput()}
 
 class TaskAnswerForm(forms.ModelForm):
     class Meta:
@@ -62,8 +68,8 @@ class PasswordChangeDoneForm(forms.Form):
 class TaskCreateForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ('title', 'description', 'price', 'university', 'direction', 'course')
-
+        fields = ('title', 'description', 'price', 'university', 'direction', 'course', "deadline")
+        widgets = {"deadline": MyDateInput()}
 
 class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True

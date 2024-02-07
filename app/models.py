@@ -80,6 +80,8 @@ class Comments(models.Model):
     comment = models.TextField()
 
 
+
+
 class Task(models.Model):
     customer_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='task_customer', null=True, blank=True)
     executor_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
