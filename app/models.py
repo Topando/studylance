@@ -1,9 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
+from django.http import FileResponse
 from django.urls import reverse
 from django import forms
+
+from studlance import settings
 
 
 class Profile(models.Model):
@@ -77,6 +80,8 @@ class Comments(models.Model):
     comment = models.TextField()
 
 
+
+
 class Task(models.Model):
     customer_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='task_customer', null=True, blank=True)
     executor_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -89,7 +94,7 @@ class Task(models.Model):
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
     price = models.IntegerField(null=True, blank=True)
     deadline = models.DateField(null=True, blank=True)
-    time_created = models.DateTimeField(auto_now_add=True)
+    time_created = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.title
@@ -101,6 +106,18 @@ class Task(models.Model):
 class ImagesTask(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='images_task')
     image = models.FileField(upload_to='tasks/', null=True, blank=True)
+
+    def deleter(self):
+        print(123)
+        return "123"
+
+class FilesTask(models.Model):
+    task_id = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='files_task')
+    file = models.FileField(upload_to='tasks/', null=True, blank=True)
+
+    def file_download(self):
+        return FileResponse(self.file, as_attachment=True)
+
 
 class TaskAnswer(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True)

@@ -11,7 +11,7 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
-from .models import User
+from .models import User, Task, ImagesTask, FilesTask
 
 
 def check_author_task(user, pk):
@@ -82,6 +82,7 @@ def user_login(request, username, password):
     user = User.objects.filter(email=username).first()
     if user is None:
         user = User.objects.filter(username=username).first()
+    print(password)
     if user is not None and check_password(password, user.password):
         login(request, user)
         print("Пользователь авторизован")
@@ -104,3 +105,66 @@ def register_user(form):
     send_message(email, subject, message)
 
 
+def task_create(task_info, images, files):
+    task = Task.objects.create(customer_id=task_info['user'], title=task_info['title'],
+                               description=task_info['description'], price=task_info['price'],
+                               university=task_info['university'], direction=task_info['direction'],
+                               course=task_info['course'])
+    images_in_db(images, task)
+    files_in_db(files, task)
+
+
+def images_in_db(images, task):
+    for image in images:
+        ImagesTask.objects.create(task_id=task, image=image)
+
+
+def files_in_db(files, task):
+    for file in files:
+        FilesTask.objects.create(task_id=task, file=file)
+
+
+def get_user_by_image_id(image_id):
+    user_id = ImagesTask.objects.filter(pk=image_id).first().task_id.customer_id.id
+    return user_id
+
+
+def get_image_by_image_id(image_id):
+    return ImagesTask.objects.filter(pk=image_id).first()
+
+
+def delete_image(image):
+    try:
+        image.delete()
+    except Exception:
+        print("Ошибка удаления фотографии")
+
+
+def get_task_by_task_id(task_id):
+    return Task.objects.get(pk=task_id)
+
+
+def get_form_task_info(form):
+    task_info = {}
+    task_info['title'] = form.cleaned_data.get("title")
+    task_info['description'] = form.cleaned_data.get("description")
+    task_info['price'] = form.cleaned_data.get("price")
+    task_info['university'] = form.cleaned_data.get("university")
+    task_info['direction'] = form.cleaned_data.get("direction")
+    task_info['course'] = form.cleaned_data.get("course")
+    return task_info
+
+
+def update_task(task_id, task_info):
+    task = Task.objects.get(pk=task_id)
+    task.title = task_info.get('title')
+    task.description = task_info.get('description')
+    task.price = task_info.get('price')
+    task.university = task_info.get('university')
+    task.direction = task_info.get('direction')
+    task.course = task_info.get('course')
+    task.save()
+
+
+def get_count_files_in_task(task_id, obj):
+    return obj.objects.filter(task_id=task_id).count()

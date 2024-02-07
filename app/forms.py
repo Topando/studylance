@@ -2,9 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError
 from .models import *
 from django.forms.widgets import HiddenInput
+from django.core.exceptions import ValidationError
 
 
 class RegisterUserForm(UserCreationForm):
@@ -21,8 +21,10 @@ class RegisterUserForm(UserCreationForm):
 
 
 class LoginUserForm(forms.Form):
-    username = forms.CharField(label="Логин или почта", widget=forms.TextInput(attrs={"class": "form-input"}), label_suffix = "")
-    password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}), label_suffix = "")
+    username = forms.CharField(label="Логин или почта", widget=forms.TextInput(attrs={"class": "form-input"}),
+                               label_suffix="")
+    password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={"class": "form-input"}),
+                               label_suffix="")
 
 
 class UserForm(forms.ModelForm):
@@ -37,12 +39,16 @@ class ProfileForm(forms.ModelForm):
         fields = ('photo', 'age',)
 
 
+class MyDateInput(forms.DateInput):
+    input_type = 'date'
+    format = '%Y-%m-%d'
+
+
 class TaskUpdateForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ('title', 'description', 'price', 'university', 'direction', 'course')
-        widgets = {'customer_id': HiddenInput()}
-
+        fields = ('title', 'description', 'price', 'university', 'direction', 'course', "deadline")
+        widgets = {'customer_id': HiddenInput(), "deadline": MyDateInput()}
 
 class TaskAnswerForm(forms.ModelForm):
     class Meta:
@@ -62,4 +68,27 @@ class PasswordChangeDoneForm(forms.Form):
 class TaskCreateForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ('title', 'description', 'price', 'university', 'direction', 'course')
+        fields = ('title', 'description', 'price', 'university', 'direction', 'course', "deadline")
+        widgets = {"deadline": MyDateInput()}
+
+class MultipleFileInput(forms.ClearableFileInput):
+    allow_multiple_selected = True
+
+
+class MultipleFileField(forms.FileField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("widget", MultipleFileInput())
+        super().__init__(*args, **kwargs)
+
+    def clean(self, data, initial=None):
+        single_file_clean = super().clean
+        if isinstance(data, (list, tuple)):
+            result = [single_file_clean(d, initial) for d in data]
+        else:
+            result = single_file_clean(data, initial)
+        return result
+
+
+class FileFieldForm(forms.Form):
+    file_field = MultipleFileField(label="Фото")
+    file_field.widget.attrs.update({'accept': 'image/png, image/jpeg, image/jpg'})
