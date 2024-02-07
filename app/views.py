@@ -3,6 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView, TemplateView, FormView
+
+from app.db_handler.db_update import database_filling
 from app.forms import *
 from app.mixins import *
 from app.utils import *
