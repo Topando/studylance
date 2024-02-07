@@ -1,22 +1,76 @@
 {% extends "app/base-for-login-reg.html" %}
 
 {% block title %}
-    Регистрация
+    STUDYLANCE - Регистрация
 {% endblock title %}
 
 {% block body%}
     <div class = 'container-out-log-reg'>
         <div class = 'container-log-reg'>
-            <form action="" method="POST">
+            <form action="" method="POST" class = "form-register">
+
                 {% csrf_token %}
                 {% for f in form %}
-                <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>
-                <div class="form-error">
-                    {{ f.errors }}
-                </div>
+
+
+
+                {% if f.label == 'Имя'%}
+                    <div class = "container-reg-field">
+                        <div>
+                            <label class="form-label" for="id_first_name">Имя</label>
+                            <input type="text" name="first_name" required="" id="id_first_name">
+                        </div>
+                        <div class="form-error">{{ f.errors }}</div>
+                        <div>
+                            <label class="form-label" for="id_last_name">Фамилия</label>
+                            <input type="text" name="last_name" required="" id="id_last_name">
+                        </div>
+                        <div class="form-error">{{ f.errors }}</div>
+                    </div>
+
+                {% elif f.label == "Фамилия" %}
+
+                {% elif f.label == "Логин" %}
+                    <div class = "container-reg-field">
+                        <div>
+                            <label class="form-label" for="id_username">Логин</label>
+                            <input type="text" name="username" class="form-input" autofocus="" required="" id="id_username">
+                        </div>
+                        <div class="form-error">{{ f.errors }}</div>
+                        <div>
+                            <label class="form-label" for="id_email">Почта</label>
+                            <input type="email" name="email" class="form-input" maxlength="320" required="" id="id_email">
+                        </div>
+                        <div class="form-error">{{ f.errors }}</div>
+                    </div>
+
+                {% elif f.label == "Почта" %}
+
+                {% elif f.label == "Пароль" %}
+                    <div class = "container-reg-field">
+                        <div>
+                            <label class="form-label" for="id_password1">Пароль</label>
+                            <input type="password" name="password1" class="form-input" required="" id="id_password1">
+                        </div>
+                        <div class="form-error">{{ f.errors }}</div>
+                        <div>
+                            <label class="form-label" for="id_password2">Повторите пароль</label>
+                            <input type="password" name="password2" class="form-input" required="" id="id_password2">
+                        </div>
+                        <div class="form-error">{{ f.errors }}</div>
+                    </div>
+
+                {% elif f.label == "Повторите пароль" %}
+                {% endif %}
+
                 {% endfor %}
                 <input class = "orange-button" type="Submit" name="submit" value="Регистрация"/>
             </form>
+
+            <div class = 'bottom-info-reg'>
+                <p>Уже есть аккаунт¿</p>
+                <a href = '{% url "login" %}'>Войти</a>
+            </div>
         </div>
     </div>
 {% endblock body%}

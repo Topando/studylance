@@ -8,7 +8,7 @@ body a {
 }
 :root {
     --index: calc(1/1440*100vw);
-    --color-main-text: #FFF;
+    --color-main-text: #FFFAF0;
     --color-secondary-text: #878383;
     --color-orange: #FF4D00;
     --color-background: #121212;
@@ -108,7 +108,8 @@ h2 {
     border-radius: 5px;
     color: var(--color-main-text);
 }
-.orange-button {
+.orange-button,
+.container-task-response > .button-task-response{
     width: 230px;
     height: 30px;
     background: var(--color-orange-button);
@@ -232,6 +233,256 @@ h2 {
     font: 24px "helvetica-bold-s", normal;
     color: var(--color-orange);
 }
-.container-show-more {
+.container-show-more,
+.container-task-response{
     text-align: center;
+}
+
+/*функциональные стили модальных окон  НИЧЕГО НЕ ТРОГАТЬ!!*/
+.hystmodal__wrap {
+    position: absolute;
+    display: none;
+    top: 25px;
+}
+.hystmodal {
+    position: relative;
+}
+.hystmodal--active .hystmodal__wrap {
+    display: block;
+}
+.hystmodal__window {
+    border: 1px solid black;
+}
+/**/
+
+.task-filter {
+    display: flex;
+    align-items: baseline;
+    margin: 90px calc(var(--index)*244) 45px calc(var(--index)*244);
+}
+.task-filter > *{
+    margin-right: 12px;
+}
+.button-filter,
+.button-create-task,
+.button-reset-filter{
+    padding: 6px 15px 6px 15px;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-secondary-text);
+    font: 18px "helvetica-regular-s", normal;
+}
+.button-create-task,
+.button-reset-filter{
+    color: var(--color-orange);
+}
+
+/*стили самих модальных окон*/
+.container-button-filter .hystmodal__window{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 15px 20px 15px 20px;
+}
+#filter-date .hystmodal__window div,
+#filter-deadline .hystmodal__window div{
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+#filter-date .hystmodal__window div label,
+#filter-deadline .hystmodal__window div label{
+    align-self: flex-start;
+    color: var(--color-secondary-text);
+    font: 18px "helvetica-regular-s", normal;
+    margin: 0 0 2px 15px;
+}
+.container-button-filter .hystmodal__window > .orange-button{
+    width: 150px;
+    padding: 7px 7px 7px 7px;
+    margin-top: 10%;
+}
+.container-button-filter .hystmodal__window input{
+    height: 30px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    color: var(--color-secondary-text);
+    font: 16px "helvetica-light-s", normal;
+    padding: 5px 5px 5px 10px;
+
+}
+.container-button-filter {
+    position: relative;
+}
+::-webkit-calendar-picker-indicator {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23878383" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+}
+
+/*стили для task_detail*/
+.task-container,
+.container-profile{
+    margin: 80px calc(var(--index)*244) 0px calc(var(--index)*244);
+    padding: 30px 50px 20px 50px;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+}
+.task-header .task-secondary-info {
+    display: flex;
+    flex-direction: row;
+    color: var(--color-secondary-text);
+    font: 16px "helvetica-light-s", normal;
+}
+.task-header .task-secondary-info > * {
+    margin-right: 25px;
+}
+.task-header .task-secondary-info .task-delete {
+    color: var(--color-secondary-text);
+}
+.task-header .task-secondary-info .task-edit {
+    color: var(--color-orange);
+}
+.task-header .task-price {
+    color: var(--color-orange);
+    font: 24px "helvetica-bold-s", normal;
+}
+.task-header{
+    display: flex;
+    justify-content: space-between;
+}
+.task-main-info{
+    padding-left: 50px;
+}
+.task-main-info > h2 {
+    font: 20px "helvetica-bold-s", normal;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+.task-main-info .task-description h3,
+.task-main-info .task-photo h3,
+.task-main-info .task-files h3{
+    font: 20px "helvetica-light-s", normal;
+    color: var(--color-secondary-text);
+    margin:0 0 10px 30px;
+}
+.task-main-info .task-description p {
+    font: 16px "helvetica-light-s", normal;
+    max-width: 600px;
+}
+.task-main-info .task-description,
+.task-main-info .task-photo{
+    margin-bottom: 25px;
+}
+.task-photo #lightgallery{
+    display: flex;
+}
+.task-photo #lightgallery > a {
+    width: 120px;
+    height: 150px;
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    background-color: var(--color-background);
+    margin-right: 10px;
+}
+.task-photo #lightgallery > a > img {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}
+.container-task-response > .button-task-response a {
+    color: var(--color-main-text);
+}
+.container-profile > .header-profile {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.header-profile > p {
+    color: var(--color-secondary-text);
+    font: 18px "helvetica-light-s", normal;
+}
+.header-profile > .profile-rating {
+    color: var(--color-orange);
+    font: 30px "helvetica-bold-s", normal;
+
+}
+.container-profile-photo-info > .profile-photo {
+    display: block;
+    width: 200px;
+    height: 200px;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    /* заменить когда саня сделает норм прикрепление фото */
+    background: no-repeat url("https://gebestore.ru/wp-content/uploads/e/7/3/e73d8d803d8faf7ef722f89ffb67f2ec.png");
+    background-size: 100% 100%;
+    margin-bottom: 20px;
+}
+.profile-confidential-info *{
+    color: var(--color-secondary-text);
+    font: 16px "helvetica-light-s", normal;
+    display: block;
+}
+.container-profile-main-info {
+    display: flex;
+}
+.container-profile-desc-comments {
+    margin-top: 80px;
+    margin-left: 40px;
+}
+.container-profile-desc-comments {
+    width: 100%;
+}
+.header-profile-description {
+    color: var(--color-secondary-text);
+    font: 20px "helvetica-light-s", normal;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    margin-bottom: 10px;
+}
+.header-profile-description a {
+    color: var(--color-secondary-text);
+    text-decoration: underline;
+    font-size: 18px;
+}
+.profile-description {
+    color: var(--color-main-text);
+    font: 18px "helvetica-light-s", normal;
+    margin-bottom: 50px;
+}
+.container-profile-comments > h3 {
+    color: var(--color-secondary-text);
+    font: 20px "helvetica-light-s", normal;
+    margin-left: 30px;
+}
+.profile-comments > * {
+    margin-top: 10px;
+}
+.profile-comment {
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    padding: 10px 30px 15px 30px;
+    background: var(--color-background);
+}
+.profile-comment > p {
+    margin: 0 30px;
+    color: var(--color-main-text);
+    font: 16px "helvetica-light-s", normal;
+}
+.header-profile-comment {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-secondary-text);
+    font: 16px "helvetica-light-s", normal;
+    margin-bottom: 15px;
+}
+.header-profile-comment > .profile-comment-score {
+    color: var(--color-orange);
+    font: 16px "helvetica-bold-s", normal;
 }

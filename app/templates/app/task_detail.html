@@ -1,21 +1,51 @@
 {% extends "app/base.html" %}
 
+
 {% block title %}
     Задание
 {% endblock %}
 
 {% block body %}
-    {{ task.title }}
-    {% for image in images %}
-        <img style="display:block;width: 100px; height: 100px" src="{{ image.image.url }}">
-    {% endfor %}
-    {% for file in files %}
-        <p><a  href="{{ file.file.url }}" download> {{ file.file|filename  }} </a></p>
-    {% endfor %}
-    {% if task.customer_id.id == request.user.id %}
-        <a href="{{ task.get_absolute_url }}update/">Редактировать задание</a>
-        <p><a href="{{ task.get_absolute_url }}delete/">Удалить задание</a></p>
-    {% endif %}
-    <p><a href="{{ task.get_absolute_url }}response/">Оставить отклик</a></p>
+    <div class = "task-container">
+        <div class = "task-header">
+            <div class = "task-secondary-info">
+                <p>Задание от {{ task.customer_id }}</p>
+                <p>До {{ task.deadline }}</p>
+                <p>{{ task.direction.code }}</p>
+                <p>Курс {{ task.course }}</p>
+                {% if task.customer_id.id == request.user.id %}
+                    <a class = 'task-edit' href="{{ task.get_absolute_url }}update/">Редактировать задание</a>
+                    <a class = 'task-delete' href="{{ task.get_absolute_url }}delete/">Удалить задание</a>
+                {% endif %}
+            </div>
+            <p class = "task-price">{{ task.price }} ₽</p>
+        </div>
+        <div class = "task-main-info">
+            <h2>{{ task.direction}}</h2>
+            <div class = "task-description">
+                <h3>Описание</h3>
+                <p>{{ task.description }}</p>
+            </div>
+            <div class = "task-photo">
+                <h3>Фото</h3>
+                <div id = 'lightgallery'>
+                    {% for image in images %}
+                        <a href = "{{ image.image.url}}">
+                            <img src="{{ image.image.url }}">
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class = "task-files">
+                <h3>Файлы</h3>
 
+            </div>
+        </div>
+
+        <div class = "container-task-response">
+            <button class = 'orange-button button-task-response'>
+                <a href="{{ task.get_absolute_url }}response/">Откликнуться</a>
+            </button>
+        </div>
+    </div>
 {% endblock %}

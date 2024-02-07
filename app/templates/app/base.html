@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <link type="text/css" href="{% static 'app/css/styles.css' %}" rel="stylesheet"/>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'app/logo/SL-logo.svg'%}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'app/scripts/lightgallery/css/lightgallery-bundle.css' %}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'app/logo/SL-logo.svg' %}" />
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -36,5 +37,18 @@
             <a href = '#'>предложения</a>
         </footer>
     </div>
+
+    <script src="../../static/app/scripts/lightgallery/lightgallery.umd.js"></script>
+    <script src="../../static/app/scripts/lightgallery/lg-fullscreen.umd.js"></script>
+    <script src="../../static/app/scripts/lightgallery/lg-rotate.umd.js"></script>
+    <script src="../../static/app/scripts/lightgallery/lg-zoom.umd.js"></script>
+    <script src="../../static/app/scripts/lightgallery/lg-thumbnail.umd.js"></script>
+
+    <script type="text/javascript">
+        lightGallery(document.getElementById('lightgallery'), {
+            plugins: [lgZoom, lgFullscreen, lgRotate],
+            speed: 500,
+        });
+    </script>
 </body>
 </html>
