@@ -344,6 +344,10 @@ h2 {
 }
 .task-header .task-secondary-info .task-delete {
     color: var(--color-secondary-text);
+    padding: 0;
+    background: none;
+    border: none;
+    font: 16px "helvetica-light-s", normal;
 }
 .task-header .task-secondary-info .task-edit {
     color: var(--color-orange);
@@ -500,4 +504,17 @@ h2 {
 .header-profile-comment > .profile-comment-score {
     color: var(--color-orange);
     font: 16px "helvetica-bold-s", normal;
+}
+.button-task-delete {
+  all: unset;
+}
+.button-task-delete,
+.button-cancel-task-delete{
+    margin-left: 70px;
+    color: var(--color-orange);
+    font: font: 20px "helvetica-regular-s", normal;
+}
+.button-cancel-task-delete {
+    color: var(--color-secondary-text);
+    margin-left: 40px;
 }

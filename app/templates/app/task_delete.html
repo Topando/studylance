@@ -5,14 +5,17 @@
 
 
 {% block body %}
-    <form method="post">
-        {% csrf_token %}
-        <h2>Удаление проекта</h2>
-        <p>Вы уверены?</p>
-        <p class="form-buttons">
-        <div>
-            <input type="submit" value="Удалить">
-            <a href="{{ task.get_absolute_url }}">Отменить</a></div>
-        </p>
-    </form>
+
+    <div class="alert alert-info" role="alert">
+        <form method="post">
+            {% csrf_token %}
+            <h2 class="alert-heading">Удалить задание¿</h2>
+            <p class="form-buttons">
+                <div>
+                    <input class = "button-task-delete" type="submit" value="Удалить">
+                    <a class = "button-cancel-task-delete" href="{{ task.get_absolute_url }}">Отменить</a>
+                </div>
+            </p>
+        </form>
+    </div>
 {% endblock %}
