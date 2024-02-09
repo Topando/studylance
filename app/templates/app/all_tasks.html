@@ -119,12 +119,12 @@
         <div class = "card-task">
             <a href = "{{ task.get_absolute_url }}" class = "link-task">
                 <div class = "container-task">
-                    <div class = "task-title-desс">
+                    <div class = "task-title-price">
                         <h3>{{ task.direction}}</h3>
-                        <p>{{ task.description }}</p>
-                    </div>
-                    <div class = "card-task-price">
                         <p>{{task.price}} ₽</p>
+                    </div>
+                    <div class = "card-task-desc">
+                        <p class = "task-description-cropped">{{ task.description }}</p>
                     </div>
                 </div>
 

@@ -20,50 +20,23 @@ class HystModal{
 
         //Обработчик событий
         this.eventsFeeler();
+
+        this._focusElements = [
+            'a[href]',
+            'area[href]',
+            'input:not([disabled]):not([type="hidden"]):not([aria-hidden])',
+            'select:not([disabled]):not([aria-hidden])',
+            'textarea:not([disabled]):not([aria-hidden])',
+            'button:not([disabled]):not([aria-hidden])',
+            'iframe',
+            'object',
+            'embed',
+            '[contenteditable]',
+            '[tabindex]:not([tabindex^="-"])'
+        ];
     }
 
-    eventsFeeler(){
-        document.addEventListener("click", function (e) {
-            if (!this.openedWindow.id) {
-                return;
-            }
-            let containingElement = document.querySelector("#" + this.openedWindow.id);
-            if(!containingElement.contains(e.target) ) {
-                e.preventDefault();
-                this.close();
-            }
 
-        }.bind(this));
-
-        document.addEventListener("click", function (e) {
-            const clickedlink = e.target.closest("[" + this.config.linkAttributeName + "]");
-
-            if (clickedlink) {
-                e.preventDefault();
-                this.starter = clickedlink;
-                let targetSelector = this.starter.getAttribute(this.config.linkAttributeName);
-                this._nextWindows = document.querySelector(targetSelector);
-                this.open();
-                return;
-            }
-
-            if (e.target.closest('[data-hystclose]')) {
-                this.close();
-                return;
-            }
-        }.bind(this));
-
-        //клавиша escape
-        window.addEventListener("keydown", function (e) {
-            if (e.which == 27 && this.isOpened) {
-                e.preventDefault();
-                this.close();
-                return;
-            }
-
-        }.bind(this));
-
-    }
 
     open(selector){
         this.openedWindow = this._nextWindows;
@@ -90,7 +63,10 @@ class HystModal{
         //возвращаем скролл
         this._bodyScrollControl();
         this.isOpened = false;
+
+
     }
+
 
     _bodyScrollControl(){
         let html = document.documentElement;

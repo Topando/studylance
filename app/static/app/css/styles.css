@@ -216,22 +216,36 @@ h2 {
     border-radius: 6px;
 }
 .container-task {
-    display: flex;
-    justify-content: space-between;
     margin-left: 20px;
 }
-.task-title-desс > h3 {
+.task-title-price{
+    display: flex;
+    justify-content: space-between;
+}
+.task-title-price > h3 {
     font: 20px "helvetica-bold-s", normal;
     color: var(--color-main-text);
 }
-.task-title-desс > p {
+.card-task-desc > p {
     font: 14px "helvetica-light-s", normal;
     color: var(--color-main-text);
     margin: 10px 0 15px 15px;
 }
-.card-task-price p{
+.task-title-price{
+    max-width: 100%;
+}
+.card-task-desc{
+    max-width: 40%;
+}
+.task-title-price p{
     font: 24px "helvetica-bold-s", normal;
     color: var(--color-orange);
+}
+.task-description-cropped{
+    white-space: nowrap; /* Отменяем перенос текста */
+    overflow: hidden; /* Обрезаем содержимое */
+    padding: 5px; /* Поля */
+    text-overflow: ellipsis;
 }
 .container-show-more,
 .container-task-response{
