@@ -36,7 +36,48 @@ class HystModal{
         ];
     }
 
+    eventsFeeler(){
+        document.addEventListener("click", function (e) {
+            if (!this.openedWindow.id) {
+                return;
+            }
+            let containingElement = document.querySelector("#" + this.openedWindow.id);
+            if(!containingElement.contains(e.target) ) {
+                e.preventDefault();
+                this.close();
+            }
 
+        }.bind(this));
+
+        document.addEventListener("click", function (e) {
+            const clickedlink = e.target.closest("[" + this.config.linkAttributeName + "]");
+
+            if (clickedlink) {
+                e.preventDefault();
+                this.starter = clickedlink;
+                let targetSelector = this.starter.getAttribute(this.config.linkAttributeName);
+                this._nextWindows = document.querySelector(targetSelector);
+                this.open();
+                return;
+            }
+
+            if (e.target.closest('[data-hystclose]')) {
+                this.close();
+                return;
+            }
+        }.bind(this));
+
+        //клавиша escape
+        window.addEventListener("keydown", function (e) {
+            if (e.which == 27 && this.isOpened) {
+                e.preventDefault();
+                this.close();
+                return;
+            }
+
+        }.bind(this));
+
+    }
 
     open(selector){
         this.openedWindow = this._nextWindows;
