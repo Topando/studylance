@@ -42,12 +42,13 @@ class HystModal{
                 return;
             }
             let containingElement = document.querySelector("#" + this.openedWindow.id);
-            if(!containingElement.contains(e.target) ) {
+            if(!containingElement.contains(e.target) && this.isOpened) {
                 e.preventDefault();
+                console.log("click-out-window");
                 this.close();
             }
 
-        }.bind(this));
+        }.bind(this));;
 
         document.addEventListener("click", function (e) {
             const clickedlink = e.target.closest("[" + this.config.linkAttributeName + "]");
@@ -63,6 +64,7 @@ class HystModal{
 
             if (e.target.closest('[data-hystclose]')) {
                 this.close();
+                console.log("dfjkfdjhf");
                 return;
             }
         }.bind(this));
