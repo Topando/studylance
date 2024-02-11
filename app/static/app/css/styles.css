@@ -585,6 +585,20 @@ h2 {
             width: calc(180px + (230 - 180) * ((100vw - 1000px) / (1900 - 1000)));
             height: calc(25px + (30 - 25) * ((100vw - 1000px) / (1900 - 1000)));
     }
+    .container-button-filter .hystmodal__window input {
+        height: calc(25px + (30 - 25) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-button-filter .hystmodal__window {
+        padding: calc(10px + (15 - 10) * ((100vw - 1000px) / (1900 - 1000))) calc(15px + (20 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    #filter-date .hystmodal__window div, #filter-deadline .hystmodal__window div {
+        width: calc(130px + (150 - 130) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-bottom: calc(8px + (15 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-button-filter .hystmodal__window > .orange-button {
+        width: calc(130px + (150 - 130) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: calc(5px + (7 - 5) * ((100vw - 1000px) / (1900 - 1000)));;
+    }
 
 }
 @media (max-width: 999px) {
