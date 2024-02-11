@@ -93,7 +93,7 @@ body {
 .index-what-is-it p,
 .alert p{
     width: 47vw;
-    max-width: 650px;
+    max-width: 700px;
     font: var(--font-size-24px) "helvetica-light-s", normal;
     margin: 0 0 calc(var(--index)*20) calc(var(--index)*40);
 }
@@ -218,11 +218,14 @@ h2 {
 }
 .card-task {
     min-width: 800px;
-    margin: 0 calc(var(--index)*244) 25px calc(var(--index)*244);
     padding: 16px 16px 14px 16px;
+    margin-bottom: 25px;
     background: var(--color-background-light);
     border: 1px solid var(--color-border);
     border-radius: 6px;
+}
+.container-all-task{
+    padding: 80px 320px 25px 320px;
 }
 .container-task {
     margin-left: 20px;
@@ -251,9 +254,8 @@ h2 {
     color: var(--color-orange);
 }
 .task-description-cropped{
-    white-space: nowrap; /* Отменяем перенос текста */
-    overflow: hidden; /* Обрезаем содержимое */
-    padding: 5px; /* Поля */
+    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 .container-show-more,
@@ -281,10 +283,10 @@ h2 {
 .task-filter {
     display: flex;
     align-items: baseline;
-    margin: 90px calc(var(--index)*244) 45px calc(var(--index)*244);
 }
 .task-filter > *{
     margin-right: 12px;
+    margin-bottom: 25px;
 }
 .button-filter,
 .button-create-task,
@@ -546,15 +548,61 @@ h2 {
 
 
 
-@media (max-width: 2000px) {
-    /*для десктоп, от 1000px до 2000px*/
+@media (max-width: 1900px) {
+    /*для десктоп, от 1000px до 1900px*/
+    :root {
+        --font-size-30px: calc(22px + (30 - 22) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-48px: calc(32px + (48 - 32) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-24px: calc(18px + (24 - 18) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-22px: calc(16px + (22 - 16) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-16px: calc(12px + (16 - 12) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-18px: calc(14px + (18 - 14) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-14px: calc(10px + (14 - 10) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .index-what-is-it p, .alert p {
+        width: calc(550px + (800 - 550) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .card-task{
+        min-width: calc(700px + (800 - 700) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: calc(8px + (16 - 8) * ((100vw - 1000px) / (1900 - 1000))) calc(15px + (16 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-bottom: calc(15px + (25 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-all-task{
+        padding: calc(50px + (80 - 50) * ((100vw - 1000px) / (1900 - 1000))) calc(140px + (320 - 140) * ((100vw - 1000px) / (1900 - 1000))) 0 calc(140px + (320 - 140) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .button-filter, .button-create-task, .button-reset-filter {
+        padding: calc(5px + (6 - 5) * ((100vw - 1000px) / (1900 - 1000))) calc(10px + (15 - 10) * ((100vw - 1000px) / (1900 - 1000)));
+        border-radius: calc(5px + (6 - 5) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-filter > * {
+        margin-right: calc(8px + (12 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-bottom: calc(15px + (25 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .card-task-desc > p {
+        margin: calc(4px + (10 - 4) * ((100vw - 1000px) / (1900 - 1000))) 0 calc(12px + (15 - 12) * ((100vw - 1000px) / (1900 - 1000))) 15px;
+    }
+    .orange-button{
+            width: calc(180px + (230 - 180) * ((100vw - 1000px) / (1900 - 1000)));
+            height: calc(25px + (30 - 25) * ((100vw - 1000px) / (1900 - 1000)));
+    }
 
 }
 @media (max-width: 999px) {
     /*планшет в портретной ориентации, от 768px до 1000px*/
+    :root{
 
+    }
 }
 @media (max-width: 767px) {
     /*смартфоны, от 320px до 768px*/
+    :root{
 
+    }
+
+}
+@media (max-width: 400px) {
+    /*смартфоны, от 320px до 768px*/
+    :root{
+
+    }
 }
