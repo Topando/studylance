@@ -16,6 +16,15 @@ body a {
     --color-orange-button: #B53C06;
     --color-border-orange-button: #B23903;
     --color-border: #1E1F21;
+
+    --font-size-48px: 48px;
+    --font-size-30px: 30px;
+    --font-size-24px: 24px;
+    --font-size-22px: 22px;
+    --font-size-18px: 18px;
+    --font-size-16px: 16px;
+    --font-size-14px: 14px;
+
 }
 @font-face {
     font-family: helvetica-bold-s;
@@ -33,7 +42,7 @@ body a {
     font-weight: normal;
 }
 body {
-    font: 22px "helvetica-regular-s", normal;
+    font: var(--font-size-22px) "helvetica-regular-s", normal;
     min-height: 100vh;
     background-color: var(--color-background);
     color: var(--color-main-text);
@@ -47,7 +56,7 @@ body {
     justify-content: space-between;
 }
 .header-logo a{
-    font: 30px "helvetica-bold-s", normal;
+    font: var(--font-size-30px) "helvetica-bold-s", normal;
     color: var(--color-orange);
 }
 .header .header-nav {
@@ -55,7 +64,7 @@ body {
 
 }
 .header .header-nav a{
-    font: 22px "helvetica-bold-s", normal;
+    font: var(--font-size-22px) "helvetica-bold-s", normal;
     color: var(--color-secondary-text);
     margin-left: calc(var(--index)*50);
 }
@@ -74,7 +83,7 @@ body {
 .footer * {
     padding-right: 5px;
     color: var(--color-secondary-text);
-    font-size: 16px;
+    font-size: var(--font-size-16px);
 }
 
 .index-what-is-it,
@@ -85,11 +94,11 @@ body {
 .alert p{
     width: 47vw;
     max-width: 650px;
-    font: 26px "helvetica-light-s", normal;
-    margin: 0 0 calc(var(--index)*20) calc(var(--index)*20);
+    font: var(--font-size-24px) "helvetica-light-s", normal;
+    margin: 0 0 calc(var(--index)*20) calc(var(--index)*40);
 }
 h2 {
-    font: 48px "helvetica-regular-s", normal;
+    font: var(--font-size-48px) "helvetica-regular-s", normal;
     margin-bottom: calc(var(--index)*45);
 }
 
@@ -116,7 +125,7 @@ h2 {
     color: var(--color-main-text);
     border: 1px solid var(--color-border-orange-button);
     border-radius: 5px;
-    font: 14px "helvetica-regular-s", normal;
+    font: var(--font-size-14px) "helvetica-regular-s", normal;
 }
 .form-login label,
 .bottom-info-reg,
@@ -124,7 +133,7 @@ h2 {
 .form-login > div .title-password-forgot a,
 .form-change-pass{
     color: var(--color-main-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
 }
 .bottom-info-reg a{
     color: var(--color-orange);
@@ -169,7 +178,7 @@ h2 {
  .form-change-pass input{
     padding: 2px 15px 2px 15px;
     margin-top: 5px;
-    font: 14px "helvetica-regular-s", normal;
+    font: var(--font-size-14px) "helvetica-regular-s", normal;
 }
 .form-login div .title-password-forgot {
     width: 230px;
@@ -196,7 +205,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     color: var(--color-secondary-text);
-    font: 14px "helvetica-regular-s", normal;
+    font: var(--font-size-14px) "helvetica-regular-s", normal;
 }
 .card-task-secondary-info > div {
     display: flex;
@@ -223,11 +232,11 @@ h2 {
     justify-content: space-between;
 }
 .task-title-price > h3 {
-    font: 20px "helvetica-bold-s", normal;
+    font: var(--font-size-22px) "helvetica-bold-s", normal;
     color: var(--color-main-text);
 }
 .card-task-desc > p {
-    font: 14px "helvetica-light-s", normal;
+    font: var(--font-size-14px) "helvetica-light-s", normal;
     color: var(--color-main-text);
     margin: 10px 0 15px 15px;
 }
@@ -238,7 +247,7 @@ h2 {
     max-width: 40%;
 }
 .task-title-price p{
-    font: 24px "helvetica-bold-s", normal;
+    font: var(--font-size-24px) "helvetica-bold-s", normal;
     color: var(--color-orange);
 }
 .task-description-cropped{
@@ -285,7 +294,7 @@ h2 {
     border: 1px solid var(--color-border);
     border-radius: 6px;
     color: var(--color-secondary-text);
-    font: 18px "helvetica-regular-s", normal;
+    font: var(--font-size-18px) "helvetica-regular-s", normal;
 }
 .button-create-task,
 .button-reset-filter{
@@ -313,7 +322,7 @@ h2 {
 #filter-deadline .hystmodal__window div label{
     align-self: flex-start;
     color: var(--color-secondary-text);
-    font: 18px "helvetica-regular-s", normal;
+    font: var(--font-size-18px) "helvetica-regular-s", normal;
     margin: 0 0 2px 15px;
 }
 .container-button-filter .hystmodal__window > .orange-button{
@@ -327,7 +336,7 @@ h2 {
     border: 1px solid var(--color-border);
     border-radius: 3px;
     color: var(--color-secondary-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
     padding: 5px 5px 5px 10px;
 
 }
@@ -351,7 +360,7 @@ h2 {
     display: flex;
     flex-direction: row;
     color: var(--color-secondary-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
 }
 .task-header .task-secondary-info > * {
     margin-right: 25px;
@@ -361,14 +370,14 @@ h2 {
     padding: 0;
     background: none;
     border: none;
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
 }
 .task-header .task-secondary-info .task-edit {
     color: var(--color-orange);
 }
 .task-header .task-price {
     color: var(--color-orange);
-    font: 24px "helvetica-bold-s", normal;
+    font: var(--font-size-24px) "helvetica-bold-s", normal;
 }
 .task-header{
     display: flex;
@@ -385,12 +394,12 @@ h2 {
 .task-main-info .task-description h3,
 .task-main-info .task-photo h3,
 .task-main-info .task-files h3{
-    font: 20px "helvetica-light-s", normal;
+    font: var(--font-size-22px) "helvetica-light-s", normal;
     color: var(--color-secondary-text);
     margin:0 0 10px 30px;
 }
 .task-main-info .task-description p {
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
     max-width: 600px;
 }
 .task-main-info .task-description,
@@ -426,7 +435,7 @@ h2 {
 }
 .container-task-file > a p {
     color: var(--color-main-text);
-    font: 16px "helvetica-regular-s", normal;
+    font: var(--font-size-16px) "helvetica-regular-s", normal;
 }
 .container-task-response > .button-task-response a {
     color: var(--color-main-text);
@@ -438,11 +447,11 @@ h2 {
 }
 .header-profile > p {
     color: var(--color-secondary-text);
-    font: 18px "helvetica-light-s", normal;
+    font: var(--font-size-18px) "helvetica-light-s", normal;
 }
 .header-profile > .profile-rating {
     color: var(--color-orange);
-    font: 30px "helvetica-bold-s", normal;
+    font: var(--font-size-30px) "helvetica-bold-s", normal;
 
 }
 .container-profile-photo-info > .profile-photo {
@@ -458,7 +467,7 @@ h2 {
 }
 .profile-confidential-info *{
     color: var(--color-secondary-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
     display: block;
 }
 .container-profile-main-info {
@@ -473,7 +482,7 @@ h2 {
 }
 .header-profile-description {
     color: var(--color-secondary-text);
-    font: 20px "helvetica-light-s", normal;
+    font: var(--font-size-22px) "helvetica-light-s", normal;
     display: flex;
     justify-content: space-between;
     padding: 0 30px;
@@ -482,16 +491,16 @@ h2 {
 .header-profile-description a {
     color: var(--color-secondary-text);
     text-decoration: underline;
-    font-size: 18px;
+    font-size: var(--font-size-18px);
 }
 .profile-description {
     color: var(--color-main-text);
-    font: 18px "helvetica-light-s", normal;
+    font: var(--font-size-18px) "helvetica-light-s", normal;
     margin-bottom: 50px;
 }
 .container-profile-comments > h3 {
     color: var(--color-secondary-text);
-    font: 20px "helvetica-light-s", normal;
+    font: var(--font-size-22px) "helvetica-light-s", normal;
     margin-left: 30px;
 }
 .profile-comments > * {
@@ -506,18 +515,18 @@ h2 {
 .profile-comment > p {
     margin: 0 30px;
     color: var(--color-main-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
 }
 .header-profile-comment {
     display: flex;
     justify-content: space-between;
     color: var(--color-secondary-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
     margin-bottom: 15px;
 }
 .header-profile-comment > .profile-comment-score {
     color: var(--color-orange);
-    font: 16px "helvetica-bold-s", normal;
+    font: var(--font-size-16px) "helvetica-bold-s", normal;
 }
 .button-task-delete {
   all: unset;
@@ -526,9 +535,26 @@ h2 {
 .button-cancel-task-delete{
     margin-left: 70px;
     color: var(--color-orange);
-    font: font: 20px "helvetica-regular-s", normal;
+    font: var(--font-size-22px) "helvetica-regular-s", normal;
 }
 .button-cancel-task-delete {
     color: var(--color-secondary-text);
     margin-left: 40px;
+}
+
+
+
+
+
+@media (max-width: 2000px) {
+    /*для десктоп, от 1000px до 2000px*/
+
+}
+@media (max-width: 999px) {
+    /*планшет в портретной ориентации, от 768px до 1000px*/
+
+}
+@media (max-width: 767px) {
+    /*смартфоны, от 320px до 768px*/
+
 }

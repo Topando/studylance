@@ -88,12 +88,12 @@ class Task(models.Model):
     is_done = models.BooleanField(default=False)
     is_working = models.BooleanField(default=False)
     title = models.TextField()
-    description = models.TextField()
-    university = models.ForeignKey('University', on_delete=models.CASCADE)
-    direction = models.ForeignKey('Direction', on_delete=models.CASCADE)
-    course = models.ForeignKey('Course', on_delete=models.CASCADE)
-    price = models.IntegerField(null=True, blank=True)
-    deadline = models.DateField(null=True, blank=True)
+    description = models.TextField(verbose_name="Описание")
+    university = models.ForeignKey('University', verbose_name="ВУЗ", on_delete=models.CASCADE)
+    direction = models.ForeignKey('Direction', verbose_name="Направление", on_delete=models.CASCADE)
+    course = models.ForeignKey('Course', verbose_name="Курс",  on_delete=models.CASCADE)
+    price = models.IntegerField(verbose_name="Цена", null=True, blank=True)
+    deadline = models.DateField(verbose_name="Дедлайн", null=True, blank=True)
     time_created = models.DateField(auto_now_add=True)
 
     def __str__(self):
