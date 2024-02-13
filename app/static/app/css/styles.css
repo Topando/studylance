@@ -109,6 +109,8 @@ h2 {
 .form-input,
 #id_first_name,
 #id_last_name,
+#id_username,
+#id_email,
 .form-change-pass > div > input{
     width: 230px;
     height: 30px;
@@ -175,7 +177,8 @@ h2 {
 .form-login p input,
  .form-login div input,
  .form-register div input,
- .form-change-pass input{
+ .form-change-pass input,
+ .profile-confidential-info form > input{
     padding: 2px 15px 2px 15px;
     margin-top: 5px;
     font: var(--font-size-14px) "helvetica-regular-s", normal;
@@ -530,6 +533,15 @@ h2 {
     color: var(--color-orange);
     font: var(--font-size-16px) "helvetica-bold-s", normal;
 }
+.profile-confidential-info > h3{
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+    margin-bottom: 20px;
+}
+.profile-confidential-info > form label{
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+    padding: 10px 0 0 25px;
+}
+
 .button-task-delete {
   all: unset;
 }

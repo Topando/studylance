@@ -29,20 +29,14 @@
                         <h3>Видно только вам</h3>
                         <form action="" method="POST">
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            {% for item in form %}
+                                <label>{{ item.label }}</label>
+                                {{ item }}
+                            {% endfor %}
                             <input type="Submit" name="submit" value="Submit"/>
                         </form>
                     </div>
                 {% else %}
-                    <div class = "profile-confidential-info">
-                        <h3>Видно только вам</h3>
-                        <form action="" method="POST">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            {{ profile_form.as_p }}
-                            <input type="Submit" name="submit" value="Submit"/>
-                        </form>
-                    </div>
                 {% endif %}
             </div>
 
