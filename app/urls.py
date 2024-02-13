@@ -26,4 +26,5 @@ urlpatterns = [
     path('password-change/<str:uidb64>/<str:token>/', views.password_change_view, name='password_change_check'),
     path('password-change-sent/', PasswordChangeSentView.as_view(), name='password_change_sent'),
     path('delete-img-task/<int:image_id>/', views.delete_img_task_view, name='delete_img_task'),
+    path("executor-info/", ExecutorInfoView.as_view(), name="executor_info"),
 ]

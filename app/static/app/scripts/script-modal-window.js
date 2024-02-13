@@ -20,6 +20,20 @@ class HystModal{
 
         //Обработчик событий
         this.eventsFeeler();
+
+        this._focusElements = [
+            'a[href]',
+            'area[href]',
+            'input:not([disabled]):not([type="hidden"]):not([aria-hidden])',
+            'select:not([disabled]):not([aria-hidden])',
+            'textarea:not([disabled]):not([aria-hidden])',
+            'button:not([disabled]):not([aria-hidden])',
+            'iframe',
+            'object',
+            'embed',
+            '[contenteditable]',
+            '[tabindex]:not([tabindex^="-"])'
+        ];
     }
 
     eventsFeeler(){
@@ -28,12 +42,13 @@ class HystModal{
                 return;
             }
             let containingElement = document.querySelector("#" + this.openedWindow.id);
-            if(!containingElement.contains(e.target) ) {
+            if(!containingElement.contains(e.target) && this.isOpened) {
                 e.preventDefault();
+                console.log("click-out-window");
                 this.close();
             }
 
-        }.bind(this));
+        }.bind(this));;
 
         document.addEventListener("click", function (e) {
             const clickedlink = e.target.closest("[" + this.config.linkAttributeName + "]");
@@ -49,6 +64,7 @@ class HystModal{
 
             if (e.target.closest('[data-hystclose]')) {
                 this.close();
+                console.log("dfjkfdjhf");
                 return;
             }
         }.bind(this));
@@ -90,7 +106,10 @@ class HystModal{
         //возвращаем скролл
         this._bodyScrollControl();
         this.isOpened = false;
+
+
     }
+
 
     _bodyScrollControl(){
         let html = document.documentElement;

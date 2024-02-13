@@ -16,6 +16,15 @@ body a {
     --color-orange-button: #B53C06;
     --color-border-orange-button: #B23903;
     --color-border: #1E1F21;
+
+    --font-size-48px: 48px;
+    --font-size-30px: 30px;
+    --font-size-24px: 24px;
+    --font-size-22px: 22px;
+    --font-size-18px: 18px;
+    --font-size-16px: 16px;
+    --font-size-14px: 14px;
+
 }
 @font-face {
     font-family: helvetica-bold-s;
@@ -33,7 +42,7 @@ body a {
     font-weight: normal;
 }
 body {
-    font: 22px "helvetica-regular-s", normal;
+    font: var(--font-size-22px) "helvetica-regular-s", normal;
     min-height: 100vh;
     background-color: var(--color-background);
     color: var(--color-main-text);
@@ -47,7 +56,7 @@ body {
     justify-content: space-between;
 }
 .header-logo a{
-    font: 30px "helvetica-bold-s", normal;
+    font: var(--font-size-30px) "helvetica-bold-s", normal;
     color: var(--color-orange);
 }
 .header .header-nav {
@@ -55,7 +64,7 @@ body {
 
 }
 .header .header-nav a{
-    font: 22px "helvetica-bold-s", normal;
+    font: var(--font-size-22px) "helvetica-bold-s", normal;
     color: var(--color-secondary-text);
     margin-left: calc(var(--index)*50);
 }
@@ -74,7 +83,7 @@ body {
 .footer * {
     padding-right: 5px;
     color: var(--color-secondary-text);
-    font-size: 16px;
+    font-size: var(--font-size-16px);
 }
 
 .index-what-is-it,
@@ -84,12 +93,12 @@ body {
 .index-what-is-it p,
 .alert p{
     width: 47vw;
-    max-width: 650px;
-    font: 26px "helvetica-light-s", normal;
-    margin: 0 0 calc(var(--index)*20) calc(var(--index)*20);
+    max-width: 700px;
+    font: var(--font-size-24px) "helvetica-light-s", normal;
+    margin: 0 0 calc(var(--index)*20) calc(var(--index)*40);
 }
 h2 {
-    font: 48px "helvetica-regular-s", normal;
+    font: var(--font-size-48px) "helvetica-regular-s", normal;
     margin-bottom: calc(var(--index)*45);
 }
 
@@ -116,7 +125,7 @@ h2 {
     color: var(--color-main-text);
     border: 1px solid var(--color-border-orange-button);
     border-radius: 5px;
-    font: 14px "helvetica-regular-s", normal;
+    font: var(--font-size-14px) "helvetica-regular-s", normal;
 }
 .form-login label,
 .bottom-info-reg,
@@ -124,7 +133,7 @@ h2 {
 .form-login > div .title-password-forgot a,
 .form-change-pass{
     color: var(--color-main-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
 }
 .bottom-info-reg a{
     color: var(--color-orange);
@@ -169,7 +178,7 @@ h2 {
  .form-change-pass input{
     padding: 2px 15px 2px 15px;
     margin-top: 5px;
-    font: 14px "helvetica-regular-s", normal;
+    font: var(--font-size-14px) "helvetica-regular-s", normal;
 }
 .form-login div .title-password-forgot {
     width: 230px;
@@ -196,7 +205,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     color: var(--color-secondary-text);
-    font: 14px "helvetica-regular-s", normal;
+    font: var(--font-size-14px) "helvetica-regular-s", normal;
 }
 .card-task-secondary-info > div {
     display: flex;
@@ -209,29 +218,45 @@ h2 {
 }
 .card-task {
     min-width: 800px;
-    margin: 0 calc(var(--index)*244) 25px calc(var(--index)*244);
     padding: 16px 16px 14px 16px;
+    margin-bottom: 25px;
     background: var(--color-background-light);
     border: 1px solid var(--color-border);
     border-radius: 6px;
 }
+.container-all-task{
+    padding: 80px 320px 25px 320px;
+}
 .container-task {
-    display: flex;
-    justify-content: space-between;
     margin-left: 20px;
 }
-.task-title-desс > h3 {
-    font: 20px "helvetica-bold-s", normal;
+.task-title-price{
+    display: flex;
+    justify-content: space-between;
+}
+.task-title-price > h3 {
+    font: var(--font-size-22px) "helvetica-bold-s", normal;
     color: var(--color-main-text);
 }
-.task-title-desс > p {
-    font: 14px "helvetica-light-s", normal;
+.card-task-desc > p {
+    font: var(--font-size-14px) "helvetica-light-s", normal;
     color: var(--color-main-text);
     margin: 10px 0 15px 15px;
 }
-.card-task-price p{
-    font: 24px "helvetica-bold-s", normal;
+.task-title-price{
+    max-width: 100%;
+}
+.card-task-desc{
+    max-width: 40%;
+}
+.task-title-price p{
+    font: var(--font-size-24px) "helvetica-bold-s", normal;
     color: var(--color-orange);
+}
+.task-description-cropped{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .container-show-more,
 .container-task-response{
@@ -258,10 +283,10 @@ h2 {
 .task-filter {
     display: flex;
     align-items: baseline;
-    margin: 90px calc(var(--index)*244) 45px calc(var(--index)*244);
 }
 .task-filter > *{
     margin-right: 12px;
+    margin-bottom: 25px;
 }
 .button-filter,
 .button-create-task,
@@ -271,7 +296,7 @@ h2 {
     border: 1px solid var(--color-border);
     border-radius: 6px;
     color: var(--color-secondary-text);
-    font: 18px "helvetica-regular-s", normal;
+    font: var(--font-size-18px) "helvetica-regular-s", normal;
 }
 .button-create-task,
 .button-reset-filter{
@@ -299,7 +324,7 @@ h2 {
 #filter-deadline .hystmodal__window div label{
     align-self: flex-start;
     color: var(--color-secondary-text);
-    font: 18px "helvetica-regular-s", normal;
+    font: var(--font-size-18px) "helvetica-regular-s", normal;
     margin: 0 0 2px 15px;
 }
 .container-button-filter .hystmodal__window > .orange-button{
@@ -313,7 +338,7 @@ h2 {
     border: 1px solid var(--color-border);
     border-radius: 3px;
     color: var(--color-secondary-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
     padding: 5px 5px 5px 10px;
 
 }
@@ -337,20 +362,24 @@ h2 {
     display: flex;
     flex-direction: row;
     color: var(--color-secondary-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
 }
 .task-header .task-secondary-info > * {
     margin-right: 25px;
 }
 .task-header .task-secondary-info .task-delete {
     color: var(--color-secondary-text);
+    padding: 0;
+    background: none;
+    border: none;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
 }
 .task-header .task-secondary-info .task-edit {
     color: var(--color-orange);
 }
 .task-header .task-price {
     color: var(--color-orange);
-    font: 24px "helvetica-bold-s", normal;
+    font: var(--font-size-24px) "helvetica-bold-s", normal;
 }
 .task-header{
     display: flex;
@@ -367,12 +396,12 @@ h2 {
 .task-main-info .task-description h3,
 .task-main-info .task-photo h3,
 .task-main-info .task-files h3{
-    font: 20px "helvetica-light-s", normal;
+    font: var(--font-size-22px) "helvetica-light-s", normal;
     color: var(--color-secondary-text);
     margin:0 0 10px 30px;
 }
 .task-main-info .task-description p {
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
     max-width: 600px;
 }
 .task-main-info .task-description,
@@ -408,7 +437,7 @@ h2 {
 }
 .container-task-file > a p {
     color: var(--color-main-text);
-    font: 16px "helvetica-regular-s", normal;
+    font: var(--font-size-16px) "helvetica-regular-s", normal;
 }
 .container-task-response > .button-task-response a {
     color: var(--color-main-text);
@@ -420,11 +449,11 @@ h2 {
 }
 .header-profile > p {
     color: var(--color-secondary-text);
-    font: 18px "helvetica-light-s", normal;
+    font: var(--font-size-18px) "helvetica-light-s", normal;
 }
 .header-profile > .profile-rating {
     color: var(--color-orange);
-    font: 30px "helvetica-bold-s", normal;
+    font: var(--font-size-30px) "helvetica-bold-s", normal;
 
 }
 .container-profile-photo-info > .profile-photo {
@@ -440,7 +469,7 @@ h2 {
 }
 .profile-confidential-info *{
     color: var(--color-secondary-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
     display: block;
 }
 .container-profile-main-info {
@@ -455,7 +484,7 @@ h2 {
 }
 .header-profile-description {
     color: var(--color-secondary-text);
-    font: 20px "helvetica-light-s", normal;
+    font: var(--font-size-22px) "helvetica-light-s", normal;
     display: flex;
     justify-content: space-between;
     padding: 0 30px;
@@ -464,16 +493,16 @@ h2 {
 .header-profile-description a {
     color: var(--color-secondary-text);
     text-decoration: underline;
-    font-size: 18px;
+    font-size: var(--font-size-18px);
 }
 .profile-description {
     color: var(--color-main-text);
-    font: 18px "helvetica-light-s", normal;
+    font: var(--font-size-18px) "helvetica-light-s", normal;
     margin-bottom: 50px;
 }
 .container-profile-comments > h3 {
     color: var(--color-secondary-text);
-    font: 20px "helvetica-light-s", normal;
+    font: var(--font-size-22px) "helvetica-light-s", normal;
     margin-left: 30px;
 }
 .profile-comments > * {
@@ -488,16 +517,106 @@ h2 {
 .profile-comment > p {
     margin: 0 30px;
     color: var(--color-main-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
 }
 .header-profile-comment {
     display: flex;
     justify-content: space-between;
     color: var(--color-secondary-text);
-    font: 16px "helvetica-light-s", normal;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
     margin-bottom: 15px;
 }
 .header-profile-comment > .profile-comment-score {
     color: var(--color-orange);
-    font: 16px "helvetica-bold-s", normal;
+    font: var(--font-size-16px) "helvetica-bold-s", normal;
+}
+.button-task-delete {
+  all: unset;
+}
+.button-task-delete,
+.button-cancel-task-delete{
+    margin-left: 70px;
+    color: var(--color-orange);
+    font: var(--font-size-22px) "helvetica-regular-s", normal;
+}
+.button-cancel-task-delete {
+    color: var(--color-secondary-text);
+    margin-left: 40px;
+}
+
+
+
+
+
+@media (max-width: 1900px) {
+    /*для десктоп, от 1000px до 1900px*/
+    :root {
+        --font-size-30px: calc(22px + (30 - 22) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-48px: calc(32px + (48 - 32) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-24px: calc(18px + (24 - 18) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-22px: calc(16px + (22 - 16) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-16px: calc(12px + (16 - 12) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-18px: calc(14px + (18 - 14) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-14px: calc(10px + (14 - 10) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .index-what-is-it p, .alert p {
+        width: calc(550px + (800 - 550) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .card-task{
+        min-width: calc(700px + (800 - 700) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: calc(8px + (16 - 8) * ((100vw - 1000px) / (1900 - 1000))) calc(15px + (16 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-bottom: calc(15px + (25 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-all-task{
+        padding: calc(50px + (80 - 50) * ((100vw - 1000px) / (1900 - 1000))) calc(140px + (320 - 140) * ((100vw - 1000px) / (1900 - 1000))) 0 calc(140px + (320 - 140) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .button-filter, .button-create-task, .button-reset-filter {
+        padding: calc(5px + (6 - 5) * ((100vw - 1000px) / (1900 - 1000))) calc(10px + (15 - 10) * ((100vw - 1000px) / (1900 - 1000)));
+        border-radius: calc(5px + (6 - 5) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-filter > * {
+        margin-right: calc(8px + (12 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-bottom: calc(15px + (25 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .card-task-desc > p {
+        margin: calc(4px + (10 - 4) * ((100vw - 1000px) / (1900 - 1000))) 0 calc(12px + (15 - 12) * ((100vw - 1000px) / (1900 - 1000))) 15px;
+    }
+    .orange-button{
+            width: calc(180px + (230 - 180) * ((100vw - 1000px) / (1900 - 1000)));
+            height: calc(25px + (30 - 25) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-button-filter .hystmodal__window input {
+        height: calc(25px + (30 - 25) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-button-filter .hystmodal__window {
+        padding: calc(10px + (15 - 10) * ((100vw - 1000px) / (1900 - 1000))) calc(15px + (20 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    #filter-date .hystmodal__window div, #filter-deadline .hystmodal__window div {
+        width: calc(130px + (150 - 130) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-bottom: calc(8px + (15 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-button-filter .hystmodal__window > .orange-button {
+        width: calc(130px + (150 - 130) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: calc(5px + (7 - 5) * ((100vw - 1000px) / (1900 - 1000)));;
+    }
+
+}
+@media (max-width: 999px) {
+    /*планшет в портретной ориентации, от 768px до 1000px*/
+    :root{
+
+    }
+}
+@media (max-width: 767px) {
+    /*смартфоны, от 320px до 768px*/
+    :root{
+
+    }
+
+}
+@media (max-width: 400px) {
+    /*смартфоны, от 320px до 768px*/
+    :root{
+
+    }
 }

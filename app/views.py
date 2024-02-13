@@ -154,6 +154,8 @@ class AllTasks(ListView):
         for task in Task.objects.all():
             print(task.time_created)
         return context
+
+
 class TaskDetail(DetailView):
     model = Task
     template_name = "app/task_detail.html"
@@ -306,3 +308,7 @@ class FileFieldFormView(FormView):
     def form_valid(self, form):
         files = form.cleaned_data["file_field"]
         return redirect(self.success_url)
+
+
+class ExecutorInfoView(TemplateView):
+    template_name = "app/executor-info.html"

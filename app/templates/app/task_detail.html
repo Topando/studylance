@@ -17,6 +17,7 @@
                 {% if task.customer_id.id == request.user.id %}
                     <a class='task-edit' href="{{ task.get_absolute_url }}update/">Редактировать задание</a>
                     <a class='task-delete' href="{{ task.get_absolute_url }}delete/">Удалить задание</a>
+
                 {% endif %}
             </div>
             <p class="task-price">{{ task.price }} ₽</p>
