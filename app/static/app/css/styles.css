@@ -661,6 +661,7 @@ h2 {
     .form-change-pass input,
     .profile-confidential-info form > input {
         padding: 2px calc(10px + (15 - 10) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-top: calc(3px + (5 - 3) * ((100vw - 1000px) / (1900 - 1000)))
     }
     .form-input,
     #id_first_name,
@@ -677,6 +678,25 @@ h2 {
     }
     .profile-description {
         margin-bottom: calc(30px + (50 - 30) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-log-reg, .container-input-data{
+        margin-top: calc(60px + (110 - 60) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-log-reg #id_first_name,
+    .container-log-reg #id_last_name,
+    .container-log-reg #id_username,
+    .container-log-reg #id_email,
+    .container-log-reg input{
+        width: calc(180px + (230 - 180) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-log-reg, .container-input-data {
+        padding: calc(20px + (30 - 20) * ((100vw - 1000px) / (1900 - 1000))) calc(25px + (35 - 25) * ((100vw - 1000px) / (1900 - 1000))) 8px calc(25px + (35 - 25) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .form-register > .container-reg-field {
+        margin-bottom: calc(10px + (20 - 10) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-reg-field > div {
+        margin-bottom: calc(5px + (6 - 5) * ((100vw - 1000px) / (1900 - 1000)));
     }
 
 }
