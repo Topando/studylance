@@ -1,7 +1,7 @@
-class HeightElem {
+export class HeightElem {
     constructor(props){
         let defaultConfig = {
-            idElem: 'task-container',
+            classElem: 'task-container',
         }
         this.config = Object.assign(defaultConfig, props);
         this.init();
@@ -9,7 +9,7 @@ class HeightElem {
 
     init(){
         const windowInnerHeight = document.documentElement.clientHeight;
-        var Elem = document.getElementsByClassName('task-container')[0],
+        var Elem = document.getElementsByClassName(this.config.classElem)[0],
             stylesElem = window.getComputedStyle(Elem),
             marginTopElem = stylesElem.getPropertyValue('margin-top');
         var body = document.getElementsByTagName('body')[0],
@@ -18,7 +18,8 @@ class HeightElem {
 
         var heightElemCalculated = windowInnerHeight - document.getElementsByClassName('header')[0].offsetHeight - parseInt(marginTopElem, 10) - parseInt(paddingBottomBody, 10);
 
-        console.log(heightElemCalculated);
+        var elem = document.getElementsByClassName(this.config.classElem)[0];
+        elem.style.minHeight = heightElemCalculated + 'px';
     }
 
 }
