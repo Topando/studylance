@@ -131,6 +131,16 @@ h2 {
     border-radius: 5px;
     font: var(--font-size-14px) "helvetica-regular-s", normal;
 }
+.task-container{
+    position: relative;
+}
+.container-task-response{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 15px;
+}
 .form-login label,
 .bottom-info-reg,
 .form-label,
@@ -492,7 +502,7 @@ h2 {
     font: var(--font-size-22px) "helvetica-light-s", normal;
     display: flex;
     justify-content: space-between;
-    padding: 0 30px;
+    padding-right: 30px;
     margin-bottom: 10px;
 }
 .header-profile-description a {
@@ -505,7 +515,8 @@ h2 {
     font: var(--font-size-18px) "helvetica-light-s", normal;
     margin-bottom: 50px;
 }
-.container-profile-comments > h3 {
+.container-profile-comments > h3,
+.header-profile-description > h3{
     color: var(--color-secondary-text);
     font: var(--font-size-22px) "helvetica-light-s", normal;
     margin-left: 30px;
@@ -626,6 +637,46 @@ h2 {
     .container-button-filter .hystmodal__window > .orange-button {
         width: calc(130px + (150 - 130) * ((100vw - 1000px) / (1900 - 1000)));
         padding: calc(5px + (7 - 5) * ((100vw - 1000px) / (1900 - 1000)));;
+    }
+    .container-profile-photo-info > .profile-photo{
+        width: calc(150px + (200 - 150) * ((100vw - 1000px) / (1900 - 1000)));
+        height: calc(150px + (200 - 150) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-profile{
+        padding: calc(20px + (30 - 20) * ((100vw - 1000px) / (1900 - 1000))) calc(35px + (50 - 35) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-profile-desc-comments {
+        margin-top: calc(40px + (80 - 40) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-left: calc(30px + (40 - 30) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .profile-confidential-info > form label {
+        padding: calc(8px + (10 - 8) * ((100vw - 1000px) / (1900 - 1000))) 0 0 calc(20px + (25 - 20) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .profile-confidential-info > h3 {
+        margin-bottom: calc(5px + (20 - 5) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .form-login p input,
+    .form-login div input,
+    .form-register div input,
+    .form-change-pass input,
+    .profile-confidential-info form > input {
+        padding: 2px calc(10px + (15 - 10) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .form-input,
+    #id_first_name,
+    #id_last_name,
+    #id_username,
+    #id_email,
+    .form-change-pass > div > input {
+        width: calc(200px + (230 - 200) * ((100vw - 1000px) / (1900 - 1000)));
+        height: calc(27px + (30 - 27) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-container,
+    .container-profile {
+        margin: calc(70px + (80 - 70) * ((100vw - 1000px) / (1900 - 1000))) calc(150px + (244 - 150) * ((100vw - 1000px) / (1900 - 1000))) 0px calc(150px + (244 - 150) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .profile-description {
+        margin-bottom: calc(30px + (50 - 30) * ((100vw - 1000px) / (1900 - 1000)));
     }
 
 }
