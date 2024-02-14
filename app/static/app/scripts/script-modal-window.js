@@ -13,27 +13,12 @@ class HystModal{
         this.isOpened = false; // открыто ли окно
         this.openedWindow = false; //ссылка на открытый .hystmodal
         this._modalBlock = false; //ссылка на открытый .hystmodal__window
-        //не нужно
         this.starter = false, //ссылка на элемент "открыватель" текущего окна
         this._nextWindows = false; //ссылка на .hystmodal который нужно открыть
         this._scrollPosition = 0; //текущая прокрутка (см. выше)
 
         //Обработчик событий
         this.eventsFeeler();
-
-        this._focusElements = [
-            'a[href]',
-            'area[href]',
-            'input:not([disabled]):not([type="hidden"]):not([aria-hidden])',
-            'select:not([disabled]):not([aria-hidden])',
-            'textarea:not([disabled]):not([aria-hidden])',
-            'button:not([disabled]):not([aria-hidden])',
-            'iframe',
-            'object',
-            'embed',
-            '[contenteditable]',
-            '[tabindex]:not([tabindex^="-"])'
-        ];
     }
 
     eventsFeeler(){
