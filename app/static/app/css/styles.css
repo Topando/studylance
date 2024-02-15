@@ -726,7 +726,7 @@ h2 {
         width: calc(150px + (230 - 150) * ((100vw - 1000px) / (1900 - 1000)));
         height: calc(25px + (30 - 25) * ((100vw - 1000px) / (1900 - 1000)));
         padding: calc(3px + (7 - 3) * ((100vw - 1000px) / (1900 - 1000)));;
-    }
+    }a
 
 }
 @media (max-width: 999px) {
