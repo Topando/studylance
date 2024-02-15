@@ -181,8 +181,7 @@ h2 {
 .form-login > div,
 .form-change-pass div{
     display: flex;
-    flex-wrap: wrap;
-    align-content: center;
+    align-items: center;
     flex-direction: column;
     margin-bottom: 20px;
 }
@@ -196,7 +195,7 @@ h2 {
     font: var(--font-size-14px) "helvetica-regular-s", normal;
 }
 .form-login div .title-password-forgot {
-    width: 230px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 0 10px 0 10px;
@@ -368,7 +367,7 @@ h2 {
 .task-container,
 .container-profile{
     margin: 80px calc(var(--index)*244) 0px calc(var(--index)*244);
-    padding: 30px 50px 20px 50px;
+    padding: 30px 50px 80px 50px;
     background: var(--color-background-light);
     border: 1px solid var(--color-border);
     border-radius: 10px;
@@ -645,6 +644,9 @@ h2 {
     .container-profile{
         padding: calc(20px + (30 - 20) * ((100vw - 1000px) / (1900 - 1000))) calc(35px + (50 - 35) * ((100vw - 1000px) / (1900 - 1000)));
     }
+    .task-container{
+        padding: calc(20px + (30 - 20) * ((100vw - 1000px) / (1900 - 1000))) calc(35px + (50 - 35) * ((100vw - 1000px) / (1900 - 1000))) calc(60px + (80 - 60) * ((100vw - 1000px) / (1900 - 1000))) calc(35px + (50 - 35) * ((100vw - 1000px) / (1900 - 1000)));
+    }
     .container-profile-desc-comments {
         margin-top: calc(40px + (80 - 40) * ((100vw - 1000px) / (1900 - 1000)));
         margin-left: calc(30px + (40 - 30) * ((100vw - 1000px) / (1900 - 1000)));
@@ -697,6 +699,33 @@ h2 {
     }
     .container-reg-field > div {
         margin-bottom: calc(5px + (6 - 5) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-main-info > h2{
+        margin-top: calc(8px + (15 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-bottom: calc(17px + (25 - 17) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-main-info .task-description,
+    .task-main-info .task-photo {
+        margin-bottom: calc(17px + (25 - 17) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-main-info {
+        padding-left: calc(40px + (50 - 40) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-photo #lightgallery > a {
+        width: calc(90px + (120 - 90) * ((100vw - 1000px) / (1900 - 1000)));
+        height: calc(120px + (150 - 120) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-right: calc(8px + (10 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-task-file {
+        margin-bottom: calc(8px + (10 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: calc(8px + (10 - 8) * ((100vw - 1000px) / (1900 - 1000))) calc(10px + (15 - 15) * ((100vw - 1000px) / (1900 - 1000))) calc(8px + (10 - 8) * ((100vw - 1000px) / (1900 - 1000))) calc(20px + (30 - 20) * ((100vw - 1000px) / (1900 - 1000)));
+        width: calc(450px + (500 - 450) * ((100vw - 1000px) / (1900 - 1000)));
+        border-radius: calc(6px + (8 - 6) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-task-response > .button-task-response {
+        width: calc(150px + (230 - 150) * ((100vw - 1000px) / (1900 - 1000)));
+        height: calc(25px + (30 - 25) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: calc(3px + (7 - 3) * ((100vw - 1000px) / (1900 - 1000)));;
     }
 
 }

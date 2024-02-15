@@ -28,16 +28,20 @@
                 <h3>Описание</h3>
                 <p>{{ task.description }}</p>
             </div>
-            <div class="task-photo">
-                <h3>Фото</h3>
-                <div id='lightgallery'>
-                    {% for image in images %}
-                        <a href="{{ image.image.url }}">
-                            <img src="{{ image.image.url }}">
-                        </a>
-                    {% endfor %}
+            {% if images|length != 0 %}
+                <div class="task-photo">
+                    <h3>Фото</h3>
+                    <div id='lightgallery'>
+                        {% for image in images %}
+                            <a href="{{ image.image.url }}">
+                                <img src="{{ image.image.url }}">
+                            </a>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
+            {% else %}
+            {% endif %}
+            {% if images|length != 0 %}
             <div class="task-files">
                 <h3>Файлы</h3>
                 {% for file in files %}
@@ -49,6 +53,8 @@
                     </div>
                 {% endfor %}
             </div>
+            {% else %}
+            {% endif %}
         </div>
 
         <div class="container-task-response">
