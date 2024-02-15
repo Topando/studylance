@@ -111,7 +111,7 @@ def logout_user(request):
     return redirect("home")
 
 
-class Profile(UpdateView):
+class ProfileView(UpdateView):
     model = User
     form_class = UserForm
     template_name = "app/profile.html"
@@ -156,6 +156,11 @@ class AllTasks(ListView):
         return context
 
 
+def all_tasks_view(request):
+    tasks = Task.objects.all()
+    return render(request, "app/all_tasks.html", {"tasks": tasks})
+
+
 class TaskDetail(DetailView):
     model = Task
     template_name = "app/task_detail.html"
@@ -187,30 +192,30 @@ class TaskUpdate(TaskUpdateMixin, LoginRequiredMixin, UserPassesTestMixin, Updat
 
 
 def task_update_view(request, task_id):
+    images = ImagesTask.objects.filter(task_id=task_id)
+    files = FilesTask.objects.filter(task_id=task_id)
+    context = {"images": images, "files": files}
     if task_create_mixin(request):
         if request.method == "POST":
             task = get_task_by_task_id(task_id)
             form = TaskUpdateForm(request.POST, instance=task)
+            context["form"] = form
             images = request.FILES.getlist("images")
             files = request.FILES.getlist("files")
             count_images = len(images) + get_count_files_in_task(task_id, ImagesTask)
             count_files = len(files) + get_count_files_in_task(task_id, FilesTask)
             if form.is_valid() and count_images <= 5 and count_files <= 5:
-                form.save()
-                images_in_db(images, task)
-                files_in_db(files, task)
-                return redirect("task", task_id)
-            return redirect("task_update", task_id)
+                if check_files(files) and check_files(images):
+                    form.save()
+                    images_in_db(images, task)
+                    files_in_db(files, task)
+                    return redirect("task", task_id)
+                return render(request, "app/task_update.html", context)
+            return render(request, "app/task_update.html", context)
         else:
             task = Task.objects.get(pk=task_id)
             form = TaskUpdateForm(instance=task)
-            images = ImagesTask.objects.filter(task_id=task_id)
-            files = FilesTask.objects.filter(task_id=task_id)
-            context = {}
             context['form'] = form
-            context['images'] = images
-            context['files'] = files
-
             return render(request, "app/task_update.html", context=context)
     else:
         return redirect("home")
@@ -249,14 +254,16 @@ def task_create_view(request):
             form = TaskCreateForm(request.POST)
             images = request.FILES.getlist("images")
             files = request.FILES.getlist("files")
-            if form.is_valid() and len(images) <= 5 and len(files) <= 5:
-                customer_id = request.user.id
-                customer = User.objects.get(pk=customer_id)
-                form.instance.customer_id = customer
-                task = form.save()
-                images_in_db(images, task)
-                files_in_db(files, task)
-                return redirect('tasks')
+            if form.is_valid():
+                if check_files(images) and check_files(files):
+                    customer_id = request.user.id
+                    customer = User.objects.get(pk=customer_id)
+                    form.instance.customer_id = customer
+                    task = form.save()
+                    images_in_db(images, task)
+                    files_in_db(files, task)
+                    return redirect('tasks')
+                return render(request, "app/task_create.html", context={"form": form})
             return render(request, 'app/task_create.html', {'form': form})
         else:
             form = TaskCreateForm()
@@ -289,26 +296,12 @@ def delete_img_task_view(request, image_id):
     return redirect('home')
 
 
-class FileFieldFormView(FormView):
-    form_class = FileFieldForm
-    template_name = "test.html"  # Replace with your template.
-    success_url = reverse_lazy("test")
-
-    def post(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        print(form_class.cleaned_data['file_field'])
-        if len(form_class.instance.file_field) > 5:
-            raise ValidationError("Vyfsds")
-        if form.is_valid():
-            return self.form_valid(form)
+def executor_info_view(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            profile_user = Profile.objects.get(user=request.user)
+            profile_user.is_executor = True
+            profile_user.save()
+            return redirect("home")
         else:
-            return self.form_invalid(form)
-
-    def form_valid(self, form):
-        files = form.cleaned_data["file_field"]
-        return redirect(self.success_url)
-
-
-class ExecutorInfoView(TemplateView):
-    template_name = "app/executor-info.html"
+            return render(request, 'app/executor-info.html', )

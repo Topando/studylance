@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 
 ]
-SITE_ID = 3
+SITE_ID = 4
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -137,5 +137,6 @@ EMAIL_HOST_PASSWORD = "ikvrubakhraopikl"
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-
 USE_L10N = False  # Here
+
+MAX_FILE_SIZE = 8 * 1024 * 1024

@@ -5,12 +5,13 @@ from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
-
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
+from studlance.settings import MAX_FILE_SIZE
 from .models import User, Task, ImagesTask, FilesTask
 
 
@@ -51,13 +52,16 @@ class GetUser:
 
 def password_change(email):
     user = User.objects.filter(email=email).first()
-    uid = urlsafe_base64_encode(force_bytes(user.pk))
-    token = default_token_generator.make_token(user)
-    activation_url = reverse_lazy('password_change_check', kwargs={'uidb64': uid, 'token': token})
-    current_site = Site.objects.get_current().domain
-    subject = 'Изменение пароля'
-    message = f'Чтобы изменить пароль перейдите по ссылке: http://{current_site}{activation_url}'
-    send_message(email, subject, message)
+    try:
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        token = default_token_generator.make_token(user)
+        activation_url = reverse_lazy('password_change_check', kwargs={'uidb64': uid, 'token': token})
+        current_site = Site.objects.get_current().domain
+        subject = 'Изменение пароля'
+        message = f'Чтобы изменить пароль перейдите по ссылке: http://{current_site}{activation_url}'
+        send_message(email, subject, message)
+    except Exception as e:
+        return redirect("home")
 
 
 def send_message(email, subject, message):
@@ -168,3 +172,22 @@ def update_task(task_id, task_info):
 
 def get_count_files_in_task(task_id, obj):
     return obj.objects.filter(task_id=task_id).count()
+
+
+def check_files_size(objs):
+    for obj in objs:
+        if obj.size > MAX_FILE_SIZE:
+            return False
+    return True
+
+
+def check_files_count(objs):
+    if len(objs) <= 5:
+        return True
+    return False
+
+
+def check_files(objs):
+    if check_files_size(objs) and check_files_count(objs):
+        return True
+    return False

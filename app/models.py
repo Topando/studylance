@@ -80,18 +80,16 @@ class Comments(models.Model):
     comment = models.TextField()
 
 
-
-
 class Task(models.Model):
     customer_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='task_customer', null=True, blank=True)
     executor_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     is_done = models.BooleanField(default=False)
     is_working = models.BooleanField(default=False)
-    title = models.TextField()
+    subject = models.CharField(max_length=40, verbose_name="Предмет")
     description = models.TextField(verbose_name="Описание")
     university = models.ForeignKey('University', verbose_name="ВУЗ", on_delete=models.CASCADE)
     direction = models.ForeignKey('Direction', verbose_name="Направление", on_delete=models.CASCADE)
-    course = models.ForeignKey('Course', verbose_name="Курс",  on_delete=models.CASCADE)
+    course = models.ForeignKey('Course', verbose_name="Курс", on_delete=models.CASCADE)
     price = models.IntegerField(verbose_name="Цена", null=True, blank=True)
     deadline = models.DateField(verbose_name="Дедлайн", null=True, blank=True)
     time_created = models.DateField(auto_now_add=True)
@@ -110,6 +108,7 @@ class ImagesTask(models.Model):
     def deleter(self):
         print(123)
         return "123"
+
 
 class FilesTask(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='files_task')
