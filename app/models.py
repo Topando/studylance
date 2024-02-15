@@ -95,7 +95,7 @@ class Task(models.Model):
     time_created = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return self.subject
 
     def get_absolute_url(self):
         return reverse("task", kwargs={"task_id": self.pk})

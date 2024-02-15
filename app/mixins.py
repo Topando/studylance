@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils.http import urlsafe_base64_decode
 
+from .db_handler.db_update import database_filling
 from .models import Task
 from .utils import check_task_delete
 from .views import User
@@ -48,7 +49,7 @@ def check_user_email_mixin(uidb64, token):
 
 def task_create_mixin(request):
     user = User.objects.filter(pk=request.user.id).first()
-    if user is not None and user.profile.is_customer:
+    if user is not None and user.profile.is_executor:
         return True
     return False
 

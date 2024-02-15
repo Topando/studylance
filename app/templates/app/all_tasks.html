@@ -6,26 +6,28 @@
 {% endblock %}
 
 {% block body %}
-    <div class = "container-all-task">
-        <div class = "task-filter">
+    <div class="container-all-task">
+        <div class="task-filter">
             {% if request.user.is_authenticated %}
-                <a class = "button-create-task" href="{% url 'task_create' %}">Создать задание</a>
+                <a class="button-create-task" href="{% url 'task_create' %}">Создать задание</a>
             {% else %}
-                <a class = "button-create-task" href="{% url 'login' %}">Создать задание</a>
+                <a class="button-create-task" href="{% url 'login' %}">Создать задание</a>
             {% endif %}
-            <div class = "container-button-filter">
-                <a class = "button-filter" href="#" data-hystmodal="#filter-date">Дата</a>
+            <div class="container-button-filter">
+                <a class="button-filter" href="#" data-hystmodal="#filter-date">Дата</a>
 
                 <div class="hystmodal" id="filter-date" aria-hidden="true">
                     <div class="hystmodal__wrap">
-                        <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <div class="hystmodal__window" role="dialog" aria-modal="true">
                             <div>
                                 <label>От</label>
-                                <input type="date" name="filter-date-from" required="" id="filter-date-from" min="2000-01-01">
+                                <input type="date" name="filter-date-from" required="" id="filter-date-from"
+                                       min="2000-01-01">
                             </div>
                             <div>
                                 <label>До</label>
-                                <input type="date" name="filter-date-before" required="" id="filter-date-before" min="2000-01-01">
+                                <input type="date" name="filter-date-before" required="" id="filter-date-before"
+                                       min="2000-01-01">
                             </div>
 
                             <button data-hystclose class="hystmodal__close orange-button">Применить</button>
@@ -35,19 +37,21 @@
             </div>
 
 
-            <div class = "container-button-filter">
-                <a class = "button-filter" href="#" data-hystmodal="#filter-deadline">Дедлайн</a>
+            <div class="container-button-filter">
+                <a class="button-filter" href="#" data-hystmodal="#filter-deadline">Дедлайн</a>
 
                 <div class="hystmodal" id="filter-deadline" aria-hidden="true">
                     <div class="hystmodal__wrap">
-                        <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <div class="hystmodal__window" role="dialog" aria-modal="true">
                             <div>
                                 <label>От</label>
-                                <input type="date" name="filter-date-from" required="" id="filter-deadline-from" min="2000-01-01">
+                                <input type="date" name="filter-date-from" required="" id="filter-deadline-from"
+                                       min="2000-01-01">
                             </div>
                             <div>
                                 <label>До</label>
-                                <input type="date" name="filter-date-before" required="" id="filter-deadline-before" min="2000-01-01">
+                                <input type="date" name="filter-date-before" required="" id="filter-deadline-before"
+                                       min="2000-01-01">
                             </div>
 
                             <button data-hystclose class="hystmodal__close orange-button">Применить</button>
@@ -57,12 +61,12 @@
             </div>
 
 
-            <div class = "container-button-filter">
-                <a class = "button-filter" href="#" data-hystmodal="#filter-subject">Предмет</a>
+            <div class="container-button-filter">
+                <a class="button-filter" href="#" data-hystmodal="#filter-subject">Предмет</a>
 
                 <div class="hystmodal" id="filter-subject" aria-hidden="true">
                     <div class="hystmodal__wrap">
-                        <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <div class="hystmodal__window" role="dialog" aria-modal="true">
                             <button data-hystclose class="hystmodal__close">Применить</button>
                             <p>subject</p>
                             <button data-hystclose class="hystmodal__close orange-button">Применить</button>
@@ -72,12 +76,12 @@
             </div>
 
 
-            <div class = "container-button-filter">
-                <a class = "button-filter" href="#" data-hystmodal="#filter-course">Курс</a>
+            <div class="container-button-filter">
+                <a class="button-filter" href="#" data-hystmodal="#filter-course">Курс</a>
 
                 <div class="hystmodal" id="filter-course" aria-hidden="true">
                     <div class="hystmodal__wrap">
-                        <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <div class="hystmodal__window" role="dialog" aria-modal="true">
                             <button data-hystclose class="hystmodal__close">Применить</button>
                             <p>Course</p>
                         </div>
@@ -86,12 +90,12 @@
             </div>
 
 
-            <div class = "container-button-filter">
-                <a class = "button-filter" href="#" data-hystmodal="#filter-university">ВУЗ</a>
+            <div class="container-button-filter">
+                <a class="button-filter" href="#" data-hystmodal="#filter-university">ВУЗ</a>
 
                 <div class="hystmodal" id="filter-university" aria-hidden="true">
                     <div class="hystmodal__wrap">
-                        <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <div class="hystmodal__window" role="dialog" aria-modal="true">
                             <button data-hystclose class="hystmodal__close">Применить</button>
                             <p>Текст модального окна ...</p>
                         </div>
@@ -100,12 +104,12 @@
             </div>
 
 
-            <div class = "container-button-filter">
-                <a class = "button-filter" href="#" data-hystmodal="#filter-direction">Направление</a>
+            <div class="container-button-filter">
+                <a class="button-filter" href="#" data-hystmodal="#filter-direction">Направление</a>
 
                 <div class="hystmodal" id="filter-direction" aria-hidden="true">
                     <div class="hystmodal__wrap">
-                        <div class="hystmodal__window" role="dialog" aria-modal="true" >
+                        <div class="hystmodal__window" role="dialog" aria-modal="true">
                             <button data-hystclose class="hystmodal__close">Применить</button>
                             <p>direction</p>
                         </div>
@@ -113,39 +117,46 @@
                 </div>
             </div>
 
-            <a class = "button-reset-filter" href="#">Сбросить</a>
+            <a class="button-reset-filter" href="#">Сбросить</a>
         </div>
 
         {% for task in tasks %}
-            <div class = "card-task">
-                <a href = "{{ task.get_absolute_url }}" class = "link-task">
-                    <div class = "container-task">
-                        <div class = "task-title-price">
-                            <h3>{{ task.direction}}</h3>
-                            <p>{{task.price}} ₽</p>
+            {{ count_tasks }}
+            {% if tasks.count_tasks != task %}
+                <div class="card-task">
+                    <a href="{{ task.get_absolute_url }}" class="link-task">
+                        <div class="container-task">
+                            <div class="task-title-price">
+                                <h3>{{ task.direction }}</h3>
+                                <p>{{ task.price }} ₽</p>
+                            </div>
+                            <div class="card-task-desc">
+                                <p class="task-description-cropped">{{ task.description }}</p>
+                            </div>
                         </div>
-                        <div class = "card-task-desc">
-                            <p class = "task-description-cropped">{{ task.description }}</p>
-                        </div>
-                    </div>
 
-                    <div class = "card-task-secondary-info">
-                        <div>
-                            <p>До {{ task.deadline|date:"d-m-Y" }}</p>
-                            <p>Курс {{ task.course }}</p>
-                            <p>{{ task.direction.code }}</p>
-                            <p>{{ task.university }}</p>
+                        <div class="card-task-secondary-info">
+                            <div>
+                                <p>До {{ task.deadline|date:"d-m-Y" }}</p>
+                                <p>Курс {{ task.course }}</p>
+                                <p>{{ task.direction.code }}</p>
+                                <p>{{ task.university }}</p>
+                            </div>
+                            <p class="card-task-time-created">{{ task.time_created|date:"d-m-Y" }}</p>
                         </div>
-                        <p class = "card-task-time-created">{{ task.time_created|date:"d-m-Y" }}</p>
-                    </div>
-                </a>
+                    </a>
 
-            </div>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 
-    <div class = "container-show-more">
-        <input class = "orange-button" id = "show-more" type="Submit" name="submit" value="Показать еще"/>
+    <div class="container-show-more">
+    {% if is_next_page %}
+        <a class="orange-button" id="show-more" type="Submit" name="submit"
+           href="?page={{ next_page }}">Показать
+            еще</a>
+    {% endif %}
     </div>
 
     <script type="text/javascript" src="../../static/app/scripts/script-modal-window.js"></script>

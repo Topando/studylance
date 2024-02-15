@@ -37,7 +37,6 @@ def password_change_view(request, uidb64, token):
                 first_password = form.cleaned_data.get('first_password')
                 second_password = form.cleaned_data.get('second_password')
                 if first_password == second_password:
-                    print(first_password)
                     user_password_change(uidb64, first_password)
                     return redirect('login')
             return render(request, 'app/password_change/password_change_done.html', {'form': form})
@@ -157,8 +156,18 @@ class AllTasks(ListView):
 
 
 def all_tasks_view(request):
-    tasks = Task.objects.all()
-    return render(request, "app/all_tasks.html", {"tasks": tasks})
+    page_number = request.GET.get('page')
+    if page_number is None:
+        page_number = 1
+    per_page = 2
+    count_page = per_page * int(page_number)
+    next_page = int(page_number) + 1
+    tasks = Task.objects.all().order_by('-time_created')[0:count_page]
+    if len(Task.objects.all()) > len(tasks):
+        is_next_page = True
+    else:
+        is_next_page = False
+    return render(request, "app/all_tasks.html", {"tasks": tasks, "next_page": next_page, "is_next_page": is_next_page})
 
 
 class TaskDetail(DetailView):
