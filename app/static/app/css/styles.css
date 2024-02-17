@@ -726,14 +726,48 @@ h2 {
         width: calc(150px + (230 - 150) * ((100vw - 1000px) / (1900 - 1000)));
         height: calc(25px + (30 - 25) * ((100vw - 1000px) / (1900 - 1000)));
         padding: calc(3px + (7 - 3) * ((100vw - 1000px) / (1900 - 1000)));;
-    }a
+    }
 
 }
 @media (max-width: 999px) {
     /*планшет в портретной ориентации, от 768px до 1000px*/
     :root{
-
+        --font-size-48px: 48px;
+        --font-size-30px: 30px;
+        --font-size-24px: 24px;
+        --font-size-22px: 24px;/*изм*/
+        --font-size-18px: 18px;
+        --font-size-16px: 16px;
+        --font-size-14px: 16px;
     }
+    .index-what-is-it, .alert {
+        margin: 120px 0 0 130px;
+    }
+    .index-what-is-it p,
+    .alert p{
+        width: 700px;
+    }
+    .container-all-task{
+        padding: 80px 100px 0 100px;
+    }
+    .task-title-price > h3 {
+        font: var(--font-size-20px) "helvetica-bold-s", normal;
+    }
+    .card-task {
+        min-width: calc(700px + (800 - 700) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: 20px 30px;
+        margin-bottom: 18px;
+        border-radius: 10px;
+    }
+    .orange-button {
+        width: 250px;
+        height: 35px;
+        border-radius: 7px;
+    }
+    .footer * {
+        font-size: var(--font-size-18px);
+    }
+
 }
 @media (max-width: 767px) {
     /*смартфоны, от 320px до 768px*/
