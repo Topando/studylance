@@ -1,4 +1,4 @@
-from app.models import Course
+from task_manager.models import Course
 
 
 def courses_update():

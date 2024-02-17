@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
-from app.models import Direction
+
+from task_manager.models import Direction
+
 url = 'https://propostuplenie.ru/article/polnyj-perechen-specialnostej-i-napravlenij-podgotovki-vysshego-obrazovaniya/'
 
 

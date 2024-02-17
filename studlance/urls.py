@@ -20,7 +20,11 @@ from django.conf.urls.static import static
 from studlance import settings
 
 urlpatterns = [
-    path('', include('app.urls')),
+    path('', include('main.urls')),
+    path('authentication/', include('authentication.urls')),
+    path('task-manager/', include('task_manager.urls')),
+    path('userprofile/', include('userprofile.urls')),
+    #path('app/', include('app.urls')),
     path('admin/', admin.site.urls),
 ]
 

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save, pre_delete
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.http import FileResponse
 from django.urls import reverse
@@ -45,9 +45,9 @@ def save_user_resume(sender, instance, **kwargs):
 
 class Resume(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    university = models.ForeignKey('University', on_delete=models.CASCADE, null=True, blank=True)
-    direction = models.ForeignKey('Direction', on_delete=models.CASCADE, null=True, blank=True)
-    course = models.ForeignKey('Course', on_delete=models.CASCADE, null=True, blank=True)
+    university = models.ForeignKey('app.University', on_delete=models.CASCADE, null=True, blank=True)
+    direction = models.ForeignKey('app.Direction', on_delete=models.CASCADE, null=True, blank=True)
+    course = models.ForeignKey('app.Course', on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     contact = models.TextField(null=True, blank=True)
 
@@ -74,12 +74,6 @@ class Direction(models.Model):
         return self.direction
 
 
-class Comments(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments_author')
-    comment = models.TextField()
-
-
 class Task(models.Model):
     customer_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='task_customer', null=True, blank=True)
     executor_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -87,9 +81,9 @@ class Task(models.Model):
     is_working = models.BooleanField(default=False)
     subject = models.CharField(max_length=40, verbose_name="Предмет")
     description = models.TextField(verbose_name="Описание")
-    university = models.ForeignKey('University', verbose_name="ВУЗ", on_delete=models.CASCADE)
-    direction = models.ForeignKey('Direction', verbose_name="Направление", on_delete=models.CASCADE)
-    course = models.ForeignKey('Course', verbose_name="Курс", on_delete=models.CASCADE)
+    university = models.ForeignKey('app.University', verbose_name="ВУЗ", on_delete=models.CASCADE)
+    direction = models.ForeignKey('app.Direction', verbose_name="Направление", on_delete=models.CASCADE)
+    course = models.ForeignKey('app.Course', verbose_name="Курс", on_delete=models.CASCADE)
     price = models.IntegerField(verbose_name="Цена", null=True, blank=True)
     deadline = models.DateField(verbose_name="Дедлайн", null=True, blank=True)
     time_created = models.DateField(auto_now_add=True)
@@ -105,10 +99,6 @@ class ImagesTask(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='images_task')
     image = models.FileField(upload_to='tasks/', null=True, blank=True)
 
-    def deleter(self):
-        print(123)
-        return "123"
-
 
 class FilesTask(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='files_task')
@@ -123,25 +113,3 @@ class TaskAnswer(models.Model):
     author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField()
     price = models.IntegerField(null=True, blank=True)
-
-
-class MultipleFileInput(forms.ClearableFileInput):
-    allow_multiple_selected = True
-
-
-class MultipleFileField(forms.FileField):
-    def __init__(self, *args, **kwargs):
-        kwargs.setdefault("widget", MultipleFileInput())
-        super().__init__(*args, **kwargs)
-
-    def clean(self, data, initial=None):
-        single_file_clean = super().clean
-        if isinstance(data, (list, tuple)):
-            result = [single_file_clean(d, initial) for d in data]
-        else:
-            result = single_file_clean(data, initial)
-        return result
-
-
-class UploadFileForm(forms.Form):
-    files = MultipleFileField()

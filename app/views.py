@@ -75,10 +75,6 @@ class EmailConfirmationFailedView(TemplateView):
     template_name = 'app/registration/email_confirmation_failed.html'
 
 
-def index(request):
-    return render(request, 'app/index.html')
-
-
 class RegisterUser(UserIsNotAuthenticated, CreateView):
     form_class = RegisterUserForm
     template_name = "app/registration/register.html"
@@ -110,49 +106,6 @@ def logout_user(request):
     return redirect("home")
 
 
-class ProfileView(UpdateView):
-    model = User
-    form_class = UserForm
-    template_name = "app/profile.html"
-    pk_url_kwarg = "profile_id"
-
-    def get_success_url(self):
-        return reverse_lazy('profile', args=[self.kwargs['profile_id']])
-
-    def get_context_data(self, **kwargs):
-        comments = Comments.objects.filter(user_id=self.kwargs['profile_id'])
-        context = super().get_context_data(**kwargs)
-        context["comments"] = comments
-        return context
-
-
-def profile_update(request):
-    if request.method == "POST":
-        user_form = UserForm(request.POST, request.FILES, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            return redirect('home')
-    else:
-        user_form = UserForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
-        return render(request, "app/profile_update.html", {
-            'user_form': user_form,
-            'profile_form': profile_form
-        })
-
-
-class AllTasks(ListView):
-    model = Task
-    template_name = "app/all_tasks.html"
-    context_object_name = "tasks"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        for task in Task.objects.all():
-            print(task.time_created)
-        return context
 
 
 def all_tasks_view(request):
@@ -167,7 +120,8 @@ def all_tasks_view(request):
         is_next_page = True
     else:
         is_next_page = False
-    return render(request, "app/all_tasks.html", {"tasks": tasks, "next_page": next_page, "is_next_page": is_next_page})
+    return render(request, "app/all_tasks.html",
+                  {"tasks": tasks, "next_page": next_page, "is_next_page": is_next_page})
 
 
 class TaskDetail(DetailView):
@@ -246,7 +200,7 @@ class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 # class TaskCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 #     model = Task
 #     form_class = TaskUpdateForm
-#     template_name = "app/task_update.html"
+#     template_name = "main/task_update.html"
 #
 #     def form_valid(self, form):
 #         form.instance.customer_id = self.request.user
@@ -300,7 +254,7 @@ def delete_img_task_view(request, image_id):
     if check_author_task(request.user, user_id):
         image = get_image_by_image_id(image_id)
         task_id = image.task_id.id
-        delete_image(image)
+        delete_image_by_task(image)
         return redirect("task_update", task_id)
     return redirect('home')
 
@@ -313,4 +267,6 @@ def executor_info_view(request):
             profile_user.save()
             return redirect("home")
         else:
-            return render(request, 'app/executor-info.html', )
+            return render(request, 'app/executor-info.html')
+    else:
+        return redirect('home')

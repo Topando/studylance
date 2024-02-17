@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_cleanup.apps.CleanupConfig',
-
+    #'app',
+    'authentication',
+    'task_manager',
+    'userprofile',
+    'main',
 ]
 SITE_ID = 4
 

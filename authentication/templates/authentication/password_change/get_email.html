@@ -1,0 +1,23 @@
+{% extends "authentication/base-for-login-reg.html" %}
+
+{% block title %}
+    STUDYLANCE - Изменить пароль
+{% endblock title %}
+
+{% block body %}
+    <div class = 'container-out-log-reg'>
+
+            <div class = 'container-log-reg'>
+                <form action="" method="POST" class = "form-change-pass">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input class = "orange-button" type="Submit" name="submit" value="Отправить"/>
+                </form>
+
+                <div class = 'bottom-info-reg'>
+                    <p>Вспомнили пароль¿</p>
+                    <a href = '{% url "login" %}'>Войти</a>
+                </div>
+            </div>
+    </div>
+{% endblock %}

@@ -1,7 +1,8 @@
 import os
 
 import openpyxl
-from ..models import University
+
+from task_manager.models import University
 
 pre = os.path.dirname(os.path.realpath(__file__))
 

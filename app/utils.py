@@ -109,15 +109,6 @@ def register_user(form):
     send_message(email, subject, message)
 
 
-def task_create(task_info, images, files):
-    task = Task.objects.create(customer_id=task_info['user'], title=task_info['title'],
-                               description=task_info['description'], price=task_info['price'],
-                               university=task_info['university'], direction=task_info['direction'],
-                               course=task_info['course'])
-    images_in_db(images, task)
-    files_in_db(files, task)
-
-
 def images_in_db(images, task):
     for image in images:
         ImagesTask.objects.create(task_id=task, image=image)
@@ -148,28 +139,6 @@ def get_task_by_task_id(task_id):
     return Task.objects.get(pk=task_id)
 
 
-def get_form_task_info(form):
-    task_info = {}
-    task_info['title'] = form.cleaned_data.get("title")
-    task_info['description'] = form.cleaned_data.get("description")
-    task_info['price'] = form.cleaned_data.get("price")
-    task_info['university'] = form.cleaned_data.get("university")
-    task_info['direction'] = form.cleaned_data.get("direction")
-    task_info['course'] = form.cleaned_data.get("course")
-    return task_info
-
-
-def update_task(task_id, task_info):
-    task = Task.objects.get(pk=task_id)
-    task.title = task_info.get('title')
-    task.description = task_info.get('description')
-    task.price = task_info.get('price')
-    task.university = task_info.get('university')
-    task.direction = task_info.get('direction')
-    task.course = task_info.get('course')
-    task.save()
-
-
 def get_count_files_in_task(task_id, obj):
     return obj.objects.filter(task_id=task_id).count()
 
@@ -191,3 +160,10 @@ def check_files(objs):
     if check_files_size(objs) and check_files_count(objs):
         return True
     return False
+
+
+def delete_image_by_task(image):
+    try:
+        image.delete()
+    except Exception:
+        print("Ошибка удаления фотографии")

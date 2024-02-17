@@ -1,10 +1,7 @@
-from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from .models import *
 from django.forms.widgets import HiddenInput
-from django.core.exceptions import ValidationError
 
 
 class RegisterUserForm(UserCreationForm):
@@ -78,4 +75,3 @@ class TaskCreateForm(forms.ModelForm):
         model = Task
         fields = ('subject', 'description', 'price', 'university', 'direction', 'course', "deadline")
         widgets = {"deadline": MyDateInput()}
-

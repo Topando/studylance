@@ -1,0 +1,785 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body a {
+    text-decoration: none;
+}
+html{
+    overflow-x: hidden;
+}
+:root {
+    --index: calc(1/1440*100vw);
+    --color-main-text: #FFFAF0;
+    --color-secondary-text: #878383;
+    --color-orange: #FF4D00;
+    --color-background: #121212;
+    --color-background-light: #141516;
+    --color-orange-button: #B53C06;
+    --color-border-orange-button: #B23903;
+    --color-border: #1E1F21;
+
+    --font-size-48px: 48px;
+    --font-size-30px: 30px;
+    --font-size-24px: 24px;
+    --font-size-22px: 22px;
+    --font-size-18px: 18px;
+    --font-size-16px: 16px;
+    --font-size-14px: 14px;
+
+}
+@font-face {
+    font-family: helvetica-bold-s;
+    src: url('../fonts/Helvetica-Bold.woff2');
+    font-weight: bold;
+}
+@font-face {
+    font-family: helvetica-light-s;
+    src: url('../fonts/Helvetica-Light.otf');
+    font-weight: 300;
+}
+@font-face {
+    font-family: helvetica-regular-s;
+    src: url('../fonts/Helvetica-Regular.woff2');
+    font-weight: normal;
+}
+body {
+    font: var(--font-size-22px) "helvetica-regular-s", normal;
+    min-height: 100vh;
+    background-color: var(--color-background);
+    color: var(--color-main-text);
+    position:relative;
+    padding-bottom: 100px;
+
+}
+.header {
+    display: flex;
+    padding: calc(var(--index)*20) 8.33% 0 8.33%;
+    justify-content: space-between;
+}
+.header-logo a{
+    font: var(--font-size-30px) "helvetica-bold-s", normal;
+    color: var(--color-orange);
+}
+.header .header-nav {
+    display: flex;
+
+}
+.header .header-nav a{
+    font: var(--font-size-22px) "helvetica-bold-s", normal;
+    color: var(--color-secondary-text);
+    margin-left: calc(var(--index)*50);
+}
+.container-footer {
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+    padding-bottom: calc(var(--index)*16);
+}
+.footer,
+.header-login-reg {
+    display: flex;
+    justify-content: center;
+}
+.footer * {
+    padding-right: 5px;
+    color: var(--color-secondary-text);
+    font-size: var(--font-size-16px);
+}
+
+.index-what-is-it,
+.alert{
+    margin: calc(var(--index)*100) 0 0 calc(var(--index)*244);
+}
+.index-what-is-it p,
+.alert p{
+    width: 47vw;
+    max-width: 700px;
+    font: var(--font-size-24px) "helvetica-light-s", normal;
+    margin: 0 0 calc(var(--index)*20) calc(var(--index)*40);
+}
+h2 {
+    font: var(--font-size-48px) "helvetica-regular-s", normal;
+    margin-bottom: calc(var(--index)*45);
+}
+
+.header-login-reg {
+    padding-top: calc(var(--index)*20);
+}
+
+.form-input,
+#id_first_name,
+#id_last_name,
+#id_username,
+#id_email,
+.form-change-pass > div > input{
+    width: 230px;
+    height: 30px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    color: var(--color-main-text);
+}
+.orange-button,
+.container-task-response > .button-task-response{
+    width: 230px;
+    height: 30px;
+    background: var(--color-orange-button);
+    color: var(--color-main-text);
+    border: 1px solid var(--color-border-orange-button);
+    border-radius: 5px;
+    font: var(--font-size-14px) "helvetica-regular-s", normal;
+}
+.task-container{
+    position: relative;
+}
+.container-task-response{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 15px;
+}
+.form-login label,
+.bottom-info-reg,
+.form-label,
+.form-login > div .title-password-forgot a,
+.form-change-pass{
+    color: var(--color-main-text);
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+}
+.bottom-info-reg a{
+    color: var(--color-orange);
+}
+.container-out-log-reg,
+ .container-input-data-out{
+    display: flex;
+    justify-content: center;
+}
+.container-log-reg,
+ .container-input-data{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin: 110px 0 0 0;
+    padding: 30px 35px 8px 35px;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+}
+.container-log-reg .bottom-info-reg {
+    display: inline-flex;
+    justify-content: center;
+    margin: 30px 0 10px 0;
+}
+.container-log-reg .bottom-info-reg a {
+    margin-left: 8px;
+}
+.form-login p,
+.form-register p,
+.form-login > div,
+.form-change-pass div{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.form-login p input,
+ .form-login div input,
+ .form-register div input,
+ .form-change-pass input,
+ .profile-confidential-info form > input{
+    padding: 2px 15px 2px 15px;
+    margin-top: 5px;
+    font: var(--font-size-14px) "helvetica-regular-s", normal;
+}
+.form-login div .title-password-forgot {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 0 10px;
+}
+.form-login > div .title-password-forgot a {
+    color: var(--color-orange);
+}
+.container-reg-field > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6px;
+}
+.form-register > .container-reg-field{
+    margin-bottom: 20px;
+}
+.container-reg-field .form-error {
+    margin-bottom: 0;
+}
+
+.card-task-secondary-info {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-secondary-text);
+    font: var(--font-size-14px) "helvetica-regular-s", normal;
+}
+.card-task-secondary-info > div {
+    display: flex;
+}
+.card-task-secondary-info > div {
+    display: flex;
+}
+.card-task-secondary-info > div > *{
+    margin-right: 20px;
+}
+.card-task {
+    min-width: 800px;
+    padding: 16px 16px 14px 16px;
+    margin-bottom: 25px;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+}
+.container-all-task{
+    padding: 80px 320px 25px 320px;
+}
+.container-task {
+    margin-left: 20px;
+}
+.task-title-price{
+    display: flex;
+    justify-content: space-between;
+}
+.task-title-price > h3 {
+    font: var(--font-size-22px) "helvetica-bold-s", normal;
+    color: var(--color-main-text);
+}
+.card-task-desc > p {
+    font: var(--font-size-14px) "helvetica-light-s", normal;
+    color: var(--color-main-text);
+    margin: 10px 0 15px 15px;
+}
+.task-title-price{
+    max-width: 100%;
+}
+.card-task-desc{
+    max-width: 40%;
+}
+.task-title-price p{
+    font: var(--font-size-24px) "helvetica-bold-s", normal;
+    color: var(--color-orange);
+}
+.task-description-cropped{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.container-show-more,
+.container-task-response{
+    text-align: center;
+}
+
+/*функциональные стили модальных окон  НИЧЕГО НЕ ТРОГАТЬ!!*/
+.hystmodal__wrap {
+    position: absolute;
+    display: none;
+    top: 25px;
+}
+.hystmodal {
+    position: relative;
+}
+.hystmodal--active .hystmodal__wrap {
+    display: block;
+}
+.hystmodal__window {
+    border: 1px solid black;
+}
+/**/
+
+.task-filter {
+    display: flex;
+    align-items: baseline;
+}
+.task-filter > *{
+    margin-right: 12px;
+    margin-bottom: 25px;
+}
+.button-filter,
+.button-create-task,
+.button-reset-filter{
+    padding: 6px 15px 6px 15px;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-secondary-text);
+    font: var(--font-size-18px) "helvetica-regular-s", normal;
+}
+.button-create-task,
+.button-reset-filter{
+    color: var(--color-orange);
+}
+
+/*стили самих модальных окон*/
+.container-button-filter .hystmodal__window{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 15px 20px 15px 20px;
+}
+#filter-date .hystmodal__window div,
+#filter-deadline .hystmodal__window div{
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+#filter-date .hystmodal__window div label,
+#filter-deadline .hystmodal__window div label{
+    align-self: flex-start;
+    color: var(--color-secondary-text);
+    font: var(--font-size-18px) "helvetica-regular-s", normal;
+    margin: 0 0 2px 15px;
+}
+.container-button-filter .hystmodal__window > .orange-button{
+    width: 150px;
+    padding: 7px 7px 7px 7px;
+    margin-top: 10%;
+}
+.container-button-filter .hystmodal__window input{
+    height: 30px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    color: var(--color-secondary-text);
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+    padding: 5px 5px 5px 10px;
+
+}
+.container-button-filter {
+    position: relative;
+}
+::-webkit-calendar-picker-indicator {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23878383" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+}
+
+/*стили для task_detail*/
+.task-container,
+.container-profile{
+    margin: 80px calc(var(--index)*244) 0px calc(var(--index)*244);
+    padding: 30px 50px 80px 50px;
+    background: var(--color-background-light);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+}
+.task-header .task-secondary-info {
+    display: flex;
+    flex-direction: row;
+    color: var(--color-secondary-text);
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+}
+.task-header .task-secondary-info > * {
+    margin-right: 25px;
+}
+.task-header .task-secondary-info .task-delete {
+    color: var(--color-secondary-text);
+    padding: 0;
+    background: none;
+    border: none;
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+}
+.task-header .task-secondary-info .task-edit {
+    color: var(--color-orange);
+}
+.task-header .task-price {
+    color: var(--color-orange);
+    font: var(--font-size-24px) "helvetica-bold-s", normal;
+}
+.task-header{
+    display: flex;
+    justify-content: space-between;
+}
+.task-main-info{
+    padding-left: 50px;
+}
+.task-main-info > h2 {
+    font: 20px "helvetica-bold-s", normal;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+.task-main-info .task-description h3,
+.task-main-info .task-photo h3,
+.task-main-info .task-files h3{
+    font: var(--font-size-22px) "helvetica-light-s", normal;
+    color: var(--color-secondary-text);
+    margin:0 0 10px 30px;
+}
+.task-main-info .task-description p {
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+    max-width: 600px;
+}
+.task-main-info .task-description,
+.task-main-info .task-photo{
+    margin-bottom: 25px;
+}
+.task-photo #lightgallery{
+    display: flex;
+}
+.task-photo #lightgallery > a {
+    width: 120px;
+    height: 150px;
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    background-color: var(--color-background);
+    margin-right: 10px;
+}
+.task-photo #lightgallery > a > img {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}
+.container-task-file {
+    margin-bottom: 10px;
+    padding: 10px 15px 10px 30px;
+    width: 500px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+}
+.container-task-file > a {
+    display: flex;
+    justify-content: space-between;
+}
+.container-task-file > a p {
+    color: var(--color-main-text);
+    font: var(--font-size-16px) "helvetica-regular-s", normal;
+}
+.container-task-response > .button-task-response a {
+    color: var(--color-main-text);
+}
+.container-profile > .header-profile {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.header-profile > p {
+    color: var(--color-secondary-text);
+    font: var(--font-size-18px) "helvetica-light-s", normal;
+}
+.header-profile > .profile-rating {
+    color: var(--color-orange);
+    font: var(--font-size-30px) "helvetica-bold-s", normal;
+
+}
+.container-profile-photo-info > .profile-photo {
+    display: block;
+    width: 200px;
+    height: 200px;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    /* заменить когда саня сделает норм прикрепление фото */
+    background: no-repeat url("https://gebestore.ru/wp-content/uploads/e/7/3/e73d8d803d8faf7ef722f89ffb67f2ec.png");
+    background-size: 100% 100%;
+    margin-bottom: 20px;
+}
+.profile-confidential-info *{
+    color: var(--color-secondary-text);
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+    display: block;
+}
+.container-profile-main-info {
+    display: flex;
+}
+.container-profile-desc-comments {
+    margin-top: 80px;
+    margin-left: 40px;
+}
+.container-profile-desc-comments {
+    width: 100%;
+}
+.header-profile-description {
+    color: var(--color-secondary-text);
+    font: var(--font-size-22px) "helvetica-light-s", normal;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 30px;
+    margin-bottom: 10px;
+}
+.header-profile-description a {
+    color: var(--color-secondary-text);
+    text-decoration: underline;
+    font-size: var(--font-size-18px);
+}
+.profile-description {
+    color: var(--color-main-text);
+    font: var(--font-size-18px) "helvetica-light-s", normal;
+    margin-bottom: 50px;
+}
+.container-profile-comments > h3,
+.header-profile-description > h3{
+    color: var(--color-secondary-text);
+    font: var(--font-size-22px) "helvetica-light-s", normal;
+    margin-left: 30px;
+}
+.profile-comments > * {
+    margin-top: 10px;
+}
+.profile-comment {
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    padding: 10px 30px 15px 30px;
+    background: var(--color-background);
+}
+.profile-comment > p {
+    margin: 0 30px;
+    color: var(--color-main-text);
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+}
+.header-profile-comment {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-secondary-text);
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+    margin-bottom: 15px;
+}
+.header-profile-comment > .profile-comment-score {
+    color: var(--color-orange);
+    font: var(--font-size-16px) "helvetica-bold-s", normal;
+}
+.profile-confidential-info > h3{
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+    margin-bottom: 20px;
+}
+.profile-confidential-info > form{
+    display: flex;
+    flex-direction: column;
+}
+.profile-confidential-info > form label{
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+    padding: 10px 0 0 25px;
+}
+.profile-confidential-info > form .profile-change-save{
+    background: none;
+    border: none;
+    padding: 0;
+
+    color: var(--color-orange);
+    font: var(--font-size-16px) "helvetica-light-s", normal;
+    align-self: center;
+
+}
+
+.button-task-delete {
+  all: unset;
+}
+.button-task-delete,
+.button-cancel-task-delete{
+    margin-left: 70px;
+    color: var(--color-orange);
+    font: var(--font-size-22px) "helvetica-regular-s", normal;
+}
+.button-cancel-task-delete {
+    color: var(--color-secondary-text);
+    margin-left: 40px;
+}
+
+
+
+
+
+@media (max-width: 1900px) {
+    /*для десктоп, от 1000px до 1900px*/
+    :root {
+        --font-size-30px: calc(22px + (30 - 22) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-48px: calc(32px + (48 - 32) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-24px: calc(18px + (24 - 18) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-22px: calc(16px + (22 - 16) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-16px: calc(12px + (16 - 12) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-18px: calc(14px + (18 - 14) * ((100vw - 1000px) / (1900 - 1000)));
+        --font-size-14px: calc(10px + (14 - 10) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .index-what-is-it p, .alert p {
+        width: calc(550px + (800 - 550) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .card-task{
+        min-width: calc(700px + (800 - 700) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: calc(8px + (16 - 8) * ((100vw - 1000px) / (1900 - 1000))) calc(15px + (16 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-bottom: calc(15px + (25 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-all-task{
+        padding: calc(50px + (80 - 50) * ((100vw - 1000px) / (1900 - 1000))) calc(140px + (320 - 140) * ((100vw - 1000px) / (1900 - 1000))) 0 calc(140px + (320 - 140) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .button-filter, .button-create-task, .button-reset-filter {
+        padding: calc(5px + (6 - 5) * ((100vw - 1000px) / (1900 - 1000))) calc(10px + (15 - 10) * ((100vw - 1000px) / (1900 - 1000)));
+        border-radius: calc(5px + (6 - 5) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-filter > * {
+        margin-right: calc(8px + (12 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-bottom: calc(15px + (25 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .card-task-desc > p {
+        margin: calc(4px + (10 - 4) * ((100vw - 1000px) / (1900 - 1000))) 0 calc(12px + (15 - 12) * ((100vw - 1000px) / (1900 - 1000))) 15px;
+    }
+    .orange-button{
+            width: calc(180px + (230 - 180) * ((100vw - 1000px) / (1900 - 1000)));
+            height: calc(25px + (30 - 25) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-button-filter .hystmodal__window input {
+        height: calc(25px + (30 - 25) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-button-filter .hystmodal__window {
+        padding: calc(10px + (15 - 10) * ((100vw - 1000px) / (1900 - 1000))) calc(15px + (20 - 15) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    #filter-date .hystmodal__window div, #filter-deadline .hystmodal__window div {
+        width: calc(130px + (150 - 130) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-bottom: calc(8px + (15 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-button-filter .hystmodal__window > .orange-button {
+        width: calc(130px + (150 - 130) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: calc(5px + (7 - 5) * ((100vw - 1000px) / (1900 - 1000)));;
+    }
+    .container-profile-photo-info > .profile-photo{
+        width: calc(150px + (200 - 150) * ((100vw - 1000px) / (1900 - 1000)));
+        height: calc(150px + (200 - 150) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-profile{
+        padding: calc(20px + (30 - 20) * ((100vw - 1000px) / (1900 - 1000))) calc(35px + (50 - 35) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-container{
+        padding: calc(20px + (30 - 20) * ((100vw - 1000px) / (1900 - 1000))) calc(35px + (50 - 35) * ((100vw - 1000px) / (1900 - 1000))) calc(60px + (80 - 60) * ((100vw - 1000px) / (1900 - 1000))) calc(35px + (50 - 35) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-profile-desc-comments {
+        margin-top: calc(40px + (80 - 40) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-left: calc(30px + (40 - 30) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .profile-confidential-info > form label {
+        padding: calc(8px + (10 - 8) * ((100vw - 1000px) / (1900 - 1000))) 0 0 calc(20px + (25 - 20) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .profile-confidential-info > h3 {
+        margin-bottom: calc(5px + (20 - 5) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .form-login p input,
+    .form-login div input,
+    .form-register div input,
+    .form-change-pass input,
+    .profile-confidential-info form > input {
+        padding: 2px calc(10px + (15 - 10) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-top: calc(3px + (5 - 3) * ((100vw - 1000px) / (1900 - 1000)))
+    }
+    .form-input,
+    #id_first_name,
+    #id_last_name,
+    #id_username,
+    #id_email,
+    .form-change-pass > div > input {
+        width: calc(200px + (230 - 200) * ((100vw - 1000px) / (1900 - 1000)));
+        height: calc(27px + (30 - 27) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-container,
+    .container-profile {
+        margin: calc(70px + (80 - 70) * ((100vw - 1000px) / (1900 - 1000))) calc(150px + (244 - 150) * ((100vw - 1000px) / (1900 - 1000))) 0px calc(150px + (244 - 150) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .profile-description {
+        margin-bottom: calc(30px + (50 - 30) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-log-reg, .container-input-data{
+        margin-top: calc(60px + (110 - 60) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-log-reg #id_first_name,
+    .container-log-reg #id_last_name,
+    .container-log-reg #id_username,
+    .container-log-reg #id_email,
+    .container-log-reg input{
+        width: calc(180px + (230 - 180) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-log-reg, .container-input-data {
+        padding: calc(20px + (30 - 20) * ((100vw - 1000px) / (1900 - 1000))) calc(25px + (35 - 25) * ((100vw - 1000px) / (1900 - 1000))) 8px calc(25px + (35 - 25) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .form-register > .container-reg-field {
+        margin-bottom: calc(10px + (20 - 10) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-reg-field > div {
+        margin-bottom: calc(5px + (6 - 5) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-main-info > h2{
+        margin-top: calc(8px + (15 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-bottom: calc(17px + (25 - 17) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-main-info .task-description,
+    .task-main-info .task-photo {
+        margin-bottom: calc(17px + (25 - 17) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-main-info {
+        padding-left: calc(40px + (50 - 40) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .task-photo #lightgallery > a {
+        width: calc(90px + (120 - 90) * ((100vw - 1000px) / (1900 - 1000)));
+        height: calc(120px + (150 - 120) * ((100vw - 1000px) / (1900 - 1000)));
+        margin-right: calc(8px + (10 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-task-file {
+        margin-bottom: calc(8px + (10 - 8) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: calc(8px + (10 - 8) * ((100vw - 1000px) / (1900 - 1000))) calc(10px + (15 - 15) * ((100vw - 1000px) / (1900 - 1000))) calc(8px + (10 - 8) * ((100vw - 1000px) / (1900 - 1000))) calc(20px + (30 - 20) * ((100vw - 1000px) / (1900 - 1000)));
+        width: calc(450px + (500 - 450) * ((100vw - 1000px) / (1900 - 1000)));
+        border-radius: calc(6px + (8 - 6) * ((100vw - 1000px) / (1900 - 1000)));
+    }
+    .container-task-response > .button-task-response {
+        width: calc(150px + (230 - 150) * ((100vw - 1000px) / (1900 - 1000)));
+        height: calc(25px + (30 - 25) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: calc(3px + (7 - 3) * ((100vw - 1000px) / (1900 - 1000)));;
+    }
+
+}
+@media (max-width: 999px) {
+    /*планшет в портретной ориентации, от 768px до 1000px*/
+    :root{
+        --font-size-48px: 48px;
+        --font-size-30px: 30px;
+        --font-size-24px: 24px;
+        --font-size-22px: 24px;/*изм*/
+        --font-size-18px: 18px;
+        --font-size-16px: 16px;
+        --font-size-14px: 16px;
+    }
+    .index-what-is-it, .alert {
+        margin: 120px 0 0 130px;
+    }
+    .index-what-is-it p,
+    .alert p{
+        width: 700px;
+    }
+    .container-all-task{
+        padding: 80px 100px 0 100px;
+    }
+    .task-title-price > h3 {
+        font: var(--font-size-20px) "helvetica-bold-s", normal;
+    }
+    .card-task {
+        min-width: calc(700px + (800 - 700) * ((100vw - 1000px) / (1900 - 1000)));
+        padding: 20px 30px;
+        margin-bottom: 18px;
+        border-radius: 10px;
+    }
+    .orange-button {
+        width: 250px;
+        height: 35px;
+        border-radius: 7px;
+
+    }
+    .footer * {
+        font-size: var(--font-size-18px);
+    }
+
+}
+@media (max-width: 767px) {
+    /*смартфоны, от 320px до 768px*/
+    :root{
+
+    }
+
+}
+@media (max-width: 400px) {
+    /*смартфоны, от 320px до 768px*/
+    :root{
+
+    }
+}
