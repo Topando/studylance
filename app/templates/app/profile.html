@@ -29,14 +29,20 @@
                         <h3>Видно только вам</h3>
                         <form action="" method="POST">
                             {% csrf_token %}
-                            {% for item in form %}
-                                <label>{{ item.label }}</label>
-                                {{ item }}
-                            {% endfor %}
-                            <input class = "profile-change-save" type="Submit" name="submit" value="Сохранить"/>
+                            {{ form.as_p }}
+                            <input type="Submit" name="submit" value="Submit"/>
                         </form>
                     </div>
                 {% else %}
+                    <div class = "profile-confidential-info">
+                        <h3>Видно только вам</h3>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            {{ profile_form.as_p }}
+                            <input type="Submit" name="submit" value="Submit"/>
+                        </form>
+                    </div>
                 {% endif %}
             </div>
 
@@ -74,7 +80,4 @@
             </div>
         </div>
     </div>
-
-
-    <script src="../../static/app/scripts/script-for-profile-min-height.js" type="module"></script>
 {% endblock %}

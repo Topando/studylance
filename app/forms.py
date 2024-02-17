@@ -31,13 +31,6 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', "username", 'email')
-        labels = {
-            'first_name': 'Имя',
-            'last_name': 'Фамилия',
-            'username': 'Логин',
-            'email': 'Почта',
-
-        }
 
 
 class ProfileForm(forms.ModelForm):
@@ -56,7 +49,6 @@ class TaskUpdateForm(forms.ModelForm):
         model = Task
         fields = ('title', 'description', 'price', 'university', 'direction', 'course', "deadline")
         widgets = {'customer_id': HiddenInput(), "deadline": MyDateInput()}
-
 
 class TaskAnswerForm(forms.ModelForm):
     class Meta:
@@ -78,7 +70,6 @@ class TaskCreateForm(forms.ModelForm):
         model = Task
         fields = ('title', 'description', 'price', 'university', 'direction', 'course', "deadline")
         widgets = {"deadline": MyDateInput()}
-
 
 class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
