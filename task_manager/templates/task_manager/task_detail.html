@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="task-container">
+    <div class="task-container" id = "task-container">
         <div class="task-header">
             <div class="task-secondary-info">
                 <p>Задание от {{ task.customer_id }}</p>
@@ -28,16 +28,20 @@
                 <h3>Описание</h3>
                 <p>{{ task.description }}</p>
             </div>
-            <div class="task-photo">
-                <h3>Фото</h3>
-                <div id='lightgallery'>
-                    {% for image in images %}
-                        <a href="{{ image.image.url }}">
-                            <img src="{{ image.image.url }}">
-                        </a>
-                    {% endfor %}
+            {% if images|length != 0 %}
+                <div class="task-photo">
+                    <h3>Фото</h3>
+                    <div id='lightgallery'>
+                        {% for image in images %}
+                            <a href="{{ image.image.url }}">
+                                <img src="{{ image.image.url }}">
+                            </a>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
+            {% else %}
+            {% endif %}
+            {% if images|length != 0 %}
             <div class="task-files">
                 <h3>Файлы</h3>
                 {% for file in files %}
@@ -49,6 +53,8 @@
                     </div>
                 {% endfor %}
             </div>
+            {% else %}
+            {% endif %}
         </div>
 
         <div class="container-task-response">
@@ -57,4 +63,7 @@
             </button>
         </div>
     </div>
+
+
+    <script src="../../static/main/scripts/script-for-task-min-height.js" type="module"></script>
 {% endblock %}
