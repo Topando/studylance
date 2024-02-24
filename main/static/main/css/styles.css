@@ -119,7 +119,7 @@ h2 {
     background: var(--color-background);
     border: 1px solid var(--color-border);
     border-radius: 5px;
-    color: var(--color-main-text);
+    color: var(--color-secondary-text);
 }
 .orange-button,
 .container-task-response > .button-task-response{
@@ -773,13 +773,81 @@ h2 {
 @media (max-width: 767px) {
     /*смартфоны, от 320px до 768px*/
     :root{
-
+        --font-size-30px: 36px;
+        --font-size-28px: 28px;
+        --font-size-48px: 40px;
+        --font-size-24px: 20px;
+        --font-size-22px: 24px;
+        --font-size-18px: 14px;
+    }
+    .header{
+        padding: 2vh 8.33vw 0 8.33vw;
+    }
+    .index-what-is-it,
+    .alert {
+        margin: 3.55vh 7vw 0 7vw;
+    }
+    h2 {
+        margin-bottom: 4.6vh;
+    }
+    .index-what-is-it p, .alert p {
+        width: 100%;
+        margin: 0 0 3vh 0;
+    }
+    .container-footer {
+        padding-bottom: 1.8vh;
+    }
+    .task-container, .container-profile {
+        margin: 7.1vh 0 0 0;
+        padding: 1.4vh 3vw;
+        border: none;
+        border-radius: 0;
+    }
+    .header-profile > .profile-rating {
+        font: var(--font-size-28px) "helvetica-bold-s", normal;
+    }
+    .header-profile > p {
+        font: var(--font-size-16px) "helvetica-light-s", normal;
+    }
+    .container-profile-photo-info > .profile-photo {
+        width: 38vw;
+        height: 38vw;
+    }
+    .container-profile-main-info {
+        display: block;
+    }
+    .container-profile-photo-info{
+        display: flex;
+        justify-content: space-between;
+    }
+    .container-profile-comments > h3,
+    .header-profile-description > h3{
+        font: var(--font-size-24px) "helvetica-light-s", normal;
+        margin-left: 30px;
+    }
+    .container-profile-desc-comments,
+    .container-profile-comments{
+        margin-top: 7.1vh;
+        margin-left: 0;
+    }
+    .profile-description {
+        font: var(--font-size-24px) "helvetica-light-s", normal;
+    }
+    .header-profile-description a {
+        font-size: var(--font-size-16px);
+    }
+    .form-input, #id_first_name, #id_last_name, #id_username, #id_email, .form-change-pass > div > input {
+        width: 50vw;
+        height: 35px;
+        padding: 4px 4vw;
+        margin-top: 0.6vh;
+    }
+    .profile-confidential-info > h3 {
+        margin-bottom: 3vh;
+        padding-left: 4vw;
+    }
+    .profile-confidential-info form > .profile-change-save{
+        margin-top: 1.6vh;
     }
 
-}
-@media (max-width: 400px) {
-    /*смартфоны, от 320px до 768px*/
-    :root{
-
-    }
 }

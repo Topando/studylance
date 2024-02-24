@@ -70,7 +70,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'builtins': [
-                'app.templatetags.app_tags',
             ]
         },
     },

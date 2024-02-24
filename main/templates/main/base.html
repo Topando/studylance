@@ -11,7 +11,7 @@
 </head>
 <body>
     {% block header %}
-        <header class = 'header'>
+        <header class = 'header header-main'>
             <div class = 'header-logo'>
                 <a href = '{% url "home" %}'>STUDYLANCE</a>
             </div>
@@ -38,6 +38,8 @@
             <a href = '#'>предложения</a>
         </footer>
     </div>
+
+    <script src="../../static/main/scripts/header-for-mobile.js"></script>
 
     <script src="../../static/main/scripts/lightgallery/lightgallery.umd.js"></script>
     <script src="../../static/main/scripts/lightgallery/lg-fullscreen.umd.js"></script>
