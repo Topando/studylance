@@ -896,5 +896,8 @@ h2 {
     .profile-comment > p {
         font: var(--font-size-17px) "helvetica-light-s", normal;
     }
+    .profile-comment > p{
+
+    }
 
 }
