@@ -11,7 +11,7 @@
 </head>
 <body>
     {% block header %}
-        <header class = 'header'>
+        <header class = 'header header-main'>
             <div class = 'header-logo'>
                 <a href = '{% url "home" %}'>STUDYLANCE</a>
             </div>
@@ -39,6 +39,9 @@
         </footer>
     </div>
 
+
+    {% include 'main/js-header.html' %}
+    <script src="../../static/main/scripts/header-for-mobile.js"></script>
     <script src="../../static/main/scripts/lightgallery/lightgallery.umd.js"></script>
     <script src="../../static/main/scripts/lightgallery/lg-fullscreen.umd.js"></script>
     <script src="../../static/main/scripts/lightgallery/lg-rotate.umd.js"></script>
