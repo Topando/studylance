@@ -849,5 +849,54 @@ h2 {
     .profile-confidential-info form > .profile-change-save{
         margin-top: 1.6vh;
     }
+    .header-logo a{
+        font: var(--font-size-28px) "helvetica-bold-s", normal;
+    }
+    .header-login-reg{
+        padding-top: 2.8vh;
+    }
+    .container-log-reg, .container-input-data {
+        margin-top: 11vh;
+    }
+    .container-log-reg #id_first_name,
+    .container-log-reg #id_last_name,
+    .container-log-reg #id_username,
+    .container-log-reg #id_email,
+    .container-log-reg input {
+        width: 70vw;
+        height: 4.1vh;
+    }
+    .form-login label,
+    .bottom-info-reg,
+    .form-label,
+    .form-login > div .title-password-forgot a,
+    .form-change-pass {
+        font: var(--font-size-24px) "helvetica-light-s", normal;
+    }
+    .form-login div .title-password-forgot {
+        width: 70vw;
+        font: var(--font-size-17px) "helvetica-light-s", normal;
+    }
+    .container-log-reg .orange-button{
+        margin-top: 30px;
+    }
+    .container-reg-field > div {
+        margin-bottom: 2vh;
+    }
+    .form-register > .container-reg-field {
+        margin-bottom: 2vh;
+    }
+    .container-log-reg, .container-input-data {
+        padding-top: 25px;
+    }
+    .profile-comment {
+        padding: 15px 25px 20px 25px;
+    }
+    .profile-comment > p {
+        font: var(--font-size-17px) "helvetica-light-s", normal;
+    }
+    .profile-comment > p{
+
+    }
 
 }

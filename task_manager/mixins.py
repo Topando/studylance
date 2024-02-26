@@ -8,7 +8,7 @@ from task_manager.models import Task
 
 def task_create_mixin(user):
     count_tasks = Task.objects.filter(customer_id=user).count()
-    if user.is_authenticated and user.profile.is_customer and count_tasks < 5:
+    if user.is_authenticated and count_tasks < 5:
         return True
     return False
 
