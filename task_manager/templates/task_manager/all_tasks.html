@@ -8,7 +8,7 @@
 {% block body %}
     <div class="container-all-task">
         <div class="task-filter">
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated and request.user.profile.is_customer %}
                 <a class="button-create-task" href="{% url 'task_create' %}">Создать задание</a>
             {% else %}
                 <a class="button-create-task" href="{% url 'login' %}">Создать задание</a>
