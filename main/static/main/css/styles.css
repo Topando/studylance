@@ -64,7 +64,7 @@ body {
 }
 .header .header-nav {
     display: flex;
-
+    align-items: center;
 }
 .header .header-nav a{
     font: var(--font-size-22px) "helvetica-bold-s", normal;
@@ -786,6 +786,7 @@ h2 {
         --font-size-24px: 20px;
         --font-size-22px: 24px;
         --font-size-18px: 14px;
+        --font-size-17px: 17px;
     }
     .header{
         padding: 2vh 8.33vw 0 8.33vw;
@@ -859,6 +860,9 @@ h2 {
     .header-logo a{
         font: var(--font-size-28px) "helvetica-bold-s", normal;
     }
+    .header .header-nav img{
+        width: var(--font-size-28px);
+    }
     .header-login-reg{
         padding-top: 2.8vh;
     }
@@ -900,10 +904,8 @@ h2 {
         padding: 15px 25px 20px 25px;
     }
     .profile-comment > p {
-        font: var(--font-size-17px) "helvetica-light-s", normal;
+        font: var(--font-size-24px) "helvetica-light-s", normal;
     }
-    .profile-comment > p{
 
-    }
 
 }
