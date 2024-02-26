@@ -15,8 +15,10 @@
             <div class="container-profile-photo-info">
 
                 {% if user.id == request.user.id %}
-                    <a href="#" class="profile-photo">
-                    </a>
+                    <div class = 'profile-photo'>
+                        <input type="file">
+                    </div>
+
                 {% else %}
                     <a href="#" class="profile-photo">
 
