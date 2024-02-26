@@ -70,7 +70,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'builtins': [
-                'app.templatetags.app_tags',
+                'task_manager.templatetags.task_manager_tags',
             ]
         },
     },

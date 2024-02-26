@@ -6,13 +6,12 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email_verify = models.BooleanField(default=False)
     is_executor = models.BooleanField(default=0)
     is_customer = models.BooleanField(default=0)
     photo = models.ImageField(upload_to="profile/", blank=True)
-    age = models.IntegerField(blank=True, null=True)
-    balance = models.IntegerField(default=0)
-    rating = models.FloatField(default=5.0)
+    age = models.IntegerField(verbose_name="Возвраст", blank=True, null=True)
+    balance = models.IntegerField(verbose_name="Баланс", default=0)
+    rating = models.FloatField(verbose_name="Рейтинг", default=5.0)
     count_tasks = models.IntegerField(default=0)
 
 
@@ -42,6 +41,7 @@ class Comments(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     author_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments_author')
     comment = models.TextField()
+    rating = models.IntegerField(verbose_name="Оценка")
 
 
 class Resume(models.Model):
@@ -49,5 +49,5 @@ class Resume(models.Model):
     university = models.ForeignKey('task_manager.University', on_delete=models.CASCADE, null=True, blank=True)
     direction = models.ForeignKey('task_manager.Direction', on_delete=models.CASCADE, null=True, blank=True)
     course = models.ForeignKey('task_manager.Course', on_delete=models.CASCADE, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-    contact = models.TextField(null=True, blank=True)
+    description = models.TextField(verbose_name="Описание профиля", null=True, blank=True)
+    contact = models.TextField(verbose_name="Контакты", null=True, blank=True)

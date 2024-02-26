@@ -1,13 +1,14 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 
 from task_manager.models import Task
 
 
-def task_create_mixin(request):
-    user = User.objects.filter(pk=request.user.id).first()
-    if user is not None and user.profile.is_customer:
+def task_create_mixin(user):
+    count_tasks = Task.objects.filter(customer_id=user).count()
+    if user.is_authenticated and user.profile.is_customer and count_tasks < 5:
         return True
     return False
 
@@ -24,3 +25,10 @@ class ResponseMixin(UserPassesTestMixin):
 
     def handle_no_permission(self):
         return redirect('home')
+
+
+def task_update_mixin(user, task_id):
+    task = Task.objects.get(pk=task_id)
+    if user.is_authenticated and user.pk == task.customer_id.pk:
+        return True
+    raise PermissionDenied()

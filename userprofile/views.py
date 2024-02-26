@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
-from userprofile.forms import UserForm
+from userprofile.forms import UserForm, UpdateProfileForm, UpdateResumeForm
 from userprofile.models import Comments, Profile
 
 
@@ -51,3 +52,20 @@ def executor_info_view(request):
             return render(request, 'userprofile/executor-info.html')
     else:
         return redirect('home')
+
+
+def update_profile_view(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form_profile = UpdateProfileForm(request.POST, instance=request.user.profile)
+            form_resume = UpdateResumeForm(request.POST, instance=request.user.resume)
+            form_profile.save()
+            form_resume.save()
+            return redirect("profile", profile_id=request.user.id)
+        else:
+            context = {}
+            context['form_profile'] = UpdateProfileForm(instance=request.user)
+            context['form_resume'] = UpdateResumeForm(instance=request.user)
+            return render(request, 'userprofile/update_profile.html', context)
+    else:
+        raise PermissionDenied()

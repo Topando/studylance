@@ -6,26 +6,25 @@
 
 
 {% block body %}
-    <div class = "container-profile">
-        <div class = "header-profile">
+    <div class="container-profile">
+        <div class="header-profile">
             <p>Профиль {{ request.user }}</p>
-            <p class = "profile-rating">{{ user.profile.rating }}</p>
+            <p class="profile-rating">{{ user.profile.rating }}</p>
         </div>
-        <div class = "container-profile-main-info">
-            <div class = "container-profile-photo-info">
+        <div class="container-profile-main-info">
+            <div class="container-profile-photo-info">
 
                 {% if user.id == request.user.id %}
-                    <a href = "#" class = "profile-photo">
-
+                    <a href="#" class="profile-photo">
                     </a>
                 {% else %}
-                    <a href = "#" class = "profile-photo">
+                    <a href="#" class="profile-photo">
 
                     </a>
                 {% endif %}
 
                 {% if user.id == request.user.id %}
-                    <div class = "profile-confidential-info">
+                    <div class="profile-confidential-info">
                         <h3>Видно только вам</h3>
                         <form action="" method="POST">
                             {% csrf_token %}
@@ -40,35 +39,35 @@
                 {% endif %}
             </div>
 
-            <div class = "container-profile-desc-comments">
-                <div class = "profile-description">
-                    <div class = "header-profile-description">
+            <div class="container-profile-desc-comments">
+                <div class="profile-description">
+                    <div class="header-profile-description">
                         <h3>Описание</h3>
                         {% if user.id == request.user.id %}
-                            <a href = "#" class = "profile-description-change">
+                            <a href="{% url 'profile_update' %}" class="profile-description-change">
                                 Изменить
                             </a>
                         {% else %}
                         {% endif %}
                     </div>
-                    <p>{{user.resume.description}}</p>
+                    <p>{{ user.resume.description }}</p>
                 </div>
 
-                <div class = "container-profile-comments">
+                <div class="container-profile-comments">
                     <h3>Комментарии</h3>
-                        <div class = "profile-comments">
-                            {% for comment in comments %}
-                                <div class = "profile-comment">
-                                    <div class = "header-profile-comment">
-                                        <p>{{comment.author_id}}</p>
-                                        <p class = "profile-comment-score">Оценка: </p>
-                                    </div>
-                                    <p>
-                                        {{ comment.comment }}
-                                    </p>
+                    <div class="profile-comments">
+                        {% for comment in comments %}
+                            <div class="profile-comment">
+                                <div class="header-profile-comment">
+                                    <p>{{ comment.author_id }}</p>
+                                    <p class="profile-comment-score">Оценка: </p>
                                 </div>
-                            {% endfor %}
-                        </div>
+                                <p>
+                                    {{ comment.comment }}
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
                     <!-- -->
                 </div>
             </div>

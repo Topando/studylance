@@ -27,3 +27,5 @@ class TaskAnswerForm(forms.ModelForm):
     class Meta:
         model = TaskAnswer
         fields = ('description', 'price')
+
+

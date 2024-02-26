@@ -6,7 +6,7 @@ from django.views.generic import DetailView, DeleteView, CreateView
 
 from task_manager.db_handler.db_update import database_filling
 from task_manager.forms import TaskCreateForm, TaskUpdateForm, TaskAnswerForm
-from task_manager.mixins import task_create_mixin, ResponseMixin
+from task_manager.mixins import *
 from task_manager.models import Task, TaskAnswer
 from task_manager.utils import *
 
@@ -15,7 +15,7 @@ def all_tasks_view(request):
     page_number = request.GET.get('page')
     if page_number is None:
         page_number = 1
-    per_page = 2
+    per_page = 10
     count_page = per_page * int(page_number)
     next_page = int(page_number) + 1
     tasks = Task.objects.all().order_by('-time_created')[0:count_page]
@@ -28,7 +28,7 @@ def all_tasks_view(request):
 
 
 def task_create_view(request):
-    if task_create_mixin(request):
+    if task_create_mixin(request.user):
         if request.method == "POST":
             form = TaskCreateForm(request.POST)
             images = request.FILES.getlist("images")
@@ -69,7 +69,7 @@ def task_update_view(request, task_id):
     images = ImagesTask.objects.filter(task_id=task_id)
     files = FilesTask.objects.filter(task_id=task_id)
     context = {"images": images, "files": files}
-    if task_create_mixin(request):
+    if task_update_mixin(request.user, task_id):
         if request.method == "POST":
             task = get_task_by_task_id(task_id)
             form = TaskUpdateForm(request.POST, instance=task)

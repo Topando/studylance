@@ -33,7 +33,7 @@ class HystModal{
                 this.close();
             }
 
-        }.bind(this));;
+        }.bind(this));
 
         document.addEventListener("click", function (e) {
             const clickedlink = e.target.closest("[" + this.config.linkAttributeName + "]");

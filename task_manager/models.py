@@ -11,7 +11,7 @@ class Task(models.Model):
     is_working = models.BooleanField(default=False)
     subject = models.CharField(max_length=40, verbose_name="Предмет")
     description = models.TextField(verbose_name="Описание")
-    university = models.ForeignKey('University', verbose_name="ВУЗ", on_delete=models.CASCADE)
+    university = models.ForeignKey('University', verbose_name="Университет", on_delete=models.CASCADE)
     direction = models.ForeignKey('Direction', verbose_name="Направление", on_delete=models.CASCADE)
     course = models.ForeignKey('Course', verbose_name="Курс", on_delete=models.CASCADE)
     price = models.IntegerField(verbose_name="Цена", null=True, blank=True)
@@ -41,27 +41,27 @@ class FilesTask(models.Model):
 class TaskAnswer(models.Model):
     task_id = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True)
     author_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    description = models.TextField()
-    price = models.IntegerField(null=True, blank=True)
+    description = models.TextField(verbose_name='Отклик')
+    price = models.IntegerField(verbose_name='Цена', null=True, blank=True)
 
 
 class University(models.Model):
-    university = models.CharField(max_length=100)
+    university = models.CharField(verbose_name="Университет", max_length=100)
 
     def __str__(self):
         return self.university
 
 
 class Course(models.Model):
-    course = models.CharField(max_length=2)
+    course = models.CharField(verbose_name="Курс", max_length=2)
 
     def __str__(self):
         return self.course
 
 
 class Direction(models.Model):
-    code = models.CharField(max_length=10)
-    direction = models.CharField(max_length=100)
+    code = models.CharField(verbose_name="Код", max_length=10)
+    direction = models.CharField(verbose_name="Направление", max_length=100)
 
     def __str__(self):
         return self.direction
