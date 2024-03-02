@@ -3,6 +3,7 @@ class HystModal{
     constructor(props){
         let defaultConfig = {
             linkAttributeName: 'data-hystmodal',
+            modalWindowCenter: 'True',
         }
         this.config = Object.assign(defaultConfig, props);
         this.init();
@@ -29,7 +30,6 @@ class HystModal{
             let containingElement = document.querySelector("#" + this.openedWindow.id);
             if(!containingElement.contains(e.target) && this.isOpened) {
                 e.preventDefault();
-                console.log("click-out-window");
                 this.close();
             }
 
@@ -49,7 +49,6 @@ class HystModal{
 
             if (e.target.closest('[data-hystclose]')) {
                 this.close();
-                console.log("dfjkfdjhf");
                 return;
             }
         }.bind(this));
@@ -77,8 +76,10 @@ class HystModal{
         this.isOpened = true;
 
         //для центровки модального окна относительно кнопки
-        var elem = document.getElementById(this.openedWindow.id);
-        elem.style.left = elem.offsetWidth/2 - elem.firstElementChild.offsetWidth/2 + 'px';
+        if (this.config.modalWindowCenter == 'True'){
+            var elem = document.getElementById(this.openedWindow.id);
+            elem.style.left = elem.offsetWidth/2 - elem.firstElementChild.offsetWidth/2 + 'px';
+        }
     }
 
     close(){
@@ -116,4 +117,5 @@ class HystModal{
 
 const myModal = new HystModal({
     linkAttributeName: 'data-hystmodal',
+    modalWindowCenter: 'True',
 });

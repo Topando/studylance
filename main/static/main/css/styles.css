@@ -292,6 +292,21 @@ h2 {
 .hystmodal__window {
     border: 1px solid black;
 }
+.header-main .header-nav .hystmodal--active{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-background);
+}
+.header-main .header-nav .hystmodal--active .hystmodal__wrap{
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
 /**/
 
 .task-filter {
@@ -470,12 +485,12 @@ h2 {
     font: var(--font-size-30px) "helvetica-bold-s", normal;
 
 }
-.container-profile-photo-info > .profile-photo input{
+.container-profile-photo-info .profile-photo input{
     filter: opacity(0);
     width: 100%;
     height: 100%;
 }
-.container-profile-photo-info > .profile-photo {
+.container-profile-photo-info .profile-photo {
     display: block;
     width: 200px;
     height: 200px;
@@ -492,6 +507,12 @@ h2 {
     color: var(--color-secondary-text);
     font: var(--font-size-16px) "helvetica-light-s", normal;
     display: block;
+}
+.profile-confidential-info form > input[type="Submit"]{
+    all: unset;
+    color: var(--color-orange);
+    align-self: center;
+    margin-top: 8px;
 }
 .container-profile-main-info {
     display: flex;
@@ -857,7 +878,8 @@ h2 {
     .profile-confidential-info form > .profile-change-save{
         margin-top: 1.6vh;
     }
-    .header-logo a{
+    .header-logo a,
+    .menu-mobile .header-logo a{
         font: var(--font-size-28px) "helvetica-bold-s", normal;
     }
     .header .header-nav img{
@@ -865,6 +887,34 @@ h2 {
     }
     .header-login-reg{
         padding-top: 2.8vh;
+    }
+    .menu-mobile-header{
+        display: flex;
+        justify-content: space-between;
+        padding: 2.4vh 5vw 0 5vw;
+    }
+    .menu-mobile{
+        border: none;
+    }
+    .menu-mobile .header-logo a{
+        color: var(--color-orange);
+    }
+    .menu-mobile .header-logo button{
+        all: unset;
+    }
+    .menu-mobile .header-logo button img{
+        height: var(--font-size-28px);
+        width: var(--font-size-28px);
+    }
+    .menu-mobile-nav{
+        margin-top: 10vh;
+        margin-left: 10vw;
+        display: flex;
+        flex-direction: column;
+    }
+    .menu-mobile .menu-mobile-nav > a{
+        margin-bottom: 4vh;
+        font-size: var(--font-size-30px);
     }
     .container-log-reg, .container-input-data {
         margin-top: 11vh;
@@ -905,6 +955,51 @@ h2 {
     }
     .profile-comment > p {
         font: var(--font-size-24px) "helvetica-light-s", normal;
+    }
+    .container-all-task {
+        padding: 8vh 3.8vw 0 3.8vw;
+    }
+    .card-task {
+        min-width: 100%;
+        padding: 1.4vh 2.5vw;
+        margin-bottom: 2.36vh;
+        border-radius: 10px;
+    }
+    .task-filter{
+        display:none;
+    }
+    .task-title-price p {
+        white-space: nowrap;
+        font: var(--font-size-22px) "helvetica-bold-s", normal;
+    }
+    .card-task-desc {
+        max-width: 100%;
+    }.card-task-desc > p {
+        margin: 1.7vh 5vw 3vh 5vw;
+    }
+    .task-info-direction{
+        grid-column: 2;
+        grid-row: 1;
+    }
+    .task-info-university{
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .task-info-direction,
+    .task-info-course{
+        justify-self: right;
+        white-space: nowrap;
+    }
+    .task-info-course,
+    .task-info-university{
+        margin-top: 1.2vh;
+    }
+    .card-task-secondary-info > div {
+        display: grid;
+        grid-template-columns: 80% 20%;
+    }
+    .card-task-secondary-info > p{
+        display: none;
     }
 
 
