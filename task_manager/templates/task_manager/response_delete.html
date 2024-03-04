@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+{% block title %}
+    Удаление задания
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="alert alert-info" role="alert">
+        <form method="post">
+            {% csrf_token %}
+            <h2 class="alert-heading">Удалить отклик¿</h2>
+            <p class="form-buttons">
+                <div>
+                    <input class = "button-task-delete" type="submit" value="Удалить">
+                    <a class = "button-cancel-task-delete" href="{% url 'task_my_responses' %}">Отменить</a>
+                </div>
+            </p>
+        </form>
+    </div>
+{% endblock %}

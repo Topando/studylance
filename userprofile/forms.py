@@ -15,10 +15,11 @@ class UserForm(forms.ModelForm):
             'email': 'Почта', }
 
 
-class UpdateProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ('age', )
+class UpdateProfileForm(forms.Form):
+    age = forms.IntegerField(label="Возвраст", min_value=16, max_value=100)
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateProfileForm, self).__init__(*args, **kwargs)
 
 
 class UpdateResumeForm(forms.ModelForm):
@@ -30,3 +31,14 @@ class UpdateResumeForm(forms.ModelForm):
             'direction': 'Направление',
             "course": 'Курс',
         }
+
+
+class UpdateProfilePhotoForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('photo',)
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateProfilePhotoForm, self).__init__(*args, **kwargs)
+        self.fields['photo'].widget.attrs.update({'class': 'profile_photo'})
+        self.fields['photo'].label = ""

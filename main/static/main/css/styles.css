@@ -470,12 +470,16 @@ h2 {
     font: var(--font-size-30px) "helvetica-bold-s", normal;
 
 }
-.container-profile-photo-info > .profile-photo input{
+.container-profile-photo-info .profile-photo input{
     filter: opacity(0);
     width: 100%;
     height: 100%;
 }
-.container-profile-photo-info > .profile-photo {
+.profile-photo > div{
+    width: 100%;
+    height: 100%;
+}
+.container-profile-photo-info .profile-photo {
     display: block;
     width: 200px;
     height: 200px;

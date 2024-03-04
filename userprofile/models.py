@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -7,9 +8,9 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_executor = models.BooleanField(default=0)
-    is_customer = models.BooleanField(default=0)
     photo = models.ImageField(upload_to="profile/", blank=True)
-    age = models.IntegerField(verbose_name="Возвраст", blank=True, null=True)
+    age = models.IntegerField(verbose_name="Возвраст", blank=True, null=True, validators=[MinValueValidator(0),
+                                                                                          MaxValueValidator(100)])
     balance = models.IntegerField(verbose_name="Баланс", default=0)
     rating = models.FloatField(verbose_name="Рейтинг", default=5.0)
     count_tasks = models.IntegerField(default=0)

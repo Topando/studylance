@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+
+{% block body %}
+    {% for response in responses %}
+        {{ response.author_id }}
+        {{ response.description }}
+        {% if response.task_id.executor_id is None %}
+        <a href="{% url 'task_response_set' response.pk %}">Назначить исполнителем</a>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

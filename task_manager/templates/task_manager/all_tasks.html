@@ -8,7 +8,7 @@
 {% block body %}
     <div class="container-all-task">
         <div class="task-filter">
-            {% if request.user.is_authenticated and request.user.profile.is_customer %}
+            {% if request.user.is_authenticated %}
                 <a class="button-create-task" href="{% url 'task_create' %}">Создать задание</a>
             {% else %}
                 <a class="button-create-task" href="{% url 'login' %}">Создать задание</a>
@@ -121,7 +121,6 @@
         </div>
 
         {% for task in tasks %}
-            {{ count_tasks }}
             {% if tasks.count_tasks != task %}
                 <div class="card-task">
                     <a href="{{ task.get_absolute_url }}" class="link-task">

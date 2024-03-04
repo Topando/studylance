@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="task-container" id = "task-container">
+    <div class="task-container" id="task-container">
         <div class="task-header">
             <div class="task-secondary-info">
                 <p>Задание от {{ task.customer_id }}</p>
@@ -17,6 +17,7 @@
                 {% if task.customer_id.id == request.user.id %}
                     <a class='task-edit' href="{{ task.get_absolute_url }}update/">Редактировать задание</a>
                     <a class='task-delete' href="{{ task.get_absolute_url }}delete/">Удалить задание</a>
+                    <a href="{{ task.get_absolute_url }}response/">Все отклики</a>
 
                 {% endif %}
             </div>
@@ -42,26 +43,27 @@
             {% else %}
             {% endif %}
             {% if images|length != 0 %}
-            <div class="task-files">
-                <h3>Файлы</h3>
-                {% for file in files %}
-                    <div class = "container-task-file">
-                        <a href="{{ file.file.url }}" download>
-                            <p>{{ file.file|filename|truncatechars:50 }}</p>
-                            <img src = "{% static 'main/img/download-icon.svg' %}">
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
+                <div class="task-files">
+                    <h3>Файлы</h3>
+                    {% for file in files %}
+                        <div class="container-task-file">
+                            <a href="{{ file.file.url }}" download>
+                                <p>{{ file.file|filename|truncatechars:50 }}</p>
+                                <img src="{% static 'main/img/download-icon.svg' %}">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
             {% else %}
             {% endif %}
         </div>
-
-        <div class="container-task-response">
-            <button class='orange-button button-task-response'>
-                <a href="{% url 'task_response' task.id %}">Откликнуться</a>
-            </button>
-        </div>
+        {% if request.user.is_authenticated and not task_answer and request.user != task.customer_id %}
+            <div class="container-task-response">
+                <button class='orange-button button-task-response'>
+                    <a href="{% url 'task_response' task.id %}">Откликнуться</a>
+                </button>
+            </div>
+        {% endif %}
     </div>
 
 

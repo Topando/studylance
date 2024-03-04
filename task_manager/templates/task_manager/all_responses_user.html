@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+
+
+{% block body %}
+    {% for response in responses %}
+        {{ response.description }}
+        <a  href="{% url 'task_response_update' response.pk %}">Редактировать</a>
+        <a href="{% url 'task_response_delete' response.pk %}">Удалить</a>
+        {% empty %}
+        <p>Нет отклитков</p>
+    {% endfor %}
+{% endblock %}

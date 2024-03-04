@@ -5,7 +5,14 @@
 {% endblock %}
 
 
+
 {% block body %}
+    {% if tasks_count != 0 and user.id == request.user.id %}
+        <a href="{% url 'task_my_tasks' %}">Мои задания</a>
+    {% endif %}
+    {% if user.id == request.user.id and responses_count != 0 %}
+        <a href="{% url 'task_my_responses' %}">Мои отклики</a>
+    {% endif %}
     <div class="container-profile">
         <div class="header-profile">
             <p>Профиль {{ request.user }}</p>
@@ -13,12 +20,15 @@
         </div>
         <div class="container-profile-main-info">
             <div class="container-profile-photo-info">
-
                 {% if user.id == request.user.id %}
-                    <div class = 'profile-photo'>
-                        <input type="file">
-                    </div>
-
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div
+                                class='profile-photo'>
+                            {{ form_profile_photo }}
+                        </div>
+                        <input type="submit" value="Слава хуесос">
+                    </form>
                 {% else %}
                     <a href="#" class="profile-photo">
 
@@ -62,7 +72,7 @@
                             <div class="profile-comment">
                                 <div class="header-profile-comment">
                                     <p>{{ comment.author_id }}</p>
-                                    <p class="profile-comment-score">Оценка: {{ comment.rating}}</p>
+                                    <p class="profile-comment-score">Оценка: {{ comment.rating }}</p>
                                 </div>
                                 <p>
                                     {{ comment.comment }}

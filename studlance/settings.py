@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_cleanup.apps.CleanupConfig',
-    #'app',
+    # 'app',
     'authentication',
     'task_manager',
     'userprofile',
@@ -143,3 +146,7 @@ EMAIL_USE_SSL = False
 USE_L10N = False  # Here
 
 MAX_FILE_SIZE = 8 * 1024 * 1024
+
+
+LOGIN_URL = reverse_lazy('login')
+LOGIN_REDIRECT_URL = reverse_lazy('login')

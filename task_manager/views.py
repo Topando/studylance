@@ -1,13 +1,12 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, DeleteView, CreateView
 
-from task_manager.db_handler.db_update import database_filling
 from task_manager.forms import TaskCreateForm, TaskUpdateForm, TaskAnswerForm
 from task_manager.mixins import *
-from task_manager.models import Task, TaskAnswer
+from task_manager.models import TaskAnswer
 from task_manager.utils import *
 
 
@@ -28,6 +27,7 @@ def all_tasks_view(request):
 
 
 def task_create_view(request):
+    context = {}
     if task_create_mixin(request.user):
         if request.method == "POST":
             form = TaskCreateForm(request.POST)
@@ -62,6 +62,9 @@ class TaskDetail(DetailView):
         files = FilesTask.objects.filter(task_id=self.kwargs["task_id"]).all()
         context["images"] = images
         context["files"] = files
+        if self.request.user.is_authenticated:
+            context['task_answer'] = TaskAnswer.objects.filter(task_id=self.kwargs["task_id"],
+                                                               author_id=self.request.user).exists()
         return context
 
 
@@ -118,7 +121,7 @@ def delete_img_task_view(request, image_id):
     return redirect('home')
 
 
-class ResponseTask(ResponseMixin, LoginRequiredMixin, UserPassesTestMixin, CreateView):
+class ResponseTask(ResponseMixin, UserPassesTestMixin, CreateView):
     model = TaskAnswer
     form_class = TaskAnswerForm
     template_name = "task_manager/response_task.html"
@@ -130,3 +133,74 @@ class ResponseTask(ResponseMixin, LoginRequiredMixin, UserPassesTestMixin, Creat
         form.instance.task_id = task
         form.save()
         return redirect("task", self.kwargs["task_id"])
+
+
+@login_required
+def all_responses_task_view(request, task_id):
+    user_id = Task.objects.get(pk=task_id).customer_id.pk
+    if check_author_task(request.user, user_id):
+        context = {}
+        context['responses'] = TaskAnswer.objects.filter(task_id=task_id)
+        return render(request, 'task_manager/all_responses_task.html', context)
+    else:
+        raise PermissionDenied()
+
+
+@login_required
+def all_tasks_user_view(request):
+    context = {}
+    user_id = request.user.id
+    tasks = Task.objects.filter(customer_id=user_id)
+    context['tasks'] = tasks
+    return render(request, 'task_manager/all_tasks_user.html', context=context)
+
+
+@login_required
+def all_responses_user_view(request):
+    context = {}
+    user_id = request.user.id
+    responses = TaskAnswer.objects.filter(author_id=user_id)
+    context['responses'] = responses
+    return render(request, 'task_manager/all_responses_user.html', context=context)
+
+
+def update_response(request, response_id):
+    context = {}
+    response = TaskAnswer.objects.get(pk=response_id)
+    if request.user.pk == response.author_id.pk:
+        if request.method == 'POST':
+            form = TaskAnswerForm(request.POST, instance=response)
+            if form.is_valid():
+                form.save()
+                return redirect('task_my_responses')
+            else:
+                context['form'] = form
+                return render(request, 'task_manager/update_response.html', context=context)
+        else:
+            context['form'] = TaskAnswerForm(instance=response)
+            return render(request, 'task_manager/update_response.html', context=context)
+    else:
+        raise PermissionDenied()
+
+
+def delete_response(request, response_id):
+    response = TaskAnswer.objects.get(pk=response_id)
+    if request.user.pk == response.author_id.pk:
+        if request.method == 'POST':
+            response.delete()
+            return redirect('task_my_responses')
+        else:
+            return render(request, 'task_manager/response_delete.html')
+    else:
+        raise PermissionDenied()
+
+
+def set_response_task(request, response_id):
+    response = TaskAnswer.objects.get(pk=response_id)
+    task = response.task_id
+    if request.user.pk == task.customer_id.pk and task.executor_id is None:
+        task.executor_id = response.author_id
+        task.save()
+        return redirect('task', task.pk)
+    else:
+        raise PermissionDenied()
