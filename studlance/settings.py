@@ -149,3 +149,5 @@ MAX_FILE_SIZE = 8 * 1024 * 1024
 
 LOGIN_URL = reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('login')
+
+PER_PAGE = 10

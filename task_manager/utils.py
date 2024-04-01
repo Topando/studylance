@@ -1,4 +1,4 @@
-from studlance.settings import MAX_FILE_SIZE
+from studlance.settings import MAX_FILE_SIZE, PER_PAGE
 from task_manager.models import ImagesTask, FilesTask, Task
 
 
@@ -70,3 +70,13 @@ def delete_image_by_task(image):
         image.delete()
     except Exception:
         print("Ошибка удаления фотографии")
+
+
+def get_pagination_filter_list(filter_obj, page_number):
+    count_obj_on_page = PER_PAGE * int(page_number)
+    return filter_obj.qs[0:count_obj_on_page]
+
+def get_is_next_page(all_obj, obj):
+    if len(all_obj) > len(obj):
+        return True
+    return False

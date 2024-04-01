@@ -127,7 +127,7 @@
                 <input type="submit" value="Сохранить">
             </div>
         </form>
-        {% for task in filter.qs %}
+        {% for task in filter_list %}
             {% if tasks.count_tasks != task %}
                 <div class="card-task">
                     <a href="{{ task.get_absolute_url }}" class="link-task">
@@ -160,7 +160,7 @@
     <div class="container-show-more">
         {% if is_next_page %}
             <a class="orange-button" id="show-more" type="Submit" name="submit"
-               href="?page={{ next_page }}">Показать
+               href="{{ request.get_full_path }}?page={{ next_page }}">Показать
                 еще</a>
         {% endif %}
     </div>
