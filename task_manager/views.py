@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, DeleteView, CreateView
 
+from task_manager.filters import TaskFilter
 from task_manager.forms import TaskCreateForm, TaskUpdateForm, TaskAnswerForm
 from task_manager.mixins import *
 from task_manager.models import TaskAnswer
@@ -14,16 +15,26 @@ def all_tasks_view(request):
     page_number = request.GET.get('page')
     if page_number is None:
         page_number = 1
-    per_page = 10
+    per_page = 2
     count_page = per_page * int(page_number)
     next_page = int(page_number) + 1
-    tasks = Task.objects.all().order_by('-time_created')[0:count_page]
-    if len(Task.objects.all()) > len(tasks):
-        is_next_page = True
-    else:
-        is_next_page = False
-    return render(request, "task_manager/all_tasks.html",
-                  {"tasks": tasks, "next_page": next_page, "is_next_page": is_next_page})
+    # tasks = Task.objects.all().order_by('-time_created')[0:count_page]
+    #
+    # if len(Task.objects.all()) > len(tasks):
+    #     is_next_page = True
+    # else:
+    #     is_next_page = False
+    # return render(request, "task_manager/all_tasks.html",
+    #               {"tasks": tasks, "next_page": next_page, "is_next_page": is_next_page})
+    filter_list = TaskFilter(request.GET, queryset=Task.objects.all().order_by('-time_created'))
+    # f = TaskFilter(request.GET, queryset=Task.objects.all().order_by('-time_created'))
+    # if len(f.qs) > len(filter_list.qs):
+    #     is_next_page = True
+    # else:
+    #     is_next_page = False
+    # return render(request, "task_manager/all_tasks.html",
+    #               {"filter": filter_list, "next_page": next_page, "is_next_page": is_next_page})
+    return render(request, 'task_manager/all_tasks.html', {"filter": filter_list})
 
 
 def task_create_view(request):

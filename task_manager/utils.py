@@ -44,7 +44,6 @@ def check_task_delete(user, pk, executor_id):
         return True
     return False
 
-
 def check_author_task(user, pk):
     if user.pk == pk:
         return True
