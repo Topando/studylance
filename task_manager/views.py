@@ -203,3 +203,4 @@ def set_response_task(request, response_id):
         return redirect('task', task.pk)
     else:
         raise PermissionDenied()
+
